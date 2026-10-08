@@ -1,0 +1,93 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "prismatic/claude-sonnet-4.6",
+  "provider": {
+    "prismatic": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Prismatic (Claude unlimited)",
+      "options": {
+        "baseURL": "https://api.prismaticapi.com/v1",
+        "apiKey": "pa_If3vuVQuN0-E0gogqJWewI8ChI22VoZLJKQEu-huz2k"
+      },
+      "models": {
+        "claude-sonnet-4.6": {
+          "name": "Sonnet 4.6",
+          "limit": {
+            "context": 200000,
+            "output": 8192
+          }
+        },
+        "claude-sonnet-5": {
+          "name": "Sonnet 5",
+          "limit": {
+            "context": 200000,
+            "output": 8192
+          }
+        },
+        "claude-opus-4.8": {
+          "name": "Opus 4.8",
+          "limit": {
+            "context": 200000,
+            "output": 8192
+          }
+        },
+        "claude-opus-5": {
+          "name": "Opus 5",
+          "limit": {
+            "context": 200000,
+            "output": 8192
+          }
+        },
+        "claude-fable-5": {
+          "name": "Fable 5",
+          "limit": {
+            "context": 200000,
+            "output": 8192
+          }
+        },
+        "claude-haiku-4.5": {
+          "name": "Haiku 4.5",
+          "limit": {
+            "context": 200000,
+            "output": 4096
+          }
+        }
+      }
+    }
+  },
+  "agent": {
+    "coder": {
+      "model": "prismatic/claude-sonnet-4.6",
+      "temperature": 0.2,
+      "top_p": 0.9,
+      "system": "Senior Python dev. Polymarket Weather Bot."
+    },
+    "architect": {
+      "model": "prismatic/claude-opus-4.8",
+      "temperature": 0.3,
+      "top_p": 0.9,
+      "system": "Architect. Risk-aware."
+    },
+    "analyst": {
+      "model": "prismatic/claude-fable-5",
+      "temperature": 0.1,
+      "top_p": 0.9,
+      "system": "Analyst. P&L, EV, metrics."
+    },
+    "reviewer": {
+      "model": "prismatic/claude-sonnet-4.6",
+      "temperature": 0.1,
+      "top_p": 0.9,
+      "system": "Code reviewer."
+    },
+    "fast": {
+      "model": "prismatic/claude-haiku-4.5",
+      "temperature": 0,
+      "top_p": 1,
+      "system": "Fast assistant."
+    }
+  },
+  "plugin": [
+    "@tarquinen/opencode-dcp@latest"
+  ]
+}

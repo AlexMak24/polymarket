@@ -1,0 +1,100 @@
+- generic [ref=f1e2]:
+  - banner [ref=f1e3]:
+    - generic [ref=f1e10]:
+      - generic [ref=f1e11]: trader-analyzer · on-chain intelligence
+      - heading [level=1] [ref=f1e13]:
+        - text: Читаем чужие кошельки
+        - emphasis [ref=f1e14]: Polymarket
+      - paragraph [ref=f1e15]:
+        - text: Парсер обходит кошельки топ-трейдеров, восстанавливает торговую стратегию и географию рынков, считает PnL и активность, и раздаёт готовые сигналы собственным ботам. Все цифры ниже — реальная выгрузка из
+        - code [ref=f1e16]: profiles.db
+        - text: .
+      - generic [ref=f1e17]:
+        - generic [ref=f1e18]: 2 245 кошельков в индексе
+        - generic [ref=f1e20]: 2 221 weather-профиль ≥ 0.3
+        - generic [ref=f1e22]: 8 классов стратегий
+        - generic [ref=f1e24]: 792 кошелька в ранге стратегий
+        - generic [ref=f1e26]: 53 города
+  - navigation [ref=f1e28]:
+    - tablist [ref=f1e29]:
+      - tab "01 Overview" [ref=f1e30] [cursor=pointer]:
+        - generic [ref=f1e31]: "01"
+        - text: Overview
+      - tab "02 Wallets" [ref=f1e32] [cursor=pointer]:
+        - generic [ref=f1e33]: "02"
+        - text: Wallets
+      - tab "03 Strategies" [ref=f1e34] [cursor=pointer]:
+        - generic [ref=f1e35]: "03"
+        - text: Strategies
+      - tab "04 Portrait" [ref=f1e36] [cursor=pointer]:
+        - generic [ref=f1e37]: "04"
+        - text: Portrait
+      - tab "05 On-chain" [active] [selected] [ref=f1e38] [cursor=pointer]:
+        - generic [ref=f1e39]: "05"
+        - text: On-chain
+      - tab "06 Signals" [ref=f1e40] [cursor=pointer]:
+        - generic [ref=f1e41]: "06"
+        - text: Signals
+  - main [ref=f1e42]:
+    - generic [ref=f1e1372]:
+      - generic [ref=f1e1373]:
+        - generic [ref=f1e1374]: on-chain · нет данных
+        - generic [ref=f1e1376]:
+          - text: Нужен
+          - code [ref=f1e1377]: POLYGONSCAN_API_KEY
+          - text: в
+          - code [ref=f1e1378]: .env
+        - paragraph [ref=f1e1379]:
+          - text: Выгрузка
+          - code [ref=f1e1380]: profiles.db
+          - text: "содержит только торговую активность: сделки, стратегии, PnL, география. Движения средств на цепочке не собраны — модуль сборщика не запускался, потому что не задан ключ Polygonscan. Демо-цифры здесь не рисуются намеренно."
+      - generic [ref=f1e1381]:
+        - generic [ref=f1e1382]:
+          - generic [ref=f1e1383]: Депозиты USDC
+          - generic [ref=f1e1384]: —
+          - generic [ref=f1e1385]: входящие трансферы на адрес
+        - generic [ref=f1e1386]:
+          - generic [ref=f1e1387]: Выводы USDC
+          - generic [ref=f1e1388]: —
+          - generic [ref=f1e1389]: исходящие трансферы
+        - generic [ref=f1e1390]:
+          - generic [ref=f1e1391]: Нетто-поток
+          - generic [ref=f1e1392]: —
+          - generic [ref=f1e1393]: выводы − депозиты
+        - generic [ref=f1e1394]:
+          - generic [ref=f1e1395]: Газ / ETH
+          - generic [ref=f1e1396]: —
+          - generic [ref=f1e1397]: in / out по нативному токену
+      - heading "Что появится, когда будет ключ" [level=2] [ref=f1e1398]
+      - generic [ref=f1e1399]:
+        - generic [ref=f1e1400]:
+          - generic [ref=f1e1401]: Метрики
+          - generic [ref=f1e1402]:
+            - generic [ref=f1e1403]: Депозиты / выводы USDC
+            - generic [ref=f1e1404]: на кошелёк и итого
+          - generic [ref=f1e1405]:
+            - generic [ref=f1e1406]: Депозиты / выводы ETH
+            - generic [ref=f1e1407]: включая газ
+          - generic [ref=f1e1408]:
+            - generic [ref=f1e1409]: Нетто-поток
+            - generic [ref=f1e1410]: выводы − депозиты
+          - generic [ref=f1e1411]:
+            - generic [ref=f1e1412]: Сверка с PnL
+            - generic [ref=f1e1413]: Δ = нетто − реализованный PnL
+          - generic [ref=f1e1414]:
+            - generic [ref=f1e1415]: Связанные адреса
+            - generic [ref=f1e1416]: переводы внутри одной группы
+        - generic [ref=f1e1417]:
+          - generic [ref=f1e1418]: Зачем это нужно
+          - paragraph [ref=f1e1419]: "Реализованный PnL (+$7 769 457 по 2 123 кошелькам) считается по сделкам и ничего не говорит о том, сколько капитала реально завели и вывели. Сверка потоков с PnL показывает: устойчивое большое Δ — маркер того, что часть денег живёт в открытых позициях или уходит на другой адрес той же группы. Это же даёт отсев «кошельков-витрин» с красивым PnL, но без реальных выводов."
+          - generic [ref=f1e1420]:
+            - generic [ref=f1e1421]: как включить
+            - paragraph [ref=f1e1422]:
+              - text: Добавить
+              - code [ref=f1e1423]: POLYGONSCAN_API_KEY=…
+              - text: в
+              - code [ref=f1e1424]: .env
+              - text: ", затем прогнать сборщик потоков и пересобрать выгрузку — вкладка заполнится сама."
+  - contentinfo [ref=f1e345]:
+    - generic [ref=f1e346]: trader-analyzer · локальный статический отчёт, без внешних запросов
+    - code [ref=f1e348]: parse → classify → portrait → signals

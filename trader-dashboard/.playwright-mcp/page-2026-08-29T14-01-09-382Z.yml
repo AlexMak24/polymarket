@@ -1,0 +1,211 @@
+- generic [ref=f1e2]:
+  - banner [ref=f1e3]:
+    - generic [ref=f1e10]:
+      - generic [ref=f1e11]: trader-analyzer · on-chain intelligence
+      - heading [level=1] [ref=f1e13]:
+        - text: Читаем чужие кошельки
+        - emphasis [ref=f1e14]: Polymarket
+      - paragraph [ref=f1e15]:
+        - text: Парсер обходит кошельки топ-трейдеров, восстанавливает торговую стратегию и географию рынков, считает PnL и активность, и раздаёт готовые сигналы собственным ботам. Все цифры ниже — реальная выгрузка из
+        - code [ref=f1e16]: profiles.db
+        - text: .
+      - generic [ref=f1e17]:
+        - generic [ref=f1e18]: 2 245 кошельков в индексе
+        - generic [ref=f1e20]: 2 221 weather-профиль ≥ 0.3
+        - generic [ref=f1e22]: 8 классов стратегий
+        - generic [ref=f1e24]: 792 кошелька в ранге стратегий
+        - generic [ref=f1e26]: 53 города
+  - navigation [ref=f1e28]:
+    - tablist [ref=f1e29]:
+      - tab "01 Overview" [ref=f1e30] [cursor=pointer]:
+        - generic [ref=f1e31]: "01"
+        - text: Overview
+      - tab "02 Wallets" [ref=f1e32] [cursor=pointer]:
+        - generic [ref=f1e33]: "02"
+        - text: Wallets
+      - tab "03 Strategies" [ref=f1e34] [cursor=pointer]:
+        - generic [ref=f1e35]: "03"
+        - text: Strategies
+      - tab "04 Portrait" [ref=f1e36] [cursor=pointer]:
+        - generic [ref=f1e37]: "04"
+        - text: Portrait
+      - tab "05 On-chain" [ref=f1e38] [cursor=pointer]:
+        - generic [ref=f1e39]: "05"
+        - text: On-chain
+      - tab "06 Signals" [active] [selected] [ref=f1e40] [cursor=pointer]:
+        - generic [ref=f1e41]: "06"
+        - text: Signals
+  - main [ref=f1e42]:
+    - generic [ref=f1e1425]:
+      - generic [ref=f1e1426]:
+        - generic [ref=f1e1427]:
+          - generic [ref=f1e1428]: сводка · signals
+          - generic [ref=f1e1430]: Что отдать ботам
+          - paragraph [ref=f1e1431]:
+            - text: Все выводы ниже пересчитаны из
+            - code [ref=f1e1432]: strategy_rank.by_strategy
+            - text: ": медианный PnL, сумма PnL, доля прибыльных и медианный вход по 792 разобранным кошелькам. Никаких оценочных долларовых целей — только то, что есть в данных."
+        - generic [ref=f1e1433]:
+          - generic [ref=f1e1434]:
+            - generic [ref=f1e1435]: В ПЛЮСЕ
+            - generic [ref=f1e1436]: "3"
+          - generic [ref=f1e1437]:
+            - generic [ref=f1e1438]: В МИНУСЕ
+            - generic [ref=f1e1439]: "3"
+          - generic [ref=f1e1440]:
+            - generic [ref=f1e1441]: СЛЕПАЯ ЗОНА
+            - generic [ref=f1e1442]: "842"
+      - generic [ref=f1e1443]:
+        - generic [ref=f1e1444]:
+          - generic [ref=f1e1446]: HIGH
+          - heading "Класс longshot — в плюсе по медиане" [level=4] [ref=f1e1447]
+          - generic [ref=f1e1448]: longshot
+          - paragraph [ref=f1e1449]: Медианный кошелёк класса даёт +$302,55, прибыльных 65,6% из 61 разобранных, суммарно +$399 562,45. Медианный вход 0,06 — это и есть ценовая зона, в которой класс работает. Копировать входы можно, ориентируясь на эту зону.
+          - generic [ref=f1e1450]:
+            - generic [ref=f1e1451]:
+              - text: Медиана
+              - generic [ref=f1e1452]: +$302,55
+            - generic [ref=f1e1453]:
+              - text: Прибыльных
+              - generic [ref=f1e1454]: 65,6%
+            - generic [ref=f1e1455]:
+              - text: Вход
+              - generic [ref=f1e1456]: 0,06
+            - generic [ref=f1e1457]:
+              - text: "n"
+              - generic [ref=f1e1458]: "61"
+        - generic [ref=f1e1459]:
+          - generic [ref=f1e1461]: MEDIUM
+          - heading "Класс ladder — в плюсе по медиане" [level=4] [ref=f1e1462]
+          - generic [ref=f1e1463]: ladder
+          - paragraph [ref=f1e1464]: Медианный кошелёк класса даёт +$68,31, прибыльных 59,9% из 152 разобранных, суммарно +$775 872,26. Медианный вход 0,34 — это и есть ценовая зона, в которой класс работает. Копировать входы можно, ориентируясь на эту зону.
+          - generic [ref=f1e1465]:
+            - generic [ref=f1e1466]:
+              - text: Медиана
+              - generic [ref=f1e1467]: +$68,31
+            - generic [ref=f1e1468]:
+              - text: Прибыльных
+              - generic [ref=f1e1469]: 59,9%
+            - generic [ref=f1e1470]:
+              - text: Вход
+              - generic [ref=f1e1471]: 0,34
+            - generic [ref=f1e1472]:
+              - text: "n"
+              - generic [ref=f1e1473]: "152"
+        - generic [ref=f1e1474]:
+          - generic [ref=f1e1476]: MEDIUM
+          - heading "Класс specialist — в плюсе по медиане" [level=4] [ref=f1e1477]
+          - generic [ref=f1e1478]: specialist
+          - paragraph [ref=f1e1479]: Медианный кошелёк класса даёт +$13,28, прибыльных 53,0% из 83 разобранных, суммарно +$53 579,91. Медианный вход 0,42 — это и есть ценовая зона, в которой класс работает. Копировать входы можно, ориентируясь на эту зону.
+          - generic [ref=f1e1480]:
+            - generic [ref=f1e1481]:
+              - text: Медиана
+              - generic [ref=f1e1482]: +$13,28
+            - generic [ref=f1e1483]:
+              - text: Прибыльных
+              - generic [ref=f1e1484]: 53,0%
+            - generic [ref=f1e1485]:
+              - text: Вход
+              - generic [ref=f1e1486]: 0,42
+            - generic [ref=f1e1487]:
+              - text: "n"
+              - generic [ref=f1e1488]: "83"
+        - generic [ref=f1e1489]:
+          - generic [ref=f1e1491]: AVOID
+          - heading "Класс mixed — медиана в минусе" [level=4] [ref=f1e1492]
+          - generic [ref=f1e1493]: mixed
+          - paragraph [ref=f1e1494]: Медианный кошелёк теряет −$9,52, прибыльных только 46,2% из 13. Суммарный PnL +$5 391,89 — то есть плюс класса, если он есть, делают единицы, а не типичный участник. Копировать класс целиком нельзя; имеет смысл только адресный отбор кошельков внутри него.
+          - generic [ref=f1e1495]:
+            - generic [ref=f1e1496]:
+              - text: Медиана
+              - generic [ref=f1e1497]: −$9,52
+            - generic [ref=f1e1498]:
+              - text: Прибыльных
+              - generic [ref=f1e1499]: 46,2%
+            - generic [ref=f1e1500]:
+              - text: Сумма
+              - generic [ref=f1e1501]: +$5 391,89
+            - generic [ref=f1e1502]:
+              - text: "n"
+              - generic [ref=f1e1503]: "13"
+        - generic [ref=f1e1504]:
+          - generic [ref=f1e1506]: AVOID
+          - heading "Класс momentum — медиана в минусе" [level=4] [ref=f1e1507]
+          - generic [ref=f1e1508]: momentum
+          - paragraph [ref=f1e1509]: Медианный кошелёк теряет −$9,93, прибыльных только 45,1% из 204. Суммарный PnL +$329 173,46 — то есть плюс класса, если он есть, делают единицы, а не типичный участник. Копировать класс целиком нельзя; имеет смысл только адресный отбор кошельков внутри него.
+          - generic [ref=f1e1510]:
+            - generic [ref=f1e1511]:
+              - text: Медиана
+              - generic [ref=f1e1512]: −$9,93
+            - generic [ref=f1e1513]:
+              - text: Прибыльных
+              - generic [ref=f1e1514]: 45,1%
+            - generic [ref=f1e1515]:
+              - text: Сумма
+              - generic [ref=f1e1516]: +$329 173,46
+            - generic [ref=f1e1517]:
+              - text: "n"
+              - generic [ref=f1e1518]: "204"
+        - generic [ref=f1e1519]:
+          - generic [ref=f1e1521]: AVOID
+          - heading "Класс value — медиана в минусе" [level=4] [ref=f1e1522]
+          - generic [ref=f1e1523]: value
+          - paragraph [ref=f1e1524]: Медианный кошелёк теряет −$29,34, прибыльных только 41,9% из 279. Суммарный PnL +$3 526,63 — то есть плюс класса, если он есть, делают единицы, а не типичный участник. Копировать класс целиком нельзя; имеет смысл только адресный отбор кошельков внутри него.
+          - generic [ref=f1e1525]:
+            - generic [ref=f1e1526]:
+              - text: Медиана
+              - generic [ref=f1e1527]: −$29,34
+            - generic [ref=f1e1528]:
+              - text: Прибыльных
+              - generic [ref=f1e1529]: 41,9%
+            - generic [ref=f1e1530]:
+              - text: Сумма
+              - generic [ref=f1e1531]: +$3 526,63
+            - generic [ref=f1e1532]:
+              - text: "n"
+              - generic [ref=f1e1533]: "279"
+        - generic [ref=f1e1534]:
+          - generic [ref=f1e1536]: TODO
+          - 'heading "Слепая зона: классы без разобранных кошельков" [level=4] [ref=f1e1537]'
+          - generic [ref=f1e1538]: certain
+          - paragraph [ref=f1e1539]: "certain (671), unknown (171) — в ранге (playbook-выборка) нет ни одного кошелька этих классов. Это 842 кошельков из 2 245 размеченных: по ним нет ни медианного PnL, ни доли прибыльных, ни ценовой зоны входа. Пока классификатор и сбор PnL по ним не отработают, любые выводы про эти классы — домыслы."
+          - generic [ref=f1e1540]:
+            - generic [ref=f1e1541]:
+              - text: Пробел
+              - generic [ref=f1e1542]: 842 кошельков
+            - generic [ref=f1e1543]:
+              - text: Классы
+              - generic [ref=f1e1544]: certain · unknown
+            - generic [ref=f1e1545]:
+              - text: Приоритет
+              - generic [ref=f1e1546]: P1
+        - generic [ref=f1e1547]:
+          - generic [ref=f1e1549]: WATCH
+          - heading "Ценовая зона входа как фильтр" [level=4] [ref=f1e1550]
+          - generic [ref=f1e1551]: longshot
+          - paragraph [ref=f1e1552]: "Медианный вход разнесён по классам: longshot 0,06, ladder 0,34, specialist 0,42, mixed 0,79, momentum 0,60, value 0,37. Прибыльные по медиане классы сидят в зоне 0,06–0,42, убыточные — 0,37–0,79. Цена входа — самый дешёвый доступный фильтр для бота."
+          - generic [ref=f1e1553]:
+            - generic [ref=f1e1554]:
+              - text: Классов в ранге
+              - generic [ref=f1e1555]: "6"
+            - generic [ref=f1e1556]:
+              - text: Покрытие
+              - generic [ref=f1e1557]: 792 / 2 221
+      - heading "Покрытие ранга" [level=2] [ref=f1e1558]
+      - generic [ref=f1e1559]:
+        - generic [ref=f1e1560]:
+          - generic [ref=f1e1561]: Кошельков в ранге
+          - generic [ref=f1e1562]: 792 из 2 221 weather-профилей (35,7%)
+        - generic [ref=f1e1563]:
+          - generic [ref=f1e1564]: Фильтр выборки
+          - generic [ref=f1e1565]: только playbook · weather ≥ 0.3
+        - generic [ref=f1e1566]:
+          - generic [ref=f1e1567]: Классов с рангом
+          - generic [ref=f1e1568]: 6 из 8
+        - generic [ref=f1e1569]:
+          - generic [ref=f1e1570]: Кошельков с PnL во всём индексе
+          - generic [ref=f1e1571]: 2 123 из 2 245
+        - paragraph [ref=f1e1572]: Ранг считается по playbook-подвыборке, поэтому доли прибыльных здесь не переносятся автоматически на весь индекс. Это верхняя оценка по наиболее разобранным кошелькам.
+  - contentinfo [ref=f1e345]:
+    - generic [ref=f1e346]: trader-analyzer · локальный статический отчёт, без внешних запросов
+    - code [ref=f1e348]: parse → classify → portrait → signals

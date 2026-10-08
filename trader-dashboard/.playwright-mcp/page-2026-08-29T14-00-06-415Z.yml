@@ -1,0 +1,891 @@
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - generic [ref=e10]:
+      - generic [ref=e11]: trader-analyzer · on-chain intelligence
+      - heading [level=1] [ref=e13]:
+        - text: Читаем чужие кошельки
+        - emphasis [ref=e14]: Polymarket
+      - paragraph [ref=e15]:
+        - text: Парсер обходит кошельки топ-трейдеров, восстанавливает торговую стратегию и географию рынков, считает PnL и активность, и раздаёт готовые сигналы собственным ботам. Все цифры ниже — реальная выгрузка из
+        - code [ref=e16]: profiles.db
+        - text: .
+      - generic [ref=e17]:
+        - generic [ref=e18]: 2 245 кошельков в индексе
+        - generic [ref=e20]: 2 221 weather-профиль ≥ 0.3
+        - generic [ref=e22]: 8 классов стратегий
+        - generic [ref=e24]: 792 кошелька с разобранным PnL
+        - generic [ref=e26]: 53 города
+  - navigation [ref=e28]:
+    - tablist [ref=e29]:
+      - tab "01 Overview" [ref=e30] [cursor=pointer]:
+        - generic [ref=e31]: "01"
+        - text: Overview
+      - tab "02 Wallets" [active] [selected] [ref=e32] [cursor=pointer]:
+        - generic [ref=e33]: "02"
+        - text: Wallets
+      - tab "03 Strategies" [ref=e34] [cursor=pointer]:
+        - generic [ref=e35]: "03"
+        - text: Strategies
+      - tab "04 Portrait" [ref=e36] [cursor=pointer]:
+        - generic [ref=e37]: "04"
+        - text: Portrait
+      - tab "05 On-chain" [ref=e38] [cursor=pointer]:
+        - generic [ref=e39]: "05"
+        - text: On-chain
+      - tab "06 Signals" [ref=e40] [cursor=pointer]:
+        - generic [ref=e41]: "06"
+        - text: Signals
+  - main [ref=e42]:
+    - generic [ref=e348]:
+      - generic [ref=e349]:
+        - generic [ref=e350]:
+          - generic [ref=e351]: Стратегия
+          - combobox [ref=e352] [cursor=pointer]:
+            - option "все (2 245)" [selected]
+            - option "certain · 671"
+            - option "value · 427"
+            - option "momentum · 329"
+            - option "mixed · 223"
+            - option "ladder · 206"
+            - option "unknown · 171"
+            - option "specialist · 135"
+            - option "longshot · 83"
+        - generic [ref=e353]:
+          - generic [ref=e354]: Топ-город
+          - combobox [ref=e355] [cursor=pointer]:
+            - option "все" [selected]
+            - option "Amsterdam"
+            - option "Ankara"
+            - option "Atlanta"
+            - option "Austin"
+            - option "Beijing"
+            - option "Buenos Aires"
+            - option "Busan"
+            - option "Cape Town"
+            - option "Chengdu"
+            - option "Chicago"
+            - option "Chongqing"
+            - option "Dallas"
+            - option "Denver"
+            - option "Guangzhou"
+            - option "Helsinki"
+            - option "Hong Kong"
+            - option "Houston"
+            - option "Istanbul"
+            - option "Jeddah"
+            - option "Jinan"
+            - option "Karachi"
+            - option "Kuala Lumpur"
+            - option "London"
+            - option "Los Angeles"
+            - option "Lucknow"
+            - option "Madrid"
+            - option "Manila"
+            - option "Mexico City"
+            - option "Miami"
+            - option "Milan"
+            - option "Moscow"
+            - option "Munich"
+            - option "New York"
+            - option "New York City"
+            - option "Panama City"
+            - option "Paris"
+            - option "Qingdao"
+            - option "San Francisco"
+            - option "Sao Paulo"
+            - option "Seattle"
+            - option "Seoul"
+            - option "Seoul (Incheon)"
+            - option "Shanghai"
+            - option "Shenzhen"
+            - option "Singapore"
+            - option "Taipei"
+            - option "Tel Aviv"
+            - option "Tokyo"
+            - option "Toronto"
+            - option "Warsaw"
+            - option "Wellington"
+            - option "Wuhan"
+            - option "Zhengzhou"
+        - generic [ref=e356]:
+          - generic [ref=e357]: Поиск по имени
+          - searchbox "имя или адрес…" [ref=e358]
+        - generic [ref=e359]:
+          - generic [ref=e360]: На странице
+          - combobox [ref=e361] [cursor=pointer]:
+            - option "50" [selected]
+            - option "100"
+            - option "200"
+        - generic [ref=e362]: 2 245 / 2 245 кошельков
+      - table [ref=e364]:
+        - rowgroup [ref=e365]:
+          - row [ref=e366]:
+            - columnheader "Кошелёк ↓" [ref=e367] [cursor=pointer]:
+              - text: Кошелёк
+              - generic [ref=e368]: ↓
+            - columnheader "Стратегия ↓" [ref=e369] [cursor=pointer]:
+              - text: Стратегия
+              - generic [ref=e370]: ↓
+            - columnheader "Топ-город ↓" [ref=e371] [cursor=pointer]:
+              - text: Топ-город
+              - generic [ref=e372]: ↓
+            - columnheader "PnL ↓" [ref=e373] [cursor=pointer]:
+              - text: PnL
+              - generic [ref=e374]: ↓
+            - columnheader "Сделок ↓" [ref=e375] [cursor=pointer]:
+              - text: Сделок
+              - generic [ref=e376]: ↓
+            - columnheader "30д ↓" [ref=e377] [cursor=pointer]:
+              - text: 30д
+              - generic [ref=e378]: ↓
+            - columnheader "Объём 30д ↓" [ref=e379] [cursor=pointer]:
+              - text: Объём 30д
+              - generic [ref=e380]: ↓
+            - columnheader "Сделок/мес ↓" [ref=e381] [cursor=pointer]:
+              - text: Сделок/мес
+              - generic [ref=e382]: ↓
+            - columnheader "Playbook ↓" [ref=e383] [cursor=pointer]:
+              - text: Playbook
+              - generic [ref=e384]: ↓
+            - columnheader "Buy-доля ↓" [ref=e385] [cursor=pointer]:
+              - text: Buy-доля
+              - generic [ref=e386]: ↓
+        - rowgroup [ref=e387]:
+          - row [ref=e2558] [cursor=pointer]:
+            - cell "SH Shanghai 0xe844…76d1" [ref=e2559]:
+              - generic [ref=e2560]:
+                - generic [ref=e2561]: SH
+                - generic [ref=e2562]:
+                  - generic [ref=e2563]: Shanghai
+                  - generic [ref=e2564]: 0xe844…76d1
+            - cell "momentum" [ref=e2565]
+            - cell "Shanghai" [ref=e2567]
+            - cell "—" [ref=e2568]
+            - cell "8" [ref=e2569]
+            - cell "8" [ref=e2570]
+            - cell "$100" [ref=e2571]
+            - cell "8,0" [ref=e2572]
+            - cell "да" [ref=e2573]
+            - cell "100%" [ref=e2575]
+          - row [ref=e2580] [cursor=pointer]:
+            - cell "PA Paris 0x754a…1fd8" [ref=e2581]:
+              - generic [ref=e2582]:
+                - generic [ref=e2583]: PA
+                - generic [ref=e2584]:
+                  - generic [ref=e2585]: Paris
+                  - generic [ref=e2586]: 0x754a…1fd8
+            - cell "certain" [ref=e2587]
+            - cell "Paris" [ref=e2589]
+            - cell "—" [ref=e2590]
+            - cell "150" [ref=e2591]
+            - cell "96" [ref=e2592]
+            - cell "$1 915" [ref=e2593]
+            - cell "129,6" [ref=e2594]
+            - cell "нет" [ref=e2595]
+            - cell "73%" [ref=e2597]
+          - row [ref=e2602] [cursor=pointer]:
+            - cell "HO Hong Kong 0xbcf9…ba09" [ref=e2603]:
+              - generic [ref=e2604]:
+                - generic [ref=e2605]: HO
+                - generic [ref=e2606]:
+                  - generic [ref=e2607]: Hong Kong
+                  - generic [ref=e2608]: 0xbcf9…ba09
+            - cell "certain" [ref=e2609]
+            - cell "Hong Kong" [ref=e2611]
+            - cell "—" [ref=e2612]
+            - cell "150" [ref=e2613]
+            - cell "142" [ref=e2614]
+            - cell "$2 345" [ref=e2615]
+            - cell "146,0" [ref=e2616]
+            - cell "нет" [ref=e2617]
+            - cell "71%" [ref=e2619]
+          - row [ref=e2624] [cursor=pointer]:
+            - cell "HO Hong Kong 0xbb55…9907" [ref=e2625]:
+              - generic [ref=e2626]:
+                - generic [ref=e2627]: HO
+                - generic [ref=e2628]:
+                  - generic [ref=e2629]: Hong Kong
+                  - generic [ref=e2630]: 0xbb55…9907
+            - cell "mixed" [ref=e2631]
+            - cell "Hong Kong" [ref=e2633]
+            - cell "—" [ref=e2634]
+            - cell "32" [ref=e2635]
+            - cell "32" [ref=e2636]
+            - cell "$77" [ref=e2637]
+            - cell "345,3" [ref=e2638]
+            - cell "нет" [ref=e2639]
+            - cell "75%" [ref=e2641]
+          - row [ref=e2646] [cursor=pointer]:
+            - cell "PA Paris 0xa384…4ed4" [ref=e2647]:
+              - generic [ref=e2648]:
+                - generic [ref=e2649]: PA
+                - generic [ref=e2650]:
+                  - generic [ref=e2651]: Paris
+                  - generic [ref=e2652]: 0xa384…4ed4
+            - cell "certain" [ref=e2653]
+            - cell "Paris" [ref=e2655]
+            - cell "—" [ref=e2656]
+            - cell "150" [ref=e2657]
+            - cell "48" [ref=e2658]
+            - cell "$5 506" [ref=e2659]
+            - cell "45,8" [ref=e2660]
+            - cell "нет" [ref=e2661]
+            - cell "71%" [ref=e2663]
+          - row [ref=e2668] [cursor=pointer]:
+            - cell "AN Ankara 0x1f1f…76b2" [ref=e2669]:
+              - generic [ref=e2670]:
+                - generic [ref=e2671]: AN
+                - generic [ref=e2672]:
+                  - generic [ref=e2673]: Ankara
+                  - generic [ref=e2674]: 0x1f1f…76b2
+            - cell "certain" [ref=e2675]
+            - cell "Ankara" [ref=e2677]
+            - cell "—" [ref=e2678]
+            - cell "150" [ref=e2679]
+            - cell "150" [ref=e2680]
+            - cell "$2 494" [ref=e2681]
+            - cell "176,8" [ref=e2682]
+            - cell "нет" [ref=e2683]
+            - cell "70%" [ref=e2685]
+          - row [ref=e2690] [cursor=pointer]:
+            - cell "PA Paris 0xe1d2…0ecf" [ref=e2691]:
+              - generic [ref=e2692]:
+                - generic [ref=e2693]: PA
+                - generic [ref=e2694]:
+                  - generic [ref=e2695]: Paris
+                  - generic [ref=e2696]: 0xe1d2…0ecf
+            - cell "certain" [ref=e2697]
+            - cell "Paris" [ref=e2699]
+            - cell "—" [ref=e2700]
+            - cell "150" [ref=e2701]
+            - cell "66" [ref=e2702]
+            - cell "$5 931" [ref=e2703]
+            - cell "122,9" [ref=e2704]
+            - cell "нет" [ref=e2705]
+            - cell "84%" [ref=e2707]
+          - row [ref=e2712] [cursor=pointer]:
+            - cell "SI Singapore 0x2b8b…9d01" [ref=e2713]:
+              - generic [ref=e2714]:
+                - generic [ref=e2715]: SI
+                - generic [ref=e2716]:
+                  - generic [ref=e2717]: Singapore
+                  - generic [ref=e2718]: 0x2b8b…9d01
+            - cell "value" [ref=e2719]
+            - cell "Singapore" [ref=e2721]
+            - cell "—" [ref=e2722]
+            - cell "134" [ref=e2723]
+            - cell "67" [ref=e2724]
+            - cell "$643" [ref=e2725]
+            - cell "61,7" [ref=e2726]
+            - cell "да" [ref=e2727]
+            - cell "90%" [ref=e2729]
+          - row [ref=e2734] [cursor=pointer]:
+            - cell "PA Paris 0x9795…ba89" [ref=e2735]:
+              - generic [ref=e2736]:
+                - generic [ref=e2737]: PA
+                - generic [ref=e2738]:
+                  - generic [ref=e2739]: Paris
+                  - generic [ref=e2740]: 0x9795…ba89
+            - cell "certain" [ref=e2741]
+            - cell "Paris" [ref=e2743]
+            - cell "—" [ref=e2744]
+            - cell "150" [ref=e2745]
+            - cell "116" [ref=e2746]
+            - cell "$1 960" [ref=e2747]
+            - cell "133,2" [ref=e2748]
+            - cell "нет" [ref=e2749]
+            - cell "77%" [ref=e2751]
+          - row [ref=e2756] [cursor=pointer]:
+            - cell "HO Hong Kong 0x375d…9a6c" [ref=e2757]:
+              - generic [ref=e2758]:
+                - generic [ref=e2759]: HO
+                - generic [ref=e2760]:
+                  - generic [ref=e2761]: Hong Kong
+                  - generic [ref=e2762]: 0x375d…9a6c
+            - cell "certain" [ref=e2763]
+            - cell "Hong Kong" [ref=e2765]
+            - cell "—" [ref=e2766]
+            - cell "150" [ref=e2767]
+            - cell "92" [ref=e2768]
+            - cell "$1 604" [ref=e2769]
+            - cell "126,0" [ref=e2770]
+            - cell "нет" [ref=e2771]
+            - cell "79%" [ref=e2773]
+          - row [ref=e2778] [cursor=pointer]:
+            - cell "MU Munich 0x3e27…4385" [ref=e2779]:
+              - generic [ref=e2780]:
+                - generic [ref=e2781]: MU
+                - generic [ref=e2782]:
+                  - generic [ref=e2783]: Munich
+                  - generic [ref=e2784]: 0x3e27…4385
+            - cell "unknown" [ref=e2785]
+            - cell "Munich" [ref=e2787]
+            - cell "—" [ref=e2788]
+            - cell "43" [ref=e2789]
+            - cell "43" [ref=e2790]
+            - cell "$69" [ref=e2791]
+            - cell "144,3" [ref=e2792]
+            - cell "нет" [ref=e2793]
+            - cell "56%" [ref=e2795]
+          - row [ref=e2800] [cursor=pointer]:
+            - cell "MU Munich 0x50f4…b9eb" [ref=e2801]:
+              - generic [ref=e2802]:
+                - generic [ref=e2803]: MU
+                - generic [ref=e2804]:
+                  - generic [ref=e2805]: Munich
+                  - generic [ref=e2806]: 0x50f4…b9eb
+            - cell "specialist" [ref=e2807]
+            - cell "Munich" [ref=e2809]
+            - cell "—" [ref=e2810]
+            - cell "150" [ref=e2811]
+            - cell "10" [ref=e2812]
+            - cell "$35" [ref=e2813]
+            - cell "72,0" [ref=e2814]
+            - cell "да" [ref=e2815]
+            - cell "67%" [ref=e2817]
+          - row [ref=e2822] [cursor=pointer]:
+            - cell "SE Seoul 0xd297…dcc7" [ref=e2823]:
+              - generic [ref=e2824]:
+                - generic [ref=e2825]: SE
+                - generic [ref=e2826]:
+                  - generic [ref=e2827]: Seoul
+                  - generic [ref=e2828]: 0xd297…dcc7
+            - cell "value" [ref=e2829]
+            - cell "Seoul" [ref=e2831]
+            - cell "—" [ref=e2832]
+            - cell "150" [ref=e2833]
+            - cell "41" [ref=e2834]
+            - cell "$102" [ref=e2835]
+            - cell "49,9" [ref=e2836]
+            - cell "да" [ref=e2837]
+            - cell "100%" [ref=e2839]
+          - row [ref=e2844] [cursor=pointer]:
+            - cell "CH Chengdu 0xeaf1…e136" [ref=e2845]:
+              - generic [ref=e2846]:
+                - generic [ref=e2847]: CH
+                - generic [ref=e2848]:
+                  - generic [ref=e2849]: Chengdu
+                  - generic [ref=e2850]: 0xeaf1…e136
+            - cell "ladder" [ref=e2851]
+            - cell "Chengdu" [ref=e2853]
+            - cell "—" [ref=e2854]
+            - cell "150" [ref=e2855]
+            - cell "150" [ref=e2856]
+            - cell "$2 462" [ref=e2857]
+            - cell "3 316,2" [ref=e2858]
+            - cell "да" [ref=e2859]
+            - cell "84%" [ref=e2861]
+          - row [ref=e2866] [cursor=pointer]:
+            - cell "MA Madrid 0xd969…0932" [ref=e2867]:
+              - generic [ref=e2868]:
+                - generic [ref=e2869]: MA
+                - generic [ref=e2870]:
+                  - generic [ref=e2871]: Madrid
+                  - generic [ref=e2872]: 0xd969…0932
+            - cell "value" [ref=e2873]
+            - cell "Madrid" [ref=e2875]
+            - cell "—" [ref=e2876]
+            - cell "146" [ref=e2877]
+            - cell "96" [ref=e2878]
+            - cell "$3 917" [ref=e2879]
+            - cell "80,5" [ref=e2880]
+            - cell "да" [ref=e2881]
+            - cell "58%" [ref=e2883]
+          - row [ref=e2888] [cursor=pointer]:
+            - cell "TO Tokyo 0xfd8f…dd57" [ref=e2889]:
+              - generic [ref=e2890]:
+                - generic [ref=e2891]: TO
+                - generic [ref=e2892]:
+                  - generic [ref=e2893]: Tokyo
+                  - generic [ref=e2894]: 0xfd8f…dd57
+            - cell "value" [ref=e2895]
+            - cell "Tokyo" [ref=e2897]
+            - cell "—" [ref=e2898]
+            - cell "15" [ref=e2899]
+            - cell "11" [ref=e2900]
+            - cell "$221" [ref=e2901]
+            - cell "10,4" [ref=e2902]
+            - cell "да" [ref=e2903]
+            - cell "73%" [ref=e2905]
+          - row [ref=e2910] [cursor=pointer]:
+            - cell "SI Singapore 0x212f…cab1" [ref=e2911]:
+              - generic [ref=e2912]:
+                - generic [ref=e2913]: SI
+                - generic [ref=e2914]:
+                  - generic [ref=e2915]: Singapore
+                  - generic [ref=e2916]: 0x212f…cab1
+            - cell "unknown" [ref=e2917]
+            - cell "Singapore" [ref=e2919]
+            - cell "—" [ref=e2920]
+            - cell "150" [ref=e2921]
+            - cell "33" [ref=e2922]
+            - cell "$48" [ref=e2923]
+            - cell "47,2" [ref=e2924]
+            - cell "нет" [ref=e2925]
+            - cell "61%" [ref=e2927]
+          - row [ref=e2932] [cursor=pointer]:
+            - cell "WU Wuhan 0xa7da…5b7b" [ref=e2933]:
+              - generic [ref=e2934]:
+                - generic [ref=e2935]: WU
+                - generic [ref=e2936]:
+                  - generic [ref=e2937]: Wuhan
+                  - generic [ref=e2938]: 0xa7da…5b7b
+            - cell "mixed" [ref=e2939]
+            - cell "Wuhan" [ref=e2941]
+            - cell "—" [ref=e2942]
+            - cell "150" [ref=e2943]
+            - cell "44" [ref=e2944]
+            - cell "$397" [ref=e2945]
+            - cell "102,6" [ref=e2946]
+            - cell "нет" [ref=e2947]
+            - cell "84%" [ref=e2949]
+          - row [ref=e2954] [cursor=pointer]:
+            - cell "SH Shanghai 0x7ea0…212d" [ref=e2955]:
+              - generic [ref=e2956]:
+                - generic [ref=e2957]: SH
+                - generic [ref=e2958]:
+                  - generic [ref=e2959]: Shanghai
+                  - generic [ref=e2960]: 0x7ea0…212d
+            - cell "value" [ref=e2961]
+            - cell "Shanghai" [ref=e2963]
+            - cell "—" [ref=e2964]
+            - cell "150" [ref=e2965]
+            - cell "32" [ref=e2966]
+            - cell "$33" [ref=e2967]
+            - cell "62,2" [ref=e2968]
+            - cell "да" [ref=e2969]
+            - cell "53%" [ref=e2971]
+          - row [ref=e2976] [cursor=pointer]:
+            - cell "SH Shanghai 0x20f9…9577" [ref=e2977]:
+              - generic [ref=e2978]:
+                - generic [ref=e2979]: SH
+                - generic [ref=e2980]:
+                  - generic [ref=e2981]: Shanghai
+                  - generic [ref=e2982]: 0x20f9…9577
+            - cell "momentum" [ref=e2983]
+            - cell "Shanghai" [ref=e2985]
+            - cell "—" [ref=e2986]
+            - cell "42" [ref=e2987]
+            - cell "31" [ref=e2988]
+            - cell "$691" [ref=e2989]
+            - cell "10,9" [ref=e2990]
+            - cell "да" [ref=e2991]
+            - cell "88%" [ref=e2993]
+          - row [ref=e2998] [cursor=pointer]:
+            - cell "LO Los Angeles 0x62c8…08d4" [ref=e2999]:
+              - generic [ref=e3000]:
+                - generic [ref=e3001]: LO
+                - generic [ref=e3002]:
+                  - generic [ref=e3003]: Los Angeles
+                  - generic [ref=e3004]: 0x62c8…08d4
+            - cell "specialist" [ref=e3005]
+            - cell "Los Angeles" [ref=e3007]
+            - cell "—" [ref=e3008]
+            - cell "150" [ref=e3009]
+            - cell "150" [ref=e3010]
+            - cell "$880" [ref=e3011]
+            - cell "186,4" [ref=e3012]
+            - cell "да" [ref=e3013]
+            - cell "73%" [ref=e3015]
+          - row [ref=e3020] [cursor=pointer]:
+            - cell "SH Shanghai 0xf13b…db8d" [ref=e3021]:
+              - generic [ref=e3022]:
+                - generic [ref=e3023]: SH
+                - generic [ref=e3024]:
+                  - generic [ref=e3025]: Shanghai
+                  - generic [ref=e3026]: 0xf13b…db8d
+            - cell "specialist" [ref=e3027]
+            - cell "Shanghai" [ref=e3029]
+            - cell "—" [ref=e3030]
+            - cell "150" [ref=e3031]
+            - cell "51" [ref=e3032]
+            - cell "$854" [ref=e3033]
+            - cell "41,8" [ref=e3034]
+            - cell "да" [ref=e3035]
+            - cell "73%" [ref=e3037]
+          - row [ref=e3042] [cursor=pointer]:
+            - cell "WU Wuhan 0x3b54…37f3" [ref=e3043]:
+              - generic [ref=e3044]:
+                - generic [ref=e3045]: WU
+                - generic [ref=e3046]:
+                  - generic [ref=e3047]: Wuhan
+                  - generic [ref=e3048]: 0x3b54…37f3
+            - cell "certain" [ref=e3049]
+            - cell "Wuhan" [ref=e3051]
+            - cell "—" [ref=e3052]
+            - cell "74" [ref=e3053]
+            - cell "46" [ref=e3054]
+            - cell "$13 915" [ref=e3055]
+            - cell "13,9" [ref=e3056]
+            - cell "нет" [ref=e3057]
+            - cell "84%" [ref=e3059]
+          - row [ref=e3064] [cursor=pointer]:
+            - cell "SH Shenzhen 0x51a2…6dc3" [ref=e3065]:
+              - generic [ref=e3066]:
+                - generic [ref=e3067]: SH
+                - generic [ref=e3068]:
+                  - generic [ref=e3069]: Shenzhen
+                  - generic [ref=e3070]: 0x51a2…6dc3
+            - cell "certain" [ref=e3071]
+            - cell "Shenzhen" [ref=e3073]
+            - cell "—" [ref=e3074]
+            - cell "112" [ref=e3075]
+            - cell "71" [ref=e3076]
+            - cell "$21 450" [ref=e3077]
+            - cell "19,5" [ref=e3078]
+            - cell "нет" [ref=e3079]
+            - cell "89%" [ref=e3081]
+          - row [ref=e3086] [cursor=pointer]:
+            - cell "HO Houston 0x85b0…6c99" [ref=e3087]:
+              - generic [ref=e3088]:
+                - generic [ref=e3089]: HO
+                - generic [ref=e3090]:
+                  - generic [ref=e3091]: Houston
+                  - generic [ref=e3092]: 0x85b0…6c99
+            - cell "certain" [ref=e3093]
+            - cell "Houston" [ref=e3095]
+            - cell "—" [ref=e3096]
+            - cell "29" [ref=e3097]
+            - cell "29" [ref=e3098]
+            - cell "$101" [ref=e3099]
+            - cell "29,0" [ref=e3100]
+            - cell "нет" [ref=e3101]
+            - cell "97%" [ref=e3103]
+          - row [ref=e3108] [cursor=pointer]:
+            - cell "LU Lucknow 0xbeaf…3066" [ref=e3109]:
+              - generic [ref=e3110]:
+                - generic [ref=e3111]: LU
+                - generic [ref=e3112]:
+                  - generic [ref=e3113]: Lucknow
+                  - generic [ref=e3114]: 0xbeaf…3066
+            - cell "certain" [ref=e3115]
+            - cell "Lucknow" [ref=e3117]
+            - cell "—" [ref=e3118]
+            - cell "119" [ref=e3119]
+            - cell "17" [ref=e3120]
+            - cell "$470" [ref=e3121]
+            - cell "12,7" [ref=e3122]
+            - cell "нет" [ref=e3123]
+            - cell "90%" [ref=e3125]
+          - row [ref=e3130] [cursor=pointer]:
+            - cell "TE Tel Aviv 0x59d1…cdc7" [ref=e3131]:
+              - generic [ref=e3132]:
+                - generic [ref=e3133]: TE
+                - generic [ref=e3134]:
+                  - generic [ref=e3135]: Tel Aviv
+                  - generic [ref=e3136]: 0x59d1…cdc7
+            - cell "value" [ref=e3137]
+            - cell "Tel Aviv" [ref=e3139]
+            - cell "—" [ref=e3140]
+            - cell "150" [ref=e3141]
+            - cell "84" [ref=e3142]
+            - cell "$96" [ref=e3143]
+            - cell "117,3" [ref=e3144]
+            - cell "да" [ref=e3145]
+            - cell "100%" [ref=e3147]
+          - row [ref=e3152] [cursor=pointer]:
+            - cell "HO Hong Kong 0x08fc…77d6" [ref=e3153]:
+              - generic [ref=e3154]:
+                - generic [ref=e3155]: HO
+                - generic [ref=e3156]:
+                  - generic [ref=e3157]: Hong Kong
+                  - generic [ref=e3158]: 0x08fc…77d6
+            - cell "specialist" [ref=e3159]
+            - cell "Hong Kong" [ref=e3161]
+            - cell "—" [ref=e3162]
+            - cell "19" [ref=e3163]
+            - cell "19" [ref=e3164]
+            - cell "$18" [ref=e3165]
+            - cell "295,9" [ref=e3166]
+            - cell "да" [ref=e3167]
+            - cell "63%" [ref=e3169]
+          - row [ref=e3174] [cursor=pointer]:
+            - cell "HO Hong Kong 0xed3f…3e99" [ref=e3175]:
+              - generic [ref=e3176]:
+                - generic [ref=e3177]: HO
+                - generic [ref=e3178]:
+                  - generic [ref=e3179]: Hong Kong
+                  - generic [ref=e3180]: 0xed3f…3e99
+            - cell "mixed" [ref=e3181]
+            - cell "Hong Kong" [ref=e3183]
+            - cell "—" [ref=e3184]
+            - cell "150" [ref=e3185]
+            - cell "109" [ref=e3186]
+            - cell "$291" [ref=e3187]
+            - cell "93,9" [ref=e3188]
+            - cell "да" [ref=e3189]
+            - cell "67%" [ref=e3191]
+          - row [ref=e3196] [cursor=pointer]:
+            - cell "HO Hong Kong 0xc04a…403a" [ref=e3197]:
+              - generic [ref=e3198]:
+                - generic [ref=e3199]: HO
+                - generic [ref=e3200]:
+                  - generic [ref=e3201]: Hong Kong
+                  - generic [ref=e3202]: 0xc04a…403a
+            - cell "momentum" [ref=e3203]
+            - cell "Hong Kong" [ref=e3205]
+            - cell "—" [ref=e3206]
+            - cell "150" [ref=e3207]
+            - cell "150" [ref=e3208]
+            - cell "$1 309" [ref=e3209]
+            - cell "215,7" [ref=e3210]
+            - cell "да" [ref=e3211]
+            - cell "34%" [ref=e3213]
+          - row [ref=e3218] [cursor=pointer]:
+            - cell "HO Hong Kong 0x0b31…b243" [ref=e3219]:
+              - generic [ref=e3220]:
+                - generic [ref=e3221]: HO
+                - generic [ref=e3222]:
+                  - generic [ref=e3223]: Hong Kong
+                  - generic [ref=e3224]: 0x0b31…b243
+            - cell "certain" [ref=e3225]
+            - cell "Hong Kong" [ref=e3227]
+            - cell "—" [ref=e3228]
+            - cell "150" [ref=e3229]
+            - cell "132" [ref=e3230]
+            - cell "$2 150" [ref=e3231]
+            - cell "140,6" [ref=e3232]
+            - cell "нет" [ref=e3233]
+            - cell "69%" [ref=e3235]
+          - row [ref=e3240] [cursor=pointer]:
+            - cell "LO London 0x5652…2aa5" [ref=e3241]:
+              - generic [ref=e3242]:
+                - generic [ref=e3243]: LO
+                - generic [ref=e3244]:
+                  - generic [ref=e3245]: London
+                  - generic [ref=e3246]: 0x5652…2aa5
+            - cell "mixed" [ref=e3247]
+            - cell "London" [ref=e3249]
+            - cell "—" [ref=e3250]
+            - cell "150" [ref=e3251]
+            - cell "68" [ref=e3252]
+            - cell "$3 620" [ref=e3253]
+            - cell "94,6" [ref=e3254]
+            - cell "нет" [ref=e3255]
+            - cell "57%" [ref=e3257]
+          - row [ref=e3262] [cursor=pointer]:
+            - cell "HO Hong Kong 0x61c7…d2e9" [ref=e3263]:
+              - generic [ref=e3264]:
+                - generic [ref=e3265]: HO
+                - generic [ref=e3266]:
+                  - generic [ref=e3267]: Hong Kong
+                  - generic [ref=e3268]: 0x61c7…d2e9
+            - cell "value" [ref=e3269]
+            - cell "Hong Kong" [ref=e3271]
+            - cell "—" [ref=e3272]
+            - cell "15" [ref=e3273]
+            - cell "15" [ref=e3274]
+            - cell "$127" [ref=e3275]
+            - cell "297,6" [ref=e3276]
+            - cell "да" [ref=e3277]
+            - cell "67%" [ref=e3279]
+          - row [ref=e3284] [cursor=pointer]:
+            - cell "SI Singapore 0x7097…3064" [ref=e3285]:
+              - generic [ref=e3286]:
+                - generic [ref=e3287]: SI
+                - generic [ref=e3288]:
+                  - generic [ref=e3289]: Singapore
+                  - generic [ref=e3290]: 0x7097…3064
+            - cell "certain" [ref=e3291]
+            - cell "Singapore" [ref=e3293]
+            - cell "—" [ref=e3294]
+            - cell "150" [ref=e3295]
+            - cell "95" [ref=e3296]
+            - cell "$1 830" [ref=e3297]
+            - cell "128,1" [ref=e3298]
+            - cell "нет" [ref=e3299]
+            - cell "76%" [ref=e3301]
+          - row [ref=e3306] [cursor=pointer]:
+            - cell "SH Shenzhen 0xee95…90b1" [ref=e3307]:
+              - generic [ref=e3308]:
+                - generic [ref=e3309]: SH
+                - generic [ref=e3310]:
+                  - generic [ref=e3311]: Shenzhen
+                  - generic [ref=e3312]: 0xee95…90b1
+            - cell "certain" [ref=e3313]
+            - cell "Shenzhen" [ref=e3315]
+            - cell "—" [ref=e3316]
+            - cell "129" [ref=e3317]
+            - cell "101" [ref=e3318]
+            - cell "$20 135" [ref=e3319]
+            - cell "22,7" [ref=e3320]
+            - cell "нет" [ref=e3321]
+            - cell "68%" [ref=e3323]
+          - row [ref=e3328] [cursor=pointer]:
+            - cell "WE Wellington 0xa8ae…94dc" [ref=e3329]:
+              - generic [ref=e3330]:
+                - generic [ref=e3331]: WE
+                - generic [ref=e3332]:
+                  - generic [ref=e3333]: Wellington
+                  - generic [ref=e3334]: 0xa8ae…94dc
+            - cell "certain" [ref=e3335]
+            - cell "Wellington" [ref=e3337]
+            - cell "—" [ref=e3338]
+            - cell "150" [ref=e3339]
+            - cell "44" [ref=e3340]
+            - cell "$93" [ref=e3341]
+            - cell "99,9" [ref=e3342]
+            - cell "нет" [ref=e3343]
+            - cell "45%" [ref=e3345]
+          - row [ref=e3350] [cursor=pointer]:
+            - cell "TA Taipei 0x1b4d…c84e" [ref=e3351]:
+              - generic [ref=e3352]:
+                - generic [ref=e3353]: TA
+                - generic [ref=e3354]:
+                  - generic [ref=e3355]: Taipei
+                  - generic [ref=e3356]: 0x1b4d…c84e
+            - cell "certain" [ref=e3357]
+            - cell "Taipei" [ref=e3359]
+            - cell "—" [ref=e3360]
+            - cell "150" [ref=e3361]
+            - cell "150" [ref=e3362]
+            - cell "$61" [ref=e3363]
+            - cell "987,7" [ref=e3364]
+            - cell "нет" [ref=e3365]
+            - cell "17%" [ref=e3367]
+          - row [ref=e3372] [cursor=pointer]:
+            - cell "BE Beijing 0x3f02…4821" [ref=e3373]:
+              - generic [ref=e3374]:
+                - generic [ref=e3375]: BE
+                - generic [ref=e3376]:
+                  - generic [ref=e3377]: Beijing
+                  - generic [ref=e3378]: 0x3f02…4821
+            - cell "certain" [ref=e3379]
+            - cell "Beijing" [ref=e3381]
+            - cell "—" [ref=e3382]
+            - cell "150" [ref=e3383]
+            - cell "13" [ref=e3384]
+            - cell "$28" [ref=e3385]
+            - cell "100,3" [ref=e3386]
+            - cell "нет" [ref=e3387]
+            - cell "10%" [ref=e3389]
+          - row [ref=e3394] [cursor=pointer]:
+            - cell "LO London 0xeacb…022d" [ref=e3395]:
+              - generic [ref=e3396]:
+                - generic [ref=e3397]: LO
+                - generic [ref=e3398]:
+                  - generic [ref=e3399]: London
+                  - generic [ref=e3400]: 0xeacb…022d
+            - cell "unknown" [ref=e3401]
+            - cell "London" [ref=e3403]
+            - cell "—" [ref=e3404]
+            - cell "97" [ref=e3405]
+            - cell "97" [ref=e3406]
+            - cell "$2 174" [ref=e3407]
+            - cell "158,3" [ref=e3408]
+            - cell "нет" [ref=e3409]
+            - cell "58%" [ref=e3411]
+          - row [ref=e3416] [cursor=pointer]:
+            - cell "AN Ankara 0x9ffc…e6dd" [ref=e3417]:
+              - generic [ref=e3418]:
+                - generic [ref=e3419]: AN
+                - generic [ref=e3420]:
+                  - generic [ref=e3421]: Ankara
+                  - generic [ref=e3422]: 0x9ffc…e6dd
+            - cell "certain" [ref=e3423]
+            - cell "Ankara" [ref=e3425]
+            - cell "—" [ref=e3426]
+            - cell "150" [ref=e3427]
+            - cell "150" [ref=e3428]
+            - cell "$5 642" [ref=e3429]
+            - cell "150,5" [ref=e3430]
+            - cell "нет" [ref=e3431]
+            - cell "56%" [ref=e3433]
+          - row [ref=e3438] [cursor=pointer]:
+            - cell "MA Manila 0x369c…fd24" [ref=e3439]:
+              - generic [ref=e3440]:
+                - generic [ref=e3441]: MA
+                - generic [ref=e3442]:
+                  - generic [ref=e3443]: Manila
+                  - generic [ref=e3444]: 0x369c…fd24
+            - cell "unknown" [ref=e3445]
+            - cell "Manila" [ref=e3447]
+            - cell "—" [ref=e3448]
+            - cell "63" [ref=e3449]
+            - cell "43" [ref=e3450]
+            - cell "$45" [ref=e3451]
+            - cell "23,7" [ref=e3452]
+            - cell "нет" [ref=e3453]
+            - cell "100%" [ref=e3455]
+          - row [ref=e3460] [cursor=pointer]:
+            - cell "HO Hong Kong 0x9be9…7017" [ref=e3461]:
+              - generic [ref=e3462]:
+                - generic [ref=e3463]: HO
+                - generic [ref=e3464]:
+                  - generic [ref=e3465]: Hong Kong
+                  - generic [ref=e3466]: 0x9be9…7017
+            - cell "mixed" [ref=e3467]
+            - cell "Hong Kong" [ref=e3469]
+            - cell "—" [ref=e3470]
+            - cell "150" [ref=e3471]
+            - cell "150" [ref=e3472]
+            - cell "$2 995" [ref=e3473]
+            - cell "197,6" [ref=e3474]
+            - cell "нет" [ref=e3475]
+            - cell "61%" [ref=e3477]
+          - row [ref=e3482] [cursor=pointer]:
+            - cell "WE Wellington 0xdc76…d308" [ref=e3483]:
+              - generic [ref=e3484]:
+                - generic [ref=e3485]: WE
+                - generic [ref=e3486]:
+                  - generic [ref=e3487]: Wellington
+                  - generic [ref=e3488]: 0xdc76…d308
+            - cell "momentum" [ref=e3489]
+            - cell "Wellington" [ref=e3491]
+            - cell "—" [ref=e3492]
+            - cell "150" [ref=e3493]
+            - cell "150" [ref=e3494]
+            - cell "$1 768" [ref=e3495]
+            - cell "157,2" [ref=e3496]
+            - cell "да" [ref=e3497]
+            - cell "59%" [ref=e3499]
+          - row [ref=e3504] [cursor=pointer]:
+            - cell "SE Seattle 0xe4f8…773c" [ref=e3505]:
+              - generic [ref=e3506]:
+                - generic [ref=e3507]: SE
+                - generic [ref=e3508]:
+                  - generic [ref=e3509]: Seattle
+                  - generic [ref=e3510]: 0xe4f8…773c
+            - cell "momentum" [ref=e3511]
+            - cell "Seattle" [ref=e3513]
+            - cell "—" [ref=e3514]
+            - cell "31" [ref=e3515]
+            - cell "31" [ref=e3516]
+            - cell "$981" [ref=e3517]
+            - cell "602,3" [ref=e3518]
+            - cell "да" [ref=e3519]
+            - cell "68%" [ref=e3521]
+          - row [ref=e3526] [cursor=pointer]:
+            - cell "TA Taipei 0x0e3e…36d6" [ref=e3527]:
+              - generic [ref=e3528]:
+                - generic [ref=e3529]: TA
+                - generic [ref=e3530]:
+                  - generic [ref=e3531]: Taipei
+                  - generic [ref=e3532]: 0x0e3e…36d6
+            - cell "mixed" [ref=e3533]
+            - cell "Taipei" [ref=e3535]
+            - cell "—" [ref=e3536]
+            - cell "150" [ref=e3537]
+            - cell "62" [ref=e3538]
+            - cell "$533" [ref=e3539]
+            - cell "103,0" [ref=e3540]
+            - cell "нет" [ref=e3541]
+            - cell "69%" [ref=e3543]
+      - generic [ref=e1488]:
+        - button "«" [ref=e3548] [cursor=pointer]
+        - button "‹" [ref=e3549] [cursor=pointer]
+        - button "1" [ref=e3550] [cursor=pointer]
+        - generic [ref=e3551]: …
+        - button "43" [ref=e3552] [cursor=pointer]
+        - button "44" [ref=e3553] [cursor=pointer]
+        - button "45" [ref=e3554] [cursor=pointer]
+        - button "›" [disabled] [ref=e3555]
+        - button "»" [disabled] [ref=e3556]
+        - generic [ref=e3557]: 2 201–2 245 из 2 245 · стр. 45/45
+      - paragraph [ref=e1499]:
+        - text: Все 2 245 кошельков из
+        - code [ref=e1500]: profiles.db
+        - text: ", страницами по 50. «Buy-доля» = buy_trades / total_trades — это не winrate по деньгам, а перекос в сторону покупок. У 122 кошельков PnL не посчитан — они показаны с прочерком и сортируются в конец."
+  - contentinfo [ref=e335]:
+    - generic [ref=e336]: trader-analyzer · локальный статический отчёт, без внешних запросов
+    - code [ref=e338]: parse → classify → portrait → signals

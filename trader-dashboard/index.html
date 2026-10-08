@@ -1,0 +1,1054 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%23070a10'/%3E%3Cpath d='M3 17 8 11l4 3.5L20 6' stroke='%235ef2c0' stroke-width='2.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='8' cy='11' r='2' fill='%23b492ff'/%3E%3C/svg%3E">
+<title>trader-analyzer — on-chain аналитика кошельков Polymarket</title>
+<style>
+/* ============ tokens ============ */
+:root{
+  --bg:#05070b;
+  --bg2:#080b12;
+  --ink:#e9edf6;
+  --dim:#8791a8;
+  --dimmer:#5c6479;
+  --mint:#5ef2c0;
+  --mint-d:#1fb98c;
+  --violet:#b492ff;
+  --violet-d:#7c4dff;
+  --amber:#ffc255;
+  --amber-d:#f59e0b;
+  --rose:#ff6b81;
+  --glass:rgba(255,255,255,.035);
+  --glass-2:rgba(255,255,255,.055);
+  --line:rgba(255,255,255,.075);
+  --line-2:rgba(255,255,255,.13);
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+  --sans:"Inter","SF Pro Display",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --r:18px;
+  --ease:cubic-bezier(.22,.86,.31,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg);color:var(--ink);font-family:var(--sans);
+  font-size:15px;line-height:1.55;letter-spacing:-.011em;
+  min-height:100vh;overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+::selection{background:rgba(94,242,192,.25);color:#fff}
+/* ============ aurora bg ============ */
+.aurora{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.aurora b{position:absolute;display:block;border-radius:50%;filter:blur(90px);opacity:.5;will-change:transform}
+.a1{width:56vw;height:56vw;left:-16vw;top:-22vw;background:radial-gradient(circle,rgba(31,185,140,.55),transparent 66%);animation:drift1 26s var(--ease) infinite alternate}
+.a2{width:48vw;height:48vw;right:-14vw;top:-8vw;background:radial-gradient(circle,rgba(124,77,255,.5),transparent 66%);animation:drift2 32s var(--ease) infinite alternate}
+.a3{width:42vw;height:42vw;left:34vw;bottom:-24vw;background:radial-gradient(circle,rgba(245,158,11,.3),transparent 66%);animation:drift3 38s var(--ease) infinite alternate}
+@keyframes drift1{to{transform:translate3d(9vw,7vw,0) scale(1.15)}}
+@keyframes drift2{to{transform:translate3d(-11vw,9vw,0) scale(1.1)}}
+@keyframes drift3{to{transform:translate3d(6vw,-8vw,0) scale(1.2)}}
+.grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.5;
+  background-image:radial-gradient(rgba(255,255,255,.045) 1px,transparent 1px);
+  background-size:3px 3px;mix-blend-mode:overlay}
+.vig{position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(120% 80% at 50% 0%,transparent 30%,rgba(3,4,7,.85) 100%)}
+/* ============ layout ============ */
+.wrap{position:relative;z-index:2;max-width:1280px;margin:0 auto;padding:0 28px 100px}
+/* ============ header ============ */
+header{padding:46px 0 26px;display:flex;align-items:flex-start;gap:22px;flex-wrap:wrap}
+.mark{width:54px;height:54px;flex:none;border-radius:16px;position:relative;
+  background:linear-gradient(145deg,rgba(94,242,192,.22),rgba(180,146,255,.18));
+  border:1px solid var(--line-2);display:grid;place-items:center;
+  box-shadow:0 12px 40px -14px rgba(94,242,192,.6),inset 0 1px 0 rgba(255,255,255,.14)}
+.mark svg{width:28px;height:28px}
+.htext{flex:1;min-width:250px}
+.eyebrow{font:600 10.5px/1 var(--mono);letter-spacing:.22em;text-transform:uppercase;
+  color:var(--mint);opacity:.85;margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--mint);
+  box-shadow:0 0 0 0 rgba(94,242,192,.6);animation:pulse 2.4s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(94,242,192,.55)}70%{box-shadow:0 0 0 9px rgba(94,242,192,0)}100%{box-shadow:0 0 0 0 rgba(94,242,192,0)}}
+h1{font-size:clamp(34px,5.2vw,50px);font-weight:680;letter-spacing:-.035em;line-height:1.02}
+h1 em{font-style:normal;background:linear-gradient(100deg,var(--mint),var(--violet) 55%,var(--amber));
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--dim);max-width:60ch;margin-top:11px;font-size:14.5px}
+.hstats{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}
+.pill{font:500 11.5px/1 var(--mono);padding:7px 11px;border-radius:999px;
+  border:1px solid var(--line);background:var(--glass);color:var(--dim);
+  display:inline-flex;align-items:center;gap:7px;backdrop-filter:blur(10px)}
+.pill i{width:5px;height:5px;border-radius:50%;background:currentColor;font-style:normal}
+.pill.m{color:var(--mint);border-color:rgba(94,242,192,.28);background:rgba(94,242,192,.07)}
+.pill.v{color:var(--violet);border-color:rgba(180,146,255,.28);background:rgba(180,146,255,.07)}
+.pill.a{color:var(--amber);border-color:rgba(255,194,85,.28);background:rgba(255,194,85,.07)}
+/* ============ tabs ============ */
+nav.tabs{position:sticky;top:0;z-index:30;margin:14px -28px 30px;padding:12px 28px;
+  background:linear-gradient(180deg,rgba(5,7,11,.94),rgba(5,7,11,.62));
+  backdrop-filter:blur(18px) saturate(150%);border-bottom:1px solid var(--line)}
+.tabrow{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;position:relative}
+.tabrow::-webkit-scrollbar{display:none}
+.tab{flex:none;appearance:none;border:0;background:transparent;color:var(--dim);
+  font:600 13.5px/1 var(--sans);letter-spacing:-.01em;padding:10px 15px;border-radius:11px;
+  cursor:pointer;transition:color .25s,background .25s;white-space:nowrap;
+  display:inline-flex;align-items:center;gap:8px}
+.tab span.n{font:600 10px/1 var(--mono);color:var(--dimmer);padding:3px 5px;border-radius:5px;
+  background:rgba(255,255,255,.05);transition:.25s}
+.tab:hover{color:var(--ink);background:rgba(255,255,255,.04)}
+.tab[aria-selected=true]{color:#06110d;background:linear-gradient(120deg,var(--mint),#8ff0d6 70%,var(--violet));
+  box-shadow:0 8px 26px -10px rgba(94,242,192,.75)}
+.tab[aria-selected=true] span.n{background:rgba(0,0,0,.18);color:rgba(4,20,15,.8)}
+/* ============ panels ============ */
+.panel{display:none}
+.panel.on{display:block}
+.panel.on>*{animation:rise .6s var(--ease) both}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.panel.on>*:nth-child(1){animation-delay:.02s}
+.panel.on>*:nth-child(2){animation-delay:.08s}
+.panel.on>*:nth-child(3){animation-delay:.14s}
+.panel.on>*:nth-child(4){animation-delay:.2s}
+.panel.on>*:nth-child(5){animation-delay:.26s}
+.panel.on>*:nth-child(6){animation-delay:.32s}
+/* ============ cards ============ */
+.card{position:relative;border-radius:var(--r);border:1px solid var(--line);
+  background:linear-gradient(160deg,var(--glass-2),var(--glass) 42%,rgba(255,255,255,.015));
+  backdrop-filter:blur(22px) saturate(140%);padding:22px;overflow:hidden;
+  box-shadow:0 24px 60px -34px rgba(0,0,0,.95),inset 0 1px 0 rgba(255,255,255,.06)}
+.card::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:linear-gradient(120deg,rgba(94,242,192,.35),rgba(180,146,255,.3) 50%,rgba(255,194,85,.28));
+  -webkit-mask:linear-gradient(#000,#000) content-box,linear-gradient(#000,#000);
+  -webkit-mask-composite:xor;mask-composite:exclude;padding:1px;opacity:0;transition:opacity .35s}
+.card:hover::after{opacity:.55}
+.card.hov{transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
+.card.hov:hover{transform:translateY(-4px);box-shadow:0 34px 70px -30px rgba(0,0,0,1)}
+.grid{display:grid;gap:16px}
+.g4{grid-template-columns:repeat(4,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g23{grid-template-columns:1.35fr .9fr}
+h2.sec{font-size:12px;font-weight:650;letter-spacing:.17em;text-transform:uppercase;
+  color:var(--dimmer);margin:34px 0 14px;display:flex;align-items:center;gap:12px}
+h2.sec::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
+h2.sec:first-child{margin-top:0}
+.ctitle{font-size:11px;font-weight:650;letter-spacing:.15em;text-transform:uppercase;color:var(--dimmer);margin-bottom:14px}
+/* ============ kpi ============ */
+.kpi{display:flex;flex-direction:column}
+.kpi .k-lab{font:600 10.5px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--dimmer)}
+.kpi .k-val{font-size:40px;font-weight:660;letter-spacing:-.045em;margin:12px 0 2px;
+  font-variant-numeric:tabular-nums;line-height:1}
+.kpi .k-sub{font-size:12.5px;color:var(--dim)}
+.kpi svg.spark{margin-top:auto;padding-top:16px;display:block;width:100%;height:34px;overflow:visible}
+.gm{background:linear-gradient(100deg,var(--mint),#a8f5dc);-webkit-background-clip:text;background-clip:text;color:transparent}
+.gv{background:linear-gradient(100deg,var(--violet),#e0d1ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.ga{background:linear-gradient(100deg,var(--amber),#ffe4a8);-webkit-background-clip:text;background-clip:text;color:transparent}
+/* ============ bars ============ */
+.bar{display:grid;grid-template-columns:106px 1fr 62px;align-items:center;gap:12px;padding:7px 0}
+.bar .nm{font:600 12.5px/1 var(--sans);color:var(--ink);text-transform:capitalize}
+.bar .tr{height:9px;border-radius:99px;background:rgba(255,255,255,.055);overflow:hidden;position:relative}
+.bar .fl{height:100%;border-radius:99px;width:0;transition:width 1.1s var(--ease);position:relative;
+  background:linear-gradient(90deg,var(--mint),var(--violet))}
+.bar .fl::after{content:"";position:absolute;inset:0;border-radius:99px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);
+  transform:translateX(-100%);animation:shim 2.6s var(--ease) infinite}
+@keyframes shim{to{transform:translateX(200%)}}
+.bar .vl{font:600 12px/1 var(--mono);color:var(--dim);text-align:right;font-variant-numeric:tabular-nums}
+/* ============ table ============ */
+.tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
+.fld{position:relative}
+.fld label{position:absolute;left:12px;top:-7px;font:600 9px/1 var(--mono);letter-spacing:.14em;
+  text-transform:uppercase;color:var(--dimmer);background:#0a0d14;padding:0 5px;border-radius:3px}
+select,input[type=search]{appearance:none;background:rgba(255,255,255,.045);color:var(--ink);
+  border:1px solid var(--line);border-radius:11px;padding:11px 34px 11px 13px;
+  font:500 13px/1 var(--sans);cursor:pointer;transition:.25s;min-width:150px}
+input[type=search]{padding-right:13px;cursor:text}
+select:hover,input:hover{border-color:var(--line-2);background:rgba(255,255,255,.07)}
+select:focus,input:focus{outline:none;border-color:rgba(94,242,192,.55);box-shadow:0 0 0 3px rgba(94,242,192,.1)}
+.fld::after{content:"";position:absolute;right:14px;top:50%;width:6px;height:6px;
+  border-right:1.6px solid var(--dim);border-bottom:1.6px solid var(--dim);
+  transform:translateY(-70%) rotate(45deg);pointer-events:none}
+.fld.nc::after{display:none}
+select option{background:#0b0f17;color:var(--ink)}
+.wcount{margin-left:auto;font:500 12px/1 var(--mono);color:var(--dimmer)}
+.tbl{width:100%;border-collapse:collapse}
+.tbl thead th{font:650 10px/1 var(--mono);letter-spacing:.15em;text-transform:uppercase;
+  color:var(--dimmer);text-align:left;padding:0 12px 12px;border-bottom:1px solid var(--line);
+  cursor:pointer;user-select:none;white-space:nowrap;transition:color .2s}
+.tbl thead th:hover{color:var(--mint)}
+.tbl thead th.num{text-align:right}
+.tbl thead th .ar{opacity:0;margin-left:5px;transition:.2s;display:inline-block}
+.tbl thead th.act{color:var(--mint)}
+.tbl thead th.act .ar{opacity:1}
+.tbl tbody tr{cursor:pointer;transition:background .22s}
+.tbl tbody tr:hover{background:rgba(255,255,255,.045)}
+.tbl tbody td{padding:13px 12px;border-bottom:1px solid rgba(255,255,255,.045);font-size:13.5px;vertical-align:middle}
+.tbl tbody td.num{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:12.5px}
+.wname{display:flex;align-items:center;gap:11px}
+.av{width:31px;height:31px;flex:none;border-radius:9px;display:grid;place-items:center;
+  font:700 11px/1 var(--mono);color:#05070b}
+.wn1{font-weight:600;letter-spacing:-.01em}
+.wn2{font:400 10.5px/1 var(--mono);color:var(--dimmer);margin-top:3px}
+.tag{display:inline-block;font:650 10px/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;
+  padding:5px 8px;border-radius:7px;border:1px solid;white-space:nowrap}
+.pos{color:var(--mint)}.neg{color:var(--rose)}
+.wr{display:flex;align-items:center;gap:9px;min-width:104px}
+.wr .tr{flex:1;height:6px;border-radius:99px;background:rgba(255,255,255,.06);overflow:hidden}
+.wr .fl{height:100%;border-radius:99px;width:0;transition:width .9s var(--ease)}
+.wr .pc{font:600 11px/1 var(--mono);color:var(--dim);width:30px;text-align:right}
+.scroll{overflow-x:auto;margin:0 -22px;padding:0 22px}
+/* ============ chips ============ */
+.chips{display:flex;flex-wrap:wrap;gap:9px}
+.chip{border:1px solid var(--line);background:var(--glass);border-radius:12px;
+  padding:11px 13px;transition:.28s var(--ease);cursor:default}
+.chip:hover{transform:translateY(-3px);border-color:rgba(94,242,192,.45);background:rgba(94,242,192,.07)}
+.chip b{font:650 12.5px/1 var(--mono);color:var(--mint);display:block}
+.chip i{font-style:normal;font-size:11.5px;color:var(--dim);display:block;margin-top:5px}
+/* ============ misc ============ */
+.note{font-size:11.5px;color:var(--dimmer);line-height:1.6}
+.note b{color:var(--dim);font-weight:600}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:14px}
+.legend div{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--dim)}
+.legend i{width:9px;height:9px;border-radius:3px;display:block}
+.kv{display:flex;justify-content:space-between;align-items:baseline;padding:9px 0;
+  border-bottom:1px solid rgba(255,255,255,.05);font-size:13px}
+.kv:last-child{border-bottom:0}
+.kv span{color:var(--dim)}
+.kv b{font:600 13px/1 var(--mono);font-variant-numeric:tabular-nums}
+.big{font-size:30px;font-weight:660;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.wlist{max-height:430px;overflow-y:auto;margin:0 -8px;padding:0 8px}
+.wlist::-webkit-scrollbar{width:5px}
+.wlist::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border-radius:9px}
+.wpick{display:flex;align-items:center;gap:11px;padding:10px;border-radius:11px;cursor:pointer;
+  transition:.22s;border:1px solid transparent}
+.wpick:hover{background:rgba(255,255,255,.05)}
+.wpick.sel{background:rgba(94,242,192,.09);border-color:rgba(94,242,192,.32)}
+.trades{display:flex;flex-direction:column;gap:2px}
+.trow{display:grid;grid-template-columns:auto 1fr auto auto;gap:12px;align-items:center;
+  padding:10px;border-radius:10px;font-size:12.5px;transition:background .2s}
+.trow:hover{background:rgba(255,255,255,.04)}
+.side{font:650 9.5px/1 var(--mono);letter-spacing:.1em;padding:5px 7px;border-radius:6px}
+.side.b{color:var(--mint);background:rgba(94,242,192,.12)}
+.side.s{color:var(--amber);background:rgba(255,194,85,.12)}
+.sig{border-radius:16px;border:1px solid var(--line);padding:20px;position:relative;overflow:hidden;
+  background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,.018));
+  transition:.35s var(--ease)}
+.sig:hover{transform:translateY(-4px);border-color:var(--line-2)}
+.sig::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px}
+.sig h4{font-size:16.5px;font-weight:640;letter-spacing:-.02em;margin-bottom:4px}
+.sig .meta{font:600 10px/1 var(--mono);letter-spacing:.13em;text-transform:uppercase;margin-bottom:13px}
+.sig p{font-size:13px;color:var(--dim);line-height:1.62}
+.sig .foot{margin-top:15px;padding-top:13px;border-top:1px solid var(--line);
+  display:flex;gap:16px;flex-wrap:wrap}
+.sig .foot div{font:600 11px/1 var(--mono);color:var(--dimmer)}
+.sig .foot div b{display:block;color:var(--ink);font-size:14px;margin-top:5px;font-weight:600}
+.conf{position:absolute;right:18px;top:18px;font:650 10px/1 var(--mono);letter-spacing:.1em;
+  padding:6px 9px;border-radius:99px;border:1px solid}
+footer{margin-top:60px;padding-top:26px;border-top:1px solid var(--line);
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--dimmer)}
+footer code{font-family:var(--mono);color:var(--dim)}
+/* ============ responsive ============ */
+@media(max-width:1040px){.g4{grid-template-columns:repeat(2,1fr)}.g23{grid-template-columns:1fr}}
+@media(max-width:880px){.g3{grid-template-columns:1fr}}
+@media(max-width:680px){
+  .wrap{padding:0 16px 70px}
+  nav.tabs{margin:12px -16px 24px;padding:10px 16px}
+  .g4,.g2,.g3{grid-template-columns:1fr}
+  header{padding:30px 0 18px}
+  .kpi .k-val{font-size:32px}
+  .card{padding:17px}
+  .scroll{margin:0 -17px;padding:0 17px}
+  .bar{grid-template-columns:88px 1fr 54px;gap:9px}
+}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<div class="aurora"><b class="a1"></b><b class="a2"></b><b class="a3"></b></div>
+<div class="grain"></div><div class="vig"></div>
+
+<div class="wrap">
+<header>
+  <div class="mark">
+    <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9">
+      <defs><linearGradient id="lg" x1="0" y1="0" x2="24" y2="24">
+        <stop offset="0" stop-color="#5ef2c0"/><stop offset=".55" stop-color="#b492ff"/><stop offset="1" stop-color="#ffc255"/>
+      </linearGradient></defs>
+      <path d="M2 17.5 7.5 11l4 3.6L21 5" stroke="url(#lg)"/>
+      <path d="M15.6 5H21v5.4" stroke="url(#lg)"/>
+      <circle cx="7.5" cy="11" r="1.9" fill="#5ef2c0" stroke="none"/>
+      <circle cx="11.5" cy="14.6" r="1.5" fill="#b492ff" stroke="none"/>
+    </svg>
+  </div>
+  <div class="htext">
+    <div class="eyebrow"><i class="dot"></i>trader-analyzer · on-chain intelligence</div>
+    <h1>Читаем чужие кошельки <em>Polymarket</em></h1>
+    <p class="sub">Парсер обходит кошельки топ-трейдеров, восстанавливает торговую стратегию и географию рынков,
+       считает PnL и активность, и раздаёт готовые сигналы собственным ботам. Все цифры ниже — реальная выгрузка из <code style="font-family:var(--mono)">profiles.db</code>.</p>
+    <div class="hstats">
+      <span class="pill m"><i></i>2 245 кошельков в индексе</span>
+      <span class="pill v"><i></i>2 221 weather-профиль ≥ 0.3</span>
+      <span class="pill a"><i></i>8 классов стратегий</span>
+      <span class="pill"><i></i>792 кошелька в ранге стратегий</span>
+      <span class="pill"><i></i>53 города</span>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs"><div class="tabrow" id="tabrow" role="tablist"></div></nav>
+
+<main id="main"></main>
+
+<footer>
+  <div>trader-analyzer · локальный статический отчёт, без внешних запросов</div>
+  <div><code>parse → classify → portrait → signals</code></div>
+</footer>
+</div>
+
+
+<style>
+/* ---- дополнения: пагинация, заглушки, таблицы ---- */
+.pager{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:18px}
+.pbtn{appearance:none;border:1px solid var(--line);background:var(--glass);color:var(--dim);
+  font:600 12px/1 var(--mono);padding:9px 12px;border-radius:10px;cursor:pointer;transition:.22s}
+.pbtn:hover:not(:disabled){color:var(--ink);border-color:var(--line-2);background:rgba(255,255,255,.08)}
+.pbtn:disabled{opacity:.32;cursor:default}
+.pbtn.cur{color:#06110d;border-color:transparent;
+  background:linear-gradient(120deg,var(--mint),#8ff0d6 70%,var(--violet))}
+.pinfo{margin-left:auto;font:500 11.5px/1 var(--mono);color:var(--dimmer)}
+.empty{border:1px dashed var(--line-2);border-radius:14px;padding:22px;text-align:center;
+  background:repeating-linear-gradient(135deg,rgba(255,255,255,.02) 0 10px,transparent 10px 20px)}
+.empty .eh{font:650 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--amber);margin-bottom:10px}
+.empty p{font-size:12.5px;color:var(--dim);line-height:1.65;max-width:64ch;margin:0 auto}
+code{font-family:var(--mono);font-size:.92em;color:var(--mint);background:rgba(94,242,192,.08);
+  padding:1px 5px;border-radius:5px}
+.mini{font:600 10.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dimmer)}
+.tbl tbody tr.norow{cursor:default}
+.tbl tbody td.num,.tbl thead th{white-space:nowrap}
+.tbl .wn1{max-width:190px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tbl .wname{min-width:210px}
+</style>
+
+<script src="data.js"></script>
+<script>
+/* =================== REAL DATA (data.js → window.DATA) =================== */
+const DATA = window.DATA;
+if(!DATA){
+  document.getElementById("main").innerHTML =
+    '<div class="card"><div class="ctitle">Нет данных</div><p class="note">Файл <code>data.js</code> не загрузился. '+
+    'Положите его рядом с index.html и перезагрузите страницу.</p></div>';
+  throw new Error("window.DATA is missing — data.js не подключён");
+}
+const WALLETS = DATA.wallets;
+WALLETS.forEach((w,i)=>{ w.id=i; });
+const RANK = DATA.strategy_rank || {by_strategy:[],wallets:[],count:0};
+const BY_STRAT = {};
+RANK.by_strategy.forEach(r=>BY_STRAT[r.strategy]=r);
+const SSUM = DATA.strategies.reduce((a,s)=>a+s.n,0);
+
+/* цвета классов */
+const SC = {
+  certain:  ["#5ef2c0","#1fb98c"],
+  value:    ["#b492ff","#7c4dff"],
+  momentum: ["#ffc255","#f59e0b"],
+  mixed:    ["#7fd7ff","#3b9ddd"],
+  ladder:   ["#ff9ecb","#e0559b"],
+  unknown:  ["#8791a8","#5c6479"],
+  specialist:["#cdf56a","#8ec21a"],
+  longshot: ["#ff8f6b","#e8542a"]
+};
+const SDESC = {
+  certain:  "Ставит на почти решённые исходы — высокий median entry, тонкая маржа.",
+  value:    "Ищет расхождение своей модели и рынка, входит против толпы.",
+  momentum: "Заходит по направлению движения цены, держит коротко.",
+  mixed:    "Не сводится к одному паттерну — комбинирует режимы по рынкам.",
+  ladder:   "Лестница ордеров по уровням цены, усредняет вход и выход.",
+  unknown:  "Недостаточно сделок или шумный след — классификатор воздержался.",
+  specialist:"Один узкий рынок/город, глубокая экспертиза, редкие входы.",
+  longshot: "Дешёвые хвосты — самый низкий median entry, редкие крупные попадания."
+};
+const CPAL = ["#5ef2c0","#b492ff","#ffc255","#7fd7ff","#ff9ecb","#cdf56a","#ff8f6b","#8791a8"];
+
+/* =================== HELPERS =================== */
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const NUM=n=>typeof n==="number"&&isFinite(n);
+function fmt(n,d=0){ return NUM(n) ? n.toLocaleString("ru-RU",{minimumFractionDigits:d,maximumFractionDigits:d}).replace(/ /g," ") : "—" }
+function usd(n,d=0){ return NUM(n) ? (n<0?"−":"+")+"$"+fmt(Math.abs(n),d) : "—" }
+function usd0(n,d=0){ return NUM(n) ? "$"+fmt(n,d) : "—" }
+function pct(n,d=1){ return NUM(n) ? fmt(n,d)+"%" : "—" }
+function ratio(n,d=1){ return NUM(n) ? fmt(n*100,d)+"%" : "—" }
+function dt(s){ if(!s) return "—"; const d=new Date(s); return isNaN(d)?"—":d.toLocaleDateString("ru-RU",{day:"2-digit",month:"2-digit",year:"numeric"}) }
+function pnlCls(n){ return !NUM(n) ? "" : (n>=0?"pos":"neg") }
+function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])) }
+function short(a){ return a? a.slice(0,6)+"…"+a.slice(-4) : "—" }
+function winrate(w){ return w.total_trades ? w.buy_trades/w.total_trades : null }
+
+/* =================== АГРЕГАТЫ (только реальные поля) =================== */
+const AGG = (()=>{
+  const withPnl = WALLETS.filter(w=>NUM(w.pnl));
+  const sumPnl  = withPnl.reduce((a,w)=>a+w.pnl,0);
+  const winners = withPnl.filter(w=>w.pnl>0).length;
+  const trades  = WALLETS.reduce((a,w)=>a+(w.total_trades||0),0);
+  const vol30   = WALLETS.reduce((a,w)=>a+(w.volume_30d||0),0);
+  const playbook= WALLETS.filter(w=>w.playbook).length;
+  const cityAgg = {};
+  WALLETS.forEach(w=>{ const c=w.cities||{}; for(const k in c) cityAgg[k]=(cityAgg[k]||0)+c[k] });
+  const cities  = Object.entries(cityAgg).map(([k,v])=>({k,v})).sort((a,b)=>b.v-a.v);
+  const cityTot = cities.reduce((a,c)=>a+c.v,0);
+  const topCities=[...new Set(WALLETS.map(w=>w.top_city).filter(Boolean))].sort();
+  const sorted  = [...withPnl].sort((a,b)=>b.pnl-a.pnl);
+  return {withPnl,sumPnl,winners,trades,vol30,playbook,cities,cityTot,topCities,
+          best:sorted[0], worst:sorted[sorted.length-1], noPnl:WALLETS.length-withPnl.length};
+})();
+
+/* =================== SVG =================== */
+function donut(parts,size=196,thick=22){
+  const R=size/2, r=R-thick/2-2, C=2*Math.PI*r;
+  let off=0;
+  const segs=parts.map((p,i)=>{
+    const len=p.v*C, s=`<circle cx="${R}" cy="${R}" r="${r}" fill="none" stroke="${p.c}" stroke-width="${thick}"
+      stroke-dasharray="${Math.max(0,len-2.5).toFixed(2)} ${(C-len+2.5).toFixed(2)}" stroke-dashoffset="${(-off).toFixed(2)}"
+      stroke-linecap="round" transform="rotate(-90 ${R} ${R})" opacity="0" class="dseg" style="animation-delay:${i*0.09}s"/>`;
+    off+=len; return s}).join("");
+  return `<svg viewBox="0 0 ${size} ${size}" style="width:100%;max-width:210px;height:auto;display:block;margin:0 auto">
+    <circle cx="${R}" cy="${R}" r="${r}" fill="none" stroke="rgba(255,255,255,.05)" stroke-width="${thick}"/>${segs}</svg>`;
+}
+let RGID=0;
+function ringPct(p,c1,c2,size=118,label){
+  const R=size/2,r=R-9,C=2*Math.PI*r,id="rg"+(RGID++);
+  const v=Math.max(0,Math.min(1,p||0));
+  return `<svg viewBox="0 0 ${size} ${size}" style="width:${size}px;height:${size}px">
+    <defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient></defs>
+    <circle cx="${R}" cy="${R}" r="${r}" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="9"/>
+    <circle cx="${R}" cy="${R}" r="${r}" fill="none" stroke="url(#${id})" stroke-width="9" stroke-linecap="round"
+      stroke-dasharray="${C}" stroke-dashoffset="${(C*(1-v)).toFixed(2)}" transform="rotate(-90 ${R} ${R})"/>
+    <text x="50%" y="50%" text-anchor="middle" dy=".36em" fill="#e9edf6" font-size="19" font-weight="650"
+      font-family="ui-monospace,Menlo,monospace">${label!=null?label:Math.round(v*100)+"%"}</text></svg>`;
+}
+function columns(items,h=176){
+  const mx=Math.max(...items.map(i=>Math.abs(i.v)))||1;
+  const anyNeg=items.some(i=>i.v<0);
+  const bh=h-52, zero=anyNeg?bh/2:bh;
+  return `<div style="display:flex;align-items:stretch;gap:10px;height:${h}px;padding-top:8px">`+
+    items.map((it,i)=>{
+      const pos=it.v>=0, size=Math.abs(it.v)/mx*(anyNeg?bh/2:bh);
+      return `<div style="flex:1;display:flex;flex-direction:column;align-items:center;height:100%;gap:6px" title="${esc(it.k)}">
+        <div style="flex:1;width:100%;display:flex;flex-direction:column;justify-content:${pos?"flex-end":"flex-start"};align-items:center;
+          padding-top:${pos?0:zero}px;padding-bottom:${pos?(anyNeg?bh/2:0):0}px;position:relative">
+          ${pos?`<div style="font:600 10px/1 var(--mono);color:${it.c1};margin-bottom:6px;white-space:nowrap">${it.lab}</div>`:""}
+          <div class="colbar" style="width:100%;border-radius:${pos?"8px 8px 3px 3px":"3px 3px 8px 8px"};height:0;--h:${size.toFixed(1)}px;
+            background:linear-gradient(${pos?"180":"0"}deg,${it.c1},${it.c2});animation-delay:${i*0.07}s;box-shadow:0 0 22px -6px ${it.c1}"></div>
+          ${!pos?`<div style="font:600 10px/1 var(--mono);color:${it.c1};margin-top:6px;white-space:nowrap">${it.lab}</div>`:""}
+        </div>
+        <div style="font:600 10.5px/1 var(--sans);color:var(--dim);text-transform:capitalize">${esc(it.k)}</div>
+      </div>`}).join("")+`</div>`;
+}
+function initials(w){const n=(w.name||"?").trim();return (n[0]+(n[1]||"")).toUpperCase()}
+function av(w,sz){const c=SC[w.strategy]||SC.unknown;
+  return `<div class="av" ${sz?`style="width:${sz}px;height:${sz}px;border-radius:16px;font-size:${Math.round(sz/3.1)}px;background:linear-gradient(135deg,${c[0]},${c[1]})"`:`style="background:linear-gradient(135deg,${c[0]},${c[1]})"`}>${esc(initials(w))}</div>`}
+function tag(k){const c=SC[k]||SC.unknown;
+  return `<span class="tag" style="color:${c[0]};border-color:${c[0]}33;background:${c[0]}14">${esc(k)}</span>`}
+
+const extraCSS=document.createElement("style");
+extraCSS.textContent=`
+@keyframes dseg{to{opacity:1}}
+.dseg{animation:dseg .5s ease forwards}
+@keyframes grow{to{height:var(--h)}}
+.colbar{animation:grow .9s cubic-bezier(.22,.86,.31,1) forwards}`;
+document.head.appendChild(extraCSS);
+</script>
+<script>
+/* =================== PANELS =================== */
+const TABS=[
+  {id:"overview", t:"Overview",   n:"01"},
+  {id:"wallets",  t:"Wallets",    n:"02"},
+  {id:"strategies",t:"Strategies",n:"03"},
+  {id:"portrait", t:"Portrait",   n:"04"},
+  {id:"onchain",  t:"On-chain",   n:"05"},
+  {id:"signals",  t:"Signals",    n:"06"}
+];
+
+/* ---------- OVERVIEW ---------- */
+function viewOverview(){
+  const T=DATA.totals, mxS=Math.max(...DATA.strategies.map(s=>s.n));
+  const cover=T.weather/T.wallets;
+  const top10=AGG.withPnl.slice().sort((a,b)=>b.pnl-a.pnl).slice(0,10);
+  const topC=AGG.cities.slice(0,7);
+  const restC=AGG.cityTot-topC.reduce((a,c)=>a+c.v,0);
+  const parts=topC.map((c,i)=>({v:c.v/AGG.cityTot,c:CPAL[i%CPAL.length],k:c.k}))
+    .concat(restC>0?[{v:restC/AGG.cityTot,c:"#3a4152",k:"прочие"}]:[]);
+  const kpi=(lab,val,sub,cls)=>`<div class="card hov kpi">
+    <div class="k-lab">${lab}</div><div class="k-val ${cls}">${val}</div><div class="k-sub">${sub}</div></div>`;
+  return `
+  <div class="grid g4">
+    ${kpi("Кошельков в индексе",fmt(T.wallets),"полная выгрузка profiles.db","gm")}
+    ${kpi("Weather-профили",fmt(T.weather),"score ≥ "+T.threshold+" · "+pct(cover*100)+" индекса","gv")}
+    ${kpi("Классов стратегий",T.strategies,"классификатор без ручных правил","ga")}
+    ${kpi("Кошельков с PnL",fmt(AGG.withPnl.length),"у "+fmt(AGG.noPnl)+" PnL не посчитан","")}
+  </div>
+
+  <h2 class="sec">Распределение по стратегиям</h2>
+  <div class="grid g23">
+    <div class="card">
+      <div class="ctitle">${fmt(SSUM)} кошельков · ${T.strategies} классов</div>
+      ${DATA.strategies.map(s=>`
+        <div class="bar">
+          <div class="nm">${esc(s.k)}</div>
+          <div class="tr"><div class="fl" data-w="${(s.n/mxS*100).toFixed(1)}"
+            style="background:linear-gradient(90deg,${(SC[s.k]||SC.unknown)[1]},${(SC[s.k]||SC.unknown)[0]})"></div></div>
+          <div class="vl">${fmt(s.n)}</div>
+        </div>`).join("")}
+      <p class="note" style="margin-top:14px">Сумма по классам = <b>${fmt(SSUM)}</b> — классификатор разметил
+        весь индекс. Из них <b>${fmt(T.weather)}</b> имеют weather-score ≥ ${T.threshold},
+        остальные ${fmt(T.wallets-T.weather)} — вне weather-выборки.</p>
+    </div>
+    <div class="card">
+      <div class="ctitle">География рынков · top-7</div>
+      ${donut(parts)}
+      <div class="legend">${parts.map(p=>
+        `<div><i style="background:${p.c}"></i>${esc(p.k)} · ${pct(p.v*100)}</div>`).join("")}</div>
+      <p class="note" style="margin-top:14px">Города считаны по полю <code>cities</code> всех ${fmt(WALLETS.length)} кошельков:
+        всего <b>${fmt(AGG.cityTot)}</b> городских сделок, <b>${AGG.topCities.length}</b> уникальных городов.</p>
+    </div>
+  </div>
+
+  <h2 class="sec">Топ-10 по PnL</h2>
+  <div class="card">
+    <div class="scroll"><table class="tbl">
+      <thead><tr><th>#</th><th>Кошелёк</th><th>Стратегия</th><th>Топ-город</th>
+        <th class="num">PnL</th><th class="num">Сделок</th><th class="num">30д</th><th class="num">Объём 30д</th></tr></thead>
+      <tbody>${top10.map((w,i)=>`<tr data-w="${w.id}">
+        <td style="font-family:var(--mono);color:var(--dimmer)">${i+1}</td>
+        <td><div class="wname">${av(w)}<div><div class="wn1">${esc(w.name)}</div>
+          <div class="wn2">${short(w.wallet)}</div></div></div></td>
+        <td>${tag(w.strategy)}</td>
+        <td style="color:var(--dim)">${esc(w.top_city||"—")}</td>
+        <td class="num ${pnlCls(w.pnl)}">${usd(w.pnl)}</td>
+        <td class="num" style="color:var(--dim)">${fmt(w.total_trades)}</td>
+        <td class="num" style="color:var(--dim)">${fmt(w.trades_30d)}</td>
+        <td class="num" style="color:var(--dimmer)">${usd0(w.volume_30d)}</td>
+      </tr>`).join("")}</tbody></table></div>
+    <p class="note" style="margin-top:14px">Клик по строке открывает <b>Portrait</b>.</p>
+  </div>
+
+  <h2 class="sec">Сводная статистика</h2>
+  <div class="grid g3">
+    <div class="card hov"><div class="ctitle">PnL по индексу</div>
+      <div class="big ${pnlCls(AGG.sumPnl)}">${usd(AGG.sumPnl)}</div>
+      <div class="note" style="margin-top:6px">сумма по ${fmt(AGG.withPnl.length)} кошелькам с посчитанным PnL</div>
+      <div class="kv" style="margin-top:14px"><span>Лучший · ${esc(AGG.best.name)}</span><b class="pos">${usd(AGG.best.pnl)}</b></div>
+      <div class="kv"><span>Худший · ${esc(AGG.worst.name)}</span><b class="neg">${usd(AGG.worst.pnl)}</b></div>
+      <div class="kv"><span>Прибыльных</span><b>${fmt(AGG.winners)} / ${fmt(AGG.withPnl.length)}</b></div>
+    </div>
+    <div class="card hov"><div class="ctitle">Доля прибыльных</div>
+      <div style="display:flex;justify-content:center;padding:8px 0">${ringPct(AGG.winners/AGG.withPnl.length,"#5ef2c0","#7c4dff")}</div>
+      <div class="note" style="text-align:center">${fmt(AGG.winners)} из ${fmt(AGG.withPnl.length)} кошельков в плюсе
+        (${pct(AGG.winners/AGG.withPnl.length*100)}). Медиана по классам — на вкладке Strategies.</div>
+    </div>
+    <div class="card hov"><div class="ctitle">Активность выборки</div>
+      <div class="kv"><span>Сделок разобрано</span><b>${fmt(AGG.trades)}</b></div>
+      <div class="kv"><span>Объём за 30 дней</span><b>${usd0(AGG.vol30)}</b></div>
+      <div class="kv"><span>Городов в индексе</span><b>${AGG.topCities.length}</b></div>
+      <div class="kv"><span>С playbook</span><b>${fmt(AGG.playbook)} / ${fmt(WALLETS.length)}</b></div>
+      <div class="kv"><span>Порог weather-score</span><b>${T.threshold}</b></div>
+    </div>
+  </div>`;
+}
+
+/* ---------- WALLETS ---------- */
+const WST={strategy:"all",city:"all",q:"",sort:"pnl",dir:-1,page:1,per:50};
+function viewWallets(){
+  return `
+  <div class="card">
+    <div class="tools">
+      <div class="fld"><label>Стратегия</label><select id="f-str">
+        <option value="all">все (${fmt(WALLETS.length)})</option>${DATA.strategies.map(s=>`<option value="${esc(s.k)}">${esc(s.k)} · ${fmt(s.n)}</option>`).join("")}</select></div>
+      <div class="fld"><label>Топ-город</label><select id="f-cty">
+        <option value="all">все</option>${AGG.topCities.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join("")}</select></div>
+      <div class="fld nc"><label>Поиск по имени</label><input type="search" id="f-q" placeholder="имя или адрес…"></div>
+      <div class="fld"><label>На странице</label><select id="f-per">
+        <option value="50">50</option><option value="100">100</option><option value="200">200</option></select></div>
+      <div class="wcount" id="wcount"></div>
+    </div>
+    <div class="scroll"><table class="tbl">
+      <thead><tr>
+        <th data-s="name">Кошелёк<span class="ar">↓</span></th>
+        <th data-s="strategy">Стратегия<span class="ar">↓</span></th>
+        <th data-s="top_city">Топ-город<span class="ar">↓</span></th>
+        <th data-s="pnl" class="num">PnL<span class="ar">↓</span></th>
+        <th data-s="total_trades" class="num">Сделок<span class="ar">↓</span></th>
+        <th data-s="trades_30d" class="num">30д<span class="ar">↓</span></th>
+        <th data-s="volume_30d" class="num">Объём 30д<span class="ar">↓</span></th>
+        <th data-s="trades_per_month" class="num">Сделок/мес<span class="ar">↓</span></th>
+        <th data-s="playbook">Playbook<span class="ar">↓</span></th>
+        <th data-s="winrate">Buy-доля<span class="ar">↓</span></th>
+      </tr></thead>
+      <tbody id="wbody"></tbody>
+    </table></div>
+    <div class="pager" id="pager"></div>
+    <p class="note" style="margin-top:16px">Все ${fmt(WALLETS.length)} кошельков из <code>profiles.db</code>, страницами по ${WST.per}.
+      «Buy-доля» = <b>buy_trades / total_trades</b> — это не winrate по деньгам, а перекос в сторону покупок.
+      У ${fmt(AGG.noPnl)} кошельков PnL не посчитан — они показаны с прочерком и сортируются в конец.</p>
+  </div>`;
+}
+function filtered(){
+  const q=WST.q.trim().toLowerCase();
+  let r=WALLETS.filter(w=>
+    (WST.strategy==="all"||w.strategy===WST.strategy) &&
+    (WST.city==="all"||w.top_city===WST.city) &&
+    (!q||(w.name+" "+w.wallet).toLowerCase().includes(q)));
+  const k=WST.sort, dir=WST.dir;
+  r.sort((a,b)=>{
+    let x = k==="winrate" ? winrate(a) : a[k];
+    let y = k==="winrate" ? winrate(b) : b[k];
+    if(typeof x==="string"||typeof y==="string")
+      return String(x||"").localeCompare(String(y||""),"ru")*dir;
+    const xn=NUM(x), yn=NUM(y);
+    if(!xn&&!yn) return 0;
+    if(!xn) return 1;          /* пустые всегда в конец */
+    if(!yn) return -1;
+    return (x-y)*dir;
+  });
+  return r;
+}
+function paintWallets(){
+  const rows=filtered();
+  const pages=Math.max(1,Math.ceil(rows.length/WST.per));
+  if(WST.page>pages) WST.page=pages;
+  const from=(WST.page-1)*WST.per, page=rows.slice(from,from+WST.per);
+  $("#wcount").textContent=fmt(rows.length)+" / "+fmt(WALLETS.length)+" кошельков";
+  $("#wbody").innerHTML = page.length? page.map(w=>{
+    const c=SC[w.strategy]||SC.unknown, wr=winrate(w);
+    return `<tr data-w="${w.id}">
+      <td><div class="wname">${av(w)}<div><div class="wn1">${esc(w.name)}</div>
+        <div class="wn2">${short(w.wallet)}</div></div></div></td>
+      <td>${tag(w.strategy)}</td>
+      <td style="color:var(--dim)">${esc(w.top_city||"—")}</td>
+      <td class="num ${pnlCls(w.pnl)}">${usd(w.pnl)}</td>
+      <td class="num" style="color:var(--dim)">${fmt(w.total_trades)}</td>
+      <td class="num" style="color:var(--dim)">${fmt(w.trades_30d)}</td>
+      <td class="num" style="color:var(--dimmer)">${usd0(w.volume_30d)}</td>
+      <td class="num" style="color:var(--dimmer)">${fmt(w.trades_per_month,1)}</td>
+      <td>${w.playbook?'<span class="tag" style="color:var(--mint);border-color:rgba(94,242,192,.28);background:rgba(94,242,192,.1)">да</span>'
+                      :'<span class="tag" style="color:var(--dimmer);border-color:var(--line);background:transparent">нет</span>'}</td>
+      <td><div class="wr"><div class="tr"><div class="fl" data-w="${NUM(wr)?(wr*100).toFixed(1):0}"
+        style="background:linear-gradient(90deg,${c[1]},${c[0]})"></div></div><div class="pc">${NUM(wr)?Math.round(wr*100)+"%":"—"}</div></div></td>
+    </tr>`}).join("")
+    : `<tr class="norow"><td colspan="10" style="text-align:center;color:var(--dimmer);padding:44px 0">Ничего не найдено — ослабьте фильтры</td></tr>`;
+  paintPager(pages,rows.length,from,page.length);
+  animateBars($("#wbody"));
+}
+function paintPager(pages,total,from,shown){
+  const p=WST.page, out=[];
+  out.push(`<button class="pbtn" data-p="1" ${p===1?"disabled":""}>«</button>`);
+  out.push(`<button class="pbtn" data-p="${p-1}" ${p===1?"disabled":""}>‹</button>`);
+  const nums=new Set([1,pages,p,p-1,p+1,p-2,p+2]);
+  const list=[...nums].filter(n=>n>=1&&n<=pages).sort((a,b)=>a-b);
+  let prev=0;
+  list.forEach(n=>{
+    if(n-prev>1) out.push(`<span style="color:var(--dimmer);font-family:var(--mono)">…</span>`);
+    out.push(`<button class="pbtn ${n===p?"cur":""}" data-p="${n}">${n}</button>`);
+    prev=n;
+  });
+  out.push(`<button class="pbtn" data-p="${p+1}" ${p===pages?"disabled":""}>›</button>`);
+  out.push(`<button class="pbtn" data-p="${pages}" ${p===pages?"disabled":""}>»</button>`);
+  out.push(`<span class="pinfo">${total?fmt(from+1)+"–"+fmt(from+shown):"0"} из ${fmt(total)} · стр. ${p}/${pages}</span>`);
+  const el=$("#pager"); el.innerHTML=out.join("");
+  $$(".pbtn",el).forEach(b=>b.addEventListener("click",()=>{
+    if(b.disabled) return;
+    WST.page=+b.dataset.p; paintWallets(); wireRows();
+    $("#main").scrollIntoView({behavior:"smooth",block:"start"});
+  }));
+}
+
+/* ---------- STRATEGIES ---------- */
+function viewStrategies(){
+  const T=DATA.totals, mxS=Math.max(...DATA.strategies.map(s=>s.n));
+  const ranked=[...RANK.by_strategy].sort((a,b)=>b.median_pnl-a.median_pnl);
+  const missing=DATA.strategies.filter(s=>!BY_STRAT[s.k]);
+  return `
+  <div class="grid g2">
+    <div class="card"><div class="ctitle">Доля класса в популяции</div>
+      ${DATA.strategies.map(s=>`<div class="bar">
+        <div class="nm">${esc(s.k)}</div>
+        <div class="tr"><div class="fl" data-w="${(s.n/mxS*100).toFixed(1)}"
+          style="background:linear-gradient(90deg,${(SC[s.k]||SC.unknown)[1]},${(SC[s.k]||SC.unknown)[0]})"></div></div>
+        <div class="vl">${pct(s.n/SSUM*100)}</div></div>`).join("")}
+      <p class="note" style="margin-top:14px">Знаменатель — ${fmt(SSUM)} размеченных кошельков
+        (из них ${fmt(T.weather)} с weather-score ≥ ${T.threshold}).</p>
+    </div>
+    <div class="card"><div class="ctitle">Медианный PnL по классу · ранг из strategy_rank</div>
+      ${columns(ranked.map(s=>({k:s.strategy, lab:usd(s.median_pnl,2),
+        v:s.median_pnl, c1:(SC[s.strategy]||SC.unknown)[0], c2:(SC[s.strategy]||SC.unknown)[1]})),200)}
+      <p class="note" style="margin-top:16px">Ранг посчитан по <b>${fmt(RANK.count)}</b> кошелькам
+        ${RANK.playbook_only?"с playbook":""}${RANK.weather_min_ratio!=null?" и weather-ratio ≥ "+RANK.weather_min_ratio:""}.
+        Классы <b>${missing.map(m=>esc(m.k)).join(", ")||"—"}</b> в ранг не попали — по ним разобранных кошельков нет.</p>
+    </div>
+  </div>
+
+  <h2 class="sec">Ранг классов · реальные цифры</h2>
+  <div class="card">
+    <div class="scroll"><table class="tbl">
+      <thead><tr><th>Класс</th><th class="num">Кошельков в ранге</th><th class="num">Медианный PnL</th>
+        <th class="num">Сумма PnL</th><th class="num">% прибыльных</th><th class="num">Медианный вход</th></tr></thead>
+      <tbody>${ranked.map(s=>`<tr class="norow">
+        <td>${tag(s.strategy)}</td>
+        <td class="num" style="color:var(--dim)">${fmt(s.wallets)}</td>
+        <td class="num ${pnlCls(s.median_pnl)}">${usd(s.median_pnl,2)}</td>
+        <td class="num ${pnlCls(s.sum_pnl)}">${usd(s.sum_pnl,2)}</td>
+        <td class="num" style="color:${s.pct_profitable>=50?"var(--mint)":"var(--amber)"}">${pct(s.pct_profitable)}</td>
+        <td class="num" style="color:var(--dim)">${fmt(s.median_entry,2)}</td>
+      </tr>`).join("")}
+      ${missing.map(m=>`<tr class="norow" style="opacity:.55">
+        <td>${tag(m.k)}</td><td class="num" style="color:var(--dimmer)">0</td>
+        <td class="num" style="color:var(--dimmer)">—</td><td class="num" style="color:var(--dimmer)">—</td>
+        <td class="num" style="color:var(--dimmer)">—</td><td class="num" style="color:var(--dimmer)">—</td>
+      </tr>`).join("")}
+      </tbody></table></div>
+    <p class="note" style="margin-top:14px">Источник — <code>strategy_rank.by_strategy</code>. Ничего не досчитывается на клиенте.</p>
+  </div>
+
+  <h2 class="sec">${T.strategies} классов стратегий</h2>
+  <div class="grid g3">
+    ${DATA.strategies.map(s=>{
+      const c=SC[s.k]||SC.unknown, r=BY_STRAT[s.k], has=!!r;
+      const pos=has?ranked.indexOf(r)+1:null;
+      return `<div class="card hov" style="border-color:${c[0]}22">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+          ${tag(s.k)}
+          <span style="font:650 10px/1 var(--mono);color:var(--dimmer)">${has?"RANK "+pos+" / "+ranked.length:"НЕТ ВЫБОРКИ"}</span>
+        </div>
+        <div class="k-val" style="font-size:30px;font-weight:660;letter-spacing:-.04em;margin:14px 0 2px;
+          color:${has?(r.median_pnl>=0?"var(--mint)":"var(--rose)"):"var(--dimmer)"};font-variant-numeric:tabular-nums">
+          ${has?usd(r.median_pnl,2):"—"}</div>
+        <div class="note">медианный PnL${has?` · n=${fmt(r.wallets)}`:" · нет разобранных кошельков"}</div>
+        ${has?`<div class="kv" style="margin-top:12px"><span>Сумма PnL</span><b class="${pnlCls(r.sum_pnl)}">${usd(r.sum_pnl,2)}</b></div>
+        <div class="kv"><span>% прибыльных</span><b>${pct(r.pct_profitable)}</b></div>
+        <div class="kv"><span>Медианный вход</span><b>${fmt(r.median_entry,2)}</b></div>`:""}
+        <div class="bar" style="grid-template-columns:1fr 60px;margin-top:14px">
+          <div class="tr"><div class="fl" data-w="${(s.n/mxS*100).toFixed(1)}"
+            style="background:linear-gradient(90deg,${c[1]},${c[0]})"></div></div>
+          <div class="vl">${fmt(s.n)}</div></div>
+        <p class="note" style="margin-top:12px">${SDESC[s.k]||""}</p>
+      </div>`}).join("")}
+  </div>`;
+}
+</script>
+<script>
+/* ---------- PORTRAIT ---------- */
+let SEL = 0;
+const PST={q:""};
+function portraitList(){
+  const q=PST.q.trim().toLowerCase();
+  const list=WALLETS.filter(w=>!q||(w.name+" "+w.wallet).toLowerCase().includes(q))
+    .sort((a,b)=>(NUM(b.pnl)?b.pnl:-Infinity)-(NUM(a.pnl)?a.pnl:-Infinity));
+  const shown=list.slice(0,150);
+  return `<div class="fld nc" style="margin-bottom:12px"><label>Поиск</label>
+      <input type="search" id="p-q" placeholder="имя или адрес…" style="width:100%" value="${esc(PST.q)}"></div>
+    <div class="wlist">${shown.map(w=>`
+      <div class="wpick" data-p="${w.id}">
+        ${av(w)}
+        <div style="flex:1;min-width:0">
+          <div class="wn1" style="font-size:13px">${esc(w.name)}</div>
+          <div class="wn2">${esc(w.strategy)} · ${esc(w.top_city||"—")}</div>
+        </div>
+        <div style="font:600 12px/1 var(--mono)" class="${pnlCls(w.pnl)}">${usd(w.pnl)}</div>
+      </div>`).join("")}</div>
+    <p class="note" style="margin-top:10px">${fmt(list.length)} совпадений${list.length>shown.length?`, показаны первые ${shown.length}`:""}.</p>`;
+}
+function viewPortrait(){
+  return `<div class="grid g23">
+    <div id="pbody"></div>
+    <div class="card"><div class="ctitle">Выберите кошелёк · ${fmt(WALLETS.length)}</div>
+      <div id="plist">${portraitList()}</div>
+    </div>
+  </div>`;
+}
+function paintPortrait(){
+  const w=WALLETS[SEL]||WALLETS[0], c=SC[w.strategy]||SC.unknown;
+  const wr=winrate(w);
+  const cities=Object.entries(w.cities||{}).sort((a,b)=>b[1]-a[1]);
+  const cityTot=cities.reduce((a,x)=>a+x[1],0);
+  const top5=cities.slice(0,5);
+  $$("#main .wpick").forEach(e=>e.classList.toggle("sel",+e.dataset.p===SEL));
+  $("#pbody").innerHTML=`
+  <div class="card" style="margin-bottom:16px">
+    <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+      ${av(w,56)}
+      <div style="flex:1;min-width:180px">
+        <div style="font-size:26px;font-weight:660;letter-spacing:-.03em">${esc(w.name)}</div>
+        <div style="font:400 11.5px/1 var(--mono);color:var(--dimmer);margin-top:7px;word-break:break-all">${esc(w.wallet)}</div>
+      </div>
+      <div style="text-align:right">
+        <div class="big ${pnlCls(w.pnl)}">${usd(w.pnl,2)}</div>
+        <div class="note">${NUM(w.pnl)?"реализованный PnL":"PnL не посчитан"}</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:9px;flex-wrap:wrap;margin-top:16px">
+      ${tag(w.strategy)}
+      <span class="pill">${esc(w.top_city||"город не определён")} · концентрация ${ratio(w.city_concentration)}</span>
+      <span class="pill">${fmt(w.total_trades)} сделок</span>
+      <span class="pill">${fmt(w.buy_trades)} buy${NUM(wr)?" · "+ratio(wr):""}</span>
+      <span class="pill ${w.playbook?"m":""}">${w.playbook?"playbook":"без playbook"}</span>
+      <span class="pill">weather ${ratio(w.weather_ratio)}</span>
+    </div>
+  </div>
+
+  <div class="grid g2" style="margin-bottom:16px">
+    <div class="card"><div class="ctitle">Профиль торговли</div>
+      <div style="display:flex;justify-content:center;padding:4px 0 12px">
+        ${ringPct(NUM(wr)?wr:0,c[0],c[1],118,NUM(wr)?Math.round(wr*100)+"%":"—")}</div>
+      <div class="note" style="text-align:center;margin-bottom:12px">buy-доля (buy_trades / total_trades)</div>
+      <div class="kv"><span>Сделок всего</span><b>${fmt(w.total_trades)}</b></div>
+      <div class="kv"><span>Buy / Sell</span><b>${fmt(w.buy_trades)} / ${fmt(w.total_trades-w.buy_trades)}</b></div>
+      <div class="kv"><span>Медианный вход</span><b>${fmt(w.median_entry,4)}</b></div>
+      <div class="kv"><span>PnL на сделку</span><b class="${pnlCls(NUM(w.pnl)&&w.total_trades?w.pnl/w.total_trades:null)}">${NUM(w.pnl)&&w.total_trades?usd(w.pnl/w.total_trades,2):"—"}</b></div>
+      <div class="kv"><span>Стратегия</span><b style="color:${c[0]}">${esc(w.strategy)}</b></div>
+    </div>
+    <div class="card"><div class="ctitle">Паттерны и активность</div>
+      ${[["ladder_ratio","ladder"],["longshot_ratio","longshot"],["certain_ratio","certain"],["weather_ratio","weather"]].map(([f,lab])=>{
+        const cc=SC[lab]||["#5ef2c0","#1fb98c"];
+        return `<div class="bar" style="grid-template-columns:92px 1fr 54px;padding:6px 0">
+          <div class="nm" style="font-size:11.5px">${lab}</div>
+          <div class="tr" style="height:7px"><div class="fl" data-w="${NUM(w[f])?(Math.min(1,w[f])*100).toFixed(1):0}"
+            style="background:linear-gradient(90deg,${cc[1]},${cc[0]})"></div></div>
+          <div class="vl" style="font-size:11px">${ratio(w[f])}</div></div>`}).join("")}
+      <div class="kv" style="margin-top:12px"><span>Сделок за 30 дней</span><b>${fmt(w.trades_30d)} (${fmt(w.buys_30d)} buy)</b></div>
+      <div class="kv"><span>Объём за 30 дней</span><b>${usd0(w.volume_30d,2)}</b></div>
+      <div class="kv"><span>Активных дней / 30</span><b>${fmt(w.active_days_30d)}</b></div>
+      <div class="kv"><span>Сделок в месяц</span><b>${fmt(w.trades_per_month,1)}</b></div>
+      <div class="kv"><span>Период наблюдения</span><b>${fmt(w.period_days,1)} дн.</b></div>
+      <div class="kv"><span>Первая / последняя</span><b>${dt(w.first_trade_at)} → ${dt(w.last_trade_at)}</b></div>
+    </div>
+  </div>
+
+  <div class="grid g2" style="margin-bottom:16px">
+    <div class="card"><div class="ctitle">Города · top-5 из ${cities.length}</div>
+      ${cities.length?`${donut(top5.map((x,i)=>({v:x[1]/cityTot,c:CPAL[i%CPAL.length]})).concat(
+          cityTot>top5.reduce((a,x)=>a+x[1],0)?[{v:(cityTot-top5.reduce((a,x)=>a+x[1],0))/cityTot,c:"#3a4152"}]:[]),180,20)}
+        <div style="margin-top:16px">${top5.map((x,i)=>`
+          <div class="bar" style="grid-template-columns:1fr 62px;padding:5px 0">
+            <div class="nm" style="font-size:11.5px;text-transform:none">
+              <i style="display:inline-block;width:8px;height:8px;border-radius:2px;background:${CPAL[i%CPAL.length]};margin-right:7px"></i>${esc(x[0])}</div>
+            <div class="vl" style="font-size:11px">${fmt(x[1])} · ${pct(x[1]/cityTot*100)}</div>
+          </div>`).join("")}</div>
+        <p class="note" style="margin-top:12px">Всего городских сделок: <b>${fmt(cityTot)}</b>.
+          Топ-город <b>${esc(w.top_city||"—")}</b>, концентрация ${ratio(w.city_concentration)}.</p>`
+        :`<div class="empty"><div class="eh">нет данных</div><p>У этого кошелька города не размечены.</p></div>`}
+    </div>
+    <div class="card"><div class="ctitle">Тематическое распределение</div>
+      <div class="empty" style="margin-top:8px"><div class="eh">нет данных</div>
+        <p>Темы (weather / politics / sports / crypto / science / pop culture) в <code>profiles.db</code>
+        не классифицированы — в выгрузке есть только <code>weather_ratio</code> (${ratio(w.weather_ratio)} у этого кошелька)
+        и география рынков. Пока тематический классификатор не отработал, разбивку по 6 темам показать нечем.</p></div>
+      <div class="ctitle" style="margin-top:22px">On-chain потоки</div>
+      <div class="empty" style="margin-top:8px"><div class="eh">нет данных</div>
+        <p>Депозиты и выводы USDC/ETH требуют <code>POLYGONSCAN_API_KEY</code> в <code>.env</code>.
+        Ключ не задан — потоков в выгрузке нет. Подробнее — вкладка <b>On-chain</b>.</p></div>
+    </div>
+  </div>
+
+  <p class="note">Все поля выше — из <code>profiles.db</code> как есть. Прочерк означает, что значения нет в выгрузке.</p>`;
+  animateBars($("#pbody"));
+}
+
+/* ---------- ON-CHAIN ---------- */
+function viewOnchain(){
+  return `
+  <div class="card" style="margin-bottom:22px">
+    <div class="eyebrow" style="color:var(--amber)"><i class="dot" style="background:var(--amber)"></i>on-chain · нет данных</div>
+    <div style="font-size:24px;font-weight:650;letter-spacing:-.03em;margin-top:8px">
+      Нужен <code>POLYGONSCAN_API_KEY</code> в <code>.env</code></div>
+    <p class="note" style="margin-top:10px;font-size:13.5px;max-width:72ch">
+      Выгрузка <code>profiles.db</code> содержит только торговую активность: сделки, стратегии, PnL, география.
+      Движения средств на цепочке не собраны — модуль сборщика не запускался, потому что не задан ключ
+      Polygonscan. Демо-цифры здесь не рисуются намеренно.</p>
+  </div>
+
+  <div class="grid g4">
+    ${[["Депозиты USDC","входящие трансферы на адрес"],
+       ["Выводы USDC","исходящие трансферы"],
+       ["Нетто-поток","выводы − депозиты"],
+       ["Газ / ETH","in / out по нативному токену"]].map(([lab,sub])=>`
+      <div class="card hov kpi" style="border-style:dashed">
+        <div class="k-lab">${lab}</div>
+        <div class="k-val" style="color:var(--dimmer)">—</div>
+        <div class="k-sub">${sub}</div>
+      </div>`).join("")}
+  </div>
+
+  <h2 class="sec">Что появится, когда будет ключ</h2>
+  <div class="grid g2">
+    <div class="card">
+      <div class="ctitle">Метрики</div>
+      <div class="kv"><span>Депозиты / выводы USDC</span><b style="color:var(--dimmer)">на кошелёк и итого</b></div>
+      <div class="kv"><span>Депозиты / выводы ETH</span><b style="color:var(--dimmer)">включая газ</b></div>
+      <div class="kv"><span>Нетто-поток</span><b style="color:var(--dimmer)">выводы − депозиты</b></div>
+      <div class="kv"><span>Сверка с PnL</span><b style="color:var(--dimmer)">Δ = нетто − реализованный PnL</b></div>
+      <div class="kv"><span>Связанные адреса</span><b style="color:var(--dimmer)">переводы внутри одной группы</b></div>
+    </div>
+    <div class="card">
+      <div class="ctitle">Зачем это нужно</div>
+      <p class="note" style="font-size:13px">Реализованный PnL (${usd(AGG.sumPnl)} по ${fmt(AGG.withPnl.length)} кошелькам)
+        считается по сделкам и ничего не говорит о том, сколько капитала реально завели и вывели.
+        Сверка потоков с PnL показывает: устойчивое большое Δ — маркер того, что часть денег живёт
+        в открытых позициях или уходит на другой адрес той же группы. Это же даёт отсев «кошельков-витрин»
+        с красивым PnL, но без реальных выводов.</p>
+      <div class="empty" style="margin-top:16px"><div class="eh">как включить</div>
+        <p>Добавить <code>POLYGONSCAN_API_KEY=…</code> в <code>.env</code>, затем прогнать сборщик потоков
+        и пересобрать выгрузку — вкладка заполнится сама.</p></div>
+    </div>
+  </div>`;
+}
+
+/* ---------- SIGNALS ---------- */
+function viewSignals(){
+  const ranked=[...RANK.by_strategy].sort((a,b)=>b.median_pnl-a.median_pnl);
+  const missing=DATA.strategies.filter(s=>!BY_STRAT[s.k]);
+  const blind=missing.reduce((a,s)=>a+s.n,0);
+  const winCls=ranked.filter(r=>r.median_pnl>0);
+  const loseCls=ranked.filter(r=>r.median_pnl<=0);
+  const covered=RANK.count, weather=DATA.totals.weather;
+  const sigs=[];
+
+  winCls.forEach((r,i)=>{
+    const conf = r.pct_profitable>=60 ? "HIGH" : (r.pct_profitable>=50?"MEDIUM":"LOW");
+    sigs.push({t:`Класс ${r.strategy} — в плюсе по медиане`,cls:r.strategy,conf,
+      d:`Медианный кошелёк класса даёт ${usd(r.median_pnl,2)}, прибыльных ${pct(r.pct_profitable)} `+
+        `из ${fmt(r.wallets)} разобранных, суммарно ${usd(r.sum_pnl,2)}. Медианный вход ${fmt(r.median_entry,2)} — `+
+        `это и есть ценовая зона, в которой класс работает. Копировать входы можно, ориентируясь на эту зону.`,
+      f:[["Медиана",usd(r.median_pnl,2)],["Прибыльных",pct(r.pct_profitable)],["Вход",fmt(r.median_entry,2)],["n",fmt(r.wallets)]]});
+  });
+  loseCls.forEach(r=>{
+    sigs.push({t:`Класс ${r.strategy} — медиана в минусе`,cls:r.strategy,conf:"AVOID",
+      d:`Медианный кошелёк теряет ${usd(r.median_pnl,2)}, прибыльных только ${pct(r.pct_profitable)} из ${fmt(r.wallets)}. `+
+        `Суммарный PnL ${usd(r.sum_pnl,2)} — то есть плюс класса, если он есть, делают единицы, а не типичный участник. `+
+        `Копировать класс целиком нельзя; имеет смысл только адресный отбор кошельков внутри него.`,
+      f:[["Медиана",usd(r.median_pnl,2)],["Прибыльных",pct(r.pct_profitable)],["Сумма",usd(r.sum_pnl,2)],["n",fmt(r.wallets)]]});
+  });
+  if(missing.length) sigs.push({t:"Слепая зона: классы без разобранных кошельков",cls:missing[0].k,conf:"TODO",
+    d:`${missing.map(m=>`<b>${esc(m.k)}</b> (${fmt(m.n)})`).join(", ")} — в ранге ${RANK.playbook_only?"(playbook-выборка)":""} `+
+      `нет ни одного кошелька этих классов. Это ${fmt(blind)} кошельков из ${fmt(SSUM)} размеченных: `+
+      `по ним нет ни медианного PnL, ни доли прибыльных, ни ценовой зоны входа. Пока классификатор `+
+      `и сбор PnL по ним не отработают, любые выводы про эти классы — домыслы.`,
+    f:[["Пробел",fmt(blind)+" кошельков"],["Классы",missing.map(m=>m.k).join(" · ")],["Приоритет","P1"]]});
+
+  const bestEntry=winCls.length?winCls[0]:null;
+  if(bestEntry) sigs.push({t:"Ценовая зона входа как фильтр",cls:bestEntry.strategy,conf:"WATCH",
+    d:`Медианный вход разнесён по классам: ${ranked.map(r=>`${esc(r.strategy)} ${fmt(r.median_entry,2)}`).join(", ")}. `+
+      `Прибыльные по медиане классы сидят в зоне ${fmt(Math.min(...winCls.map(r=>r.median_entry)),2)}–`+
+      `${fmt(Math.max(...winCls.map(r=>r.median_entry)),2)}, убыточные — ${fmt(Math.min(...loseCls.map(r=>r.median_entry)),2)}–`+
+      `${fmt(Math.max(...loseCls.map(r=>r.median_entry)),2)}. Цена входа — самый дешёвый доступный фильтр для бота.`,
+    f:[["Классов в ранге",fmt(ranked.length)],["Покрытие",fmt(covered)+" / "+fmt(weather)]]});
+
+  const confColors={HIGH:"#5ef2c0",MEDIUM:"#ffc255",LOW:"#8791a8",AVOID:"#ff6b81",TODO:"#b492ff",WATCH:"#7fd7ff"};
+  return `
+  <div class="card" style="margin-bottom:22px;display:flex;gap:20px;align-items:center;flex-wrap:wrap">
+    <div style="flex:1;min-width:230px">
+      <div class="eyebrow"><i class="dot"></i>сводка · signals</div>
+      <div style="font-size:22px;font-weight:650;letter-spacing:-.03em;margin-top:6px">Что отдать ботам</div>
+      <p class="note" style="margin-top:8px;font-size:13px">Все выводы ниже пересчитаны из
+        <code>strategy_rank.by_strategy</code>: медианный PnL, сумма PnL, доля прибыльных и медианный вход
+        по ${fmt(covered)} разобранным кошелькам. Никаких оценочных долларовых целей — только то, что есть в данных.</p>
+    </div>
+    <div style="display:flex;gap:22px;flex-wrap:wrap">
+      <div><div class="mini">В ПЛЮСЕ</div><div class="big gm">${winCls.length}</div></div>
+      <div><div class="mini">В МИНУСЕ</div><div class="big" style="color:var(--rose)">${loseCls.length}</div></div>
+      <div><div class="mini">СЛЕПАЯ ЗОНА</div><div class="big ga">${fmt(blind)}</div></div>
+    </div>
+  </div>
+
+  <div class="grid g2">${sigs.map(s=>{
+    const c=SC[s.cls]||SC.unknown, cc=confColors[s.conf]||"#8791a8";
+    return `<div class="sig">
+      <span style="position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,${c[0]},${c[1]})"></span>
+      <span class="conf" style="color:${cc};border-color:${cc}44;background:${cc}14">${s.conf}</span>
+      <h4 style="padding-right:88px">${esc(s.t)}</h4>
+      <div class="meta" style="color:${c[0]}">${esc(s.cls)}</div>
+      <p>${s.d}</p>
+      <div class="foot">${s.f.map(f=>`<div>${esc(f[0])}<b>${f[1]}</b></div>`).join("")}</div>
+    </div>`}).join("")}</div>
+
+  <h2 class="sec">Покрытие ранга</h2>
+  <div class="card">
+    <div class="kv"><span>Кошельков в ранге</span><b>${fmt(covered)} из ${fmt(weather)} weather-профилей (${pct(covered/weather*100)})</b></div>
+    <div class="kv"><span>Фильтр выборки</span><b>${RANK.playbook_only?"только playbook":"без фильтра"}${RANK.weather_min_ratio!=null?" · weather ≥ "+RANK.weather_min_ratio:""}</b></div>
+    <div class="kv"><span>Классов с рангом</span><b>${ranked.length} из ${DATA.totals.strategies}</b></div>
+    <div class="kv"><span>Кошельков с PnL во всём индексе</span><b>${fmt(AGG.withPnl.length)} из ${fmt(WALLETS.length)}</b></div>
+    <p class="note" style="margin-top:14px">Ранг считается по playbook-подвыборке, поэтому доли прибыльных здесь
+      не переносятся автоматически на весь индекс. Это верхняя оценка по наиболее разобранным кошелькам.</p>
+  </div>`;
+}
+</script>
+<script>
+/* =================== ROUTER =================== */
+const VIEWS={overview:viewOverview,wallets:viewWallets,strategies:viewStrategies,
+             portrait:viewPortrait,onchain:viewOnchain,signals:viewSignals};
+
+function animateBars(root){
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    $$(".fl[data-w]",root||document).forEach(f=>{f.style.width=f.dataset.w+"%"});
+  }));
+}
+
+let CUR="overview";
+function show(id){
+  CUR=id;
+  $$("#tabrow .tab").forEach(b=>b.setAttribute("aria-selected", b.dataset.id===id));
+  const main=$("#main");
+  main.innerHTML=`<section class="panel on" id="p-${id}">${VIEWS[id]()}</section>`;
+  if(id==="wallets"){ wireWallets(); paintWallets() }
+  if(id==="portrait"){ wirePortrait(); paintPortrait() }
+  animateBars(main);
+  wireRows();
+  if(location.hash.slice(1)!==id) history.replaceState(null,"","#"+id);
+}
+function wireRows(){
+  $$("#main tr[data-w]").forEach(tr=>tr.addEventListener("click",()=>{
+    SEL=+tr.dataset.w; show("portrait");
+    window.scrollTo({top:0,behavior:"smooth"});
+  }));
+  $$("#main .wpick").forEach(e=>e.addEventListener("click",()=>{SEL=+e.dataset.p;paintPortrait()}));
+}
+function wirePortrait(){
+  const el=$("#p-q");
+  if(el) el.addEventListener("input",()=>{
+    PST.q=el.value;
+    $("#plist").innerHTML=portraitList();
+    $("#plist input").focus();
+    $("#plist input").setSelectionRange(PST.q.length,PST.q.length);
+    wirePortrait(); wireRows(); paintPortrait();
+  });
+}
+function wireWallets(){
+  const bind=(sel,fn)=>{const el=$(sel); if(el) el.addEventListener("input",()=>{fn(el.value);WST.page=1;paintWallets();wireRows()})};
+  bind("#f-str",v=>WST.strategy=v);
+  bind("#f-cty",v=>WST.city=v);
+  bind("#f-q",  v=>WST.q=v);
+  bind("#f-per",v=>WST.per=+v);
+  $("#f-str").value=WST.strategy; $("#f-cty").value=WST.city; $("#f-q").value=WST.q; $("#f-per").value=String(WST.per);
+  $$("#main thead th[data-s]").forEach(th=>{
+    if(th.dataset.s===WST.sort){th.classList.add("act");th.querySelector(".ar").textContent=WST.dir<0?"↓":"↑"}
+    th.addEventListener("click",()=>{
+      const k=th.dataset.s;
+      if(WST.sort===k) WST.dir*=-1;
+      else{WST.sort=k; WST.dir=(k==="name"||k==="top_city"||k==="strategy")?1:-1}
+      WST.page=1;
+      $$("#main thead th[data-s]").forEach(o=>{o.classList.remove("act");o.querySelector(".ar").textContent="↓"});
+      th.classList.add("act"); th.querySelector(".ar").textContent=WST.dir<0?"↓":"↑";
+      paintWallets(); wireRows();
+    });
+  });
+}
+
+/* tabs */
+$("#tabrow").innerHTML=TABS.map(t=>
+  `<button class="tab" role="tab" data-id="${t.id}" aria-selected="false"><span class="n">${t.n}</span>${t.t}</button>`).join("");
+$$("#tabrow .tab").forEach(b=>b.addEventListener("click",()=>show(b.dataset.id)));
+window.addEventListener("hashchange",()=>{const h=location.hash.slice(1); if(VIEWS[h]&&h!==CUR) show(h)});
+document.addEventListener("keydown",e=>{
+  if(e.target.matches("input,select"))return;
+  const i=TABS.findIndex(t=>t.id===CUR);
+  if(e.key==="ArrowRight")show(TABS[(i+1)%TABS.length].id);
+  if(e.key==="ArrowLeft")show(TABS[(i-1+TABS.length)%TABS.length].id);
+});
+
+show(VIEWS[location.hash.slice(1)] ? location.hash.slice(1) : "overview");
+</script>
+</body>
+</html>

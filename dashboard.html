@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Polymarket Crypto Dashboard</title>
+<style>
+  :root {
+    --bg: #0e1117; --panel: #161b22; --panel2: #1c2129; --border: #2d333b;
+    --text: #e6edf3; --muted: #8b949e; --green: #3fb950; --red: #f85149;
+    --accent: #58a6ff; --up: #2ea043; --down: #da3633;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font: 14px/1.45 -apple-system, "Segoe UI", Roboto, sans-serif; padding: 16px; }
+  h1 { font-size: 18px; margin-bottom: 4px; }
+  .sub { color: var(--muted); font-size: 12px; margin-bottom: 10px; }
+  .tabs { display: flex; gap: 4px; margin-bottom: 14px; border-bottom: 1px solid var(--border); }
+  .tab { padding: 8px 16px; cursor: pointer; color: var(--muted); font-size: 14px; border-bottom: 2px solid transparent; }
+  .tab.active { color: var(--text); border-bottom-color: var(--accent); font-weight: 600; }
+  .tab:hover { color: var(--text); }
+  .toolbar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; align-items: center; }
+  .toolbar select, .toolbar input { background: var(--panel2); color: var(--text); border: 1px solid var(--border); border-radius: 6px; padding: 6px 8px; font-size: 13px; }
+  .toolbar button { background: var(--accent); color: #000; border: none; border-radius: 6px; padding: 7px 14px; font-weight: 600; cursor: pointer; font-size: 13px; }
+  .layout { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 1000px) { .layout { grid-template-columns: 1fr; } }
+  .panel { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .panel h2 { font-size: 13px; padding: 10px 12px; border-bottom: 1px solid var(--border); background: var(--panel2); color: var(--muted); text-transform: uppercase; letter-spacing: .5px; }
+  table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  th { text-align: left; color: var(--muted); font-weight: 500; padding: 7px 10px; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: var(--panel2); }
+  td { padding: 6px 10px; border-bottom: 1px solid var(--border); }
+  tbody tr { cursor: pointer; }
+  tbody tr:hover { background: var(--panel2); }
+  tbody tr.selected { background: #1f3a5f; }
+  .asset { font-weight: 700; text-transform: uppercase; }
+  .tag { font-size: 10px; padding: 1px 6px; border-radius: 4px; background: #21262d; color: var(--muted); }
+  .pos { color: var(--green); } .neg { color: var(--red); }
+  .muted { color: var(--muted); }
+  .num { font-variant-numeric: tabular-nums; }
+  .scroll { max-height: 70vh; overflow-y: auto; }
+  .details { padding: 12px; }
+  .mk-title { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+  .mk-meta { color: var(--muted); font-size: 12px; margin-bottom: 12px; }
+  .book { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+  .book .side h3 { font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+  .book .row { display: grid; grid-template-columns: 1fr 1fr 2fr; gap: 6px; font-size: 11.5px; padding: 2px 0; align-items: center; }
+  .book .bar-wrap { background: #21262d; border-radius: 3px; height: 12px; overflow: hidden; }
+  .book .bar { height: 100%; }
+  .bar.bid { background: var(--up); float: right; }
+  .bar.ask { background: var(--down); float: left; }
+  .wallet { color: var(--accent); text-decoration: none; font-family: monospace; font-size: 11.5px; }
+  .wallet:hover { text-decoration: underline; }
+  .pseudonym { color: var(--text); font-size: 12px; }
+  .trade-side.buy { color: var(--green); font-weight: 700; }
+  .trade-side.sell { color: var(--red); font-weight: 700; }
+  .empty { color: var(--muted); padding: 14px; text-align: center; }
+  .hidden { display: none; }
+
+  /* вкладка "как устроено" */
+  .how { padding: 20px; max-width: 900px; }
+  .how h3 { font-size: 14px; margin: 18px 0 8px; color: var(--text); }
+  .how p, .how li { color: var(--muted); font-size: 13px; line-height: 1.6; }
+  .how ul { padding-left: 20px; margin: 6px 0; }
+  .how code { background: var(--panel2); padding: 1px 5px; border-radius: 4px; font-size: 12px; color: var(--accent); }
+  .how svg { width: 100%; height: auto; border: 1px solid var(--border); border-radius: 10px; background: #0b0f14; }
+  .step { display: flex; gap: 10px; margin: 8px 0; align-items: flex-start; }
+  .step .n { flex: 0 0 22px; height: 22px; background: var(--accent); color: #000; font-weight: 700; border-radius: 6px; text-align: center; line-height: 22px; font-size: 12px; }
+  .step .t { color: var(--text); font-size: 13px; }
+  .step .d { color: var(--muted); font-size: 12.5px; }
+</style>
+</head>
+<body>
+<h1>Polymarket Crypto Dashboard</h1>
+<div class="sub" id="status">загрузка…</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('markets', this)">Рынки</div>
+  <div class="tab" onclick="switchTab('how', this)">Как это устроено</div>
+</div>
+
+<!-- ===== ВКЛАДКА: РЫНКИ ===== -->
+<div id="tab_markets">
+  <div class="toolbar">
+    <select id="f_asset"><option value="">все активы</option></select>
+    <select id="f_tf">
+      <option value="">все таймфреймы</option>
+      <option>5m</option><option>15m</option><option>4h</option>
+      <option>hourly</option><option>daily</option><option>weekly</option><option>monthly</option>
+    </select>
+    <select id="f_type">
+      <option value="">все типы</option>
+      <option value="up-or-down">up-or-down (свечи)</option>
+      <option value="hit-price">hit-price</option>
+      <option value="multi-strikes">multi-strikes</option>
+      <option value="neg-risk">neg-risk</option>
+    </select>
+    <input id="f_minvol" type="number" placeholder="мин объём, $" value="0" style="width:110px">
+    <select id="f_sort">
+      <option value="end">сортировка: время</option>
+      <option value="volume">сортировка: объём</option>
+    </select>
+    <button onclick="loadMarkets()">Обновить рынки</button>
+  </div>
+
+  <div class="layout">
+    <div class="panel">
+      <h2>Рынки (<span id="count">0</span>)</h2>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>актив</th><th>таймфрейм</th><th>вопрос</th><th>цена</th><th>bid/ask</th><th>объём $</th></tr></thead>
+          <tbody id="mk_body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Детали рынка</h2>
+      <div class="details" id="detail">
+        <div class="empty">Выбери рынок слева — покажу стакан, сделки и кошельки.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ВКЛАДКА: КАК ЭТО УСТРОЕНО ===== -->
+<div id="tab_how" class="hidden">
+  <div class="how">
+    <h3 style="margin-top:0">Поток сбора данных</h3>
+    <svg viewBox="0 0 860 720" xmlns="http://www.w3.org/2000/svg" font-family="JetBrains Mono, Menlo, monospace">
+      <rect width="860" height="720" fill="#0b0f14"/>
+      <defs>
+        <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#58a6ff"/>
+        </marker>
+      </defs>
+
+      <!-- источник -->
+      <rect x="290" y="24" width="280" height="54" rx="8" fill="#1e293b" stroke="#94a3b8" stroke-width="1.5"/>
+      <text x="430" y="47" fill="#e6edf3" font-size="13" text-anchor="middle" font-weight="bold">Polymarket Gamma API</text>
+      <text x="430" y="65" fill="#8b949e" font-size="10" text-anchor="middle">gamma-api.polymarket.com · REST, без ключа</text>
+
+      <!-- шаг 1 -->
+      <line x1="430" y1="78" x2="430" y2="110" stroke="#58a6ff" stroke-width="1.5" marker-end="url(#arr)"/>
+      <text x="438" y="98" fill="#58a6ff" font-size="9">GET /series (пагинация 50)</text>
+      <rect x="250" y="112" width="360" height="60" rx="8" fill="#064e3b" stroke="#34d399" stroke-width="1.5"/>
+      <text x="430" y="137" fill="#e6edf3" font-size="13" text-anchor="middle" font-weight="bold">Discovery серий</text>
+      <text x="430" y="156" fill="#86efac" font-size="10" text-anchor="middle">2443 серии → фильтр slug (актив + тип) → 83 крипто-серии</text>
+
+      <!-- шаг 2 -->
+      <line x1="430" y1="172" x2="430" y2="204" stroke="#58a6ff" stroke-width="1.5" marker-end="url(#arr)"/>
+      <text x="438" y="192" fill="#58a6ff" font-size="9">GET /events?series_id (пагинация 100)</text>
+      <rect x="250" y="206" width="360" height="60" rx="8" fill="#064e3b" stroke="#34d399" stroke-width="1.5"/>
+      <text x="430" y="231" fill="#e6edf3" font-size="13" text-anchor="middle" font-weight="bold">События серии</text>
+      <text x="430" y="250" fill="#86efac" font-size="10" text-anchor="middle">order=endDate desc · фильтр endDate ≥ now (только будущие)</text>
+
+      <!-- шаг 3 -->
+      <line x1="430" y1="266" x2="430" y2="298" stroke="#58a6ff" stroke-width="1.5" marker-end="url(#arr)"/>
+      <text x="438" y="286" fill="#58a6ff" font-size="9">markets[] → json.loads(outcomes, clobTokenIds)</text>
+      <rect x="250" y="300" width="360" height="60" rx="8" fill="#064e3b" stroke="#34d399" stroke-width="1.5"/>
+      <text x="430" y="325" fill="#e6edf3" font-size="13" text-anchor="middle" font-weight="bold">Запись рынка</text>
+      <text x="430" y="344" fill="#86efac" font-size="10" text-anchor="middle">question · conditionId · token_yes/no · bid/ask/mid · volume</text>
+
+      <!-- шаг 4 -->
+      <line x1="430" y1="360" x2="430" y2="392" stroke="#58a6ff" stroke-width="1.5" marker-end="url(#arr)"/>
+      <rect x="250" y="394" width="360" height="56" rx="8" fill="#4c1d95" stroke="#a78bfa" stroke-width="1.5"/>
+      <text x="430" y="418" fill="#e6edf3" font-size="13" text-anchor="middle" font-weight="bold">JSON-снимок</text>
+      <text x="430" y="437" fill="#c4b5fd" font-size="10" text-anchor="middle">polymarket_crypto_snapshot.json · ~3800 рынков</text>
+
+      <!-- live слой -->
+      <line x1="430" y1="450" x2="430" y2="482" stroke="#58a6ff" stroke-width="1.5" marker-end="url(#arr)"/>
+      <text x="438" y="470" fill="#58a6ff" font-size="9">по клику / по запросу (TTL-кэш 5с)</text>
+
+      <rect x="60" y="484" width="230" height="56" rx="8" fill="#1e293b" stroke="#94a3b8" stroke-width="1.5"/>
+      <text x="175" y="507" fill="#e6edf3" font-size="12" text-anchor="middle" font-weight="bold">Стакан</text>
+      <text x="175" y="526" fill="#8b949e" font-size="9" text-anchor="middle">CLOB /book?token_id</text>
+
+      <rect x="315" y="484" width="230" height="56" rx="8" fill="#1e293b" stroke="#94a3b8" stroke-width="1.5"/>
+      <text x="430" y="507" fill="#e6edf3" font-size="12" text-anchor="middle" font-weight="bold">Сделки</text>
+      <text x="430" y="526" fill="#8b949e" font-size="9" text-anchor="middle">Data /trades?market</text>
+
+      <rect x="570" y="484" width="230" height="56" rx="8" fill="#1e293b" stroke="#94a3b8" stroke-width="1.5"/>
+      <text x="685" y="507" fill="#e6edf3" font-size="12" text-anchor="middle" font-weight="bold">Топ кошельков</text>
+      <text x="685" y="526" fill="#8b949e" font-size="9" text-anchor="middle">агрегация trades по proxyWallet</text>
+
+      <line x1="300" y1="482" x2="175" y2="484" stroke="#58a6ff" stroke-width="1.5" marker-end="url(#arr)"/>
+      <line x1="430" y1="482" x2="430" y2="484" stroke="#58a6ff" stroke-width="1.5" marker-end="url(#arr)"/>
+      <line x1="560" y1="482" x2="685" y2="484" stroke="#58a6ff" stroke-width="1.5" marker-end="url(#arr)"/>
+
+      <!-- легенда -->
+      <text x="60" y="590" fill="#8b949e" font-size="11" font-weight="bold">Легенда:</text>
+      <rect x="60" y="600" width="14" height="14" rx="3" fill="#1e293b" stroke="#94a3b8"/>
+      <text x="82" y="612" fill="#8b949e" font-size="11">внешний API</text>
+      <rect x="190" y="600" width="14" height="14" rx="3" fill="#064e3b" stroke="#34d399"/>
+      <text x="212" y="612" fill="#8b949e" font-size="11">парсер (обработка)</text>
+      <rect x="350" y="600" width="14" height="14" rx="3" fill="#4c1d95" stroke="#a78bfa"/>
+      <text x="372" y="612" fill="#8b949e" font-size="11">хранилище (JSON)</text>
+      <line x1="500" y1="607" x2="545" y2="607" stroke="#58a6ff" stroke-width="1.5" marker-end="url(#arr)"/>
+      <text x="555" y="612" fill="#8b949e" font-size="11">поток данных</text>
+
+      <text x="60" y="660" fill="#58a6ff" font-size="11">Связь уровней: conditionId + token_id — сквозные ключи между всеми 5 уровнями.</text>
+    </svg>
+
+    <h3>Ключевые решения</h3>
+    <div class="step"><div class="n">1</div><div><div class="t">Тег crypto не работает</div><div class="d">Gamma на <code>tag=crypto</code> отдаёт политику. Поэтому discovery через slug: первый сегмент = актив (<code>btc-up-or-down-5m</code> → btc), паттерн = тип рынка.</div></div></div>
+    <div class="step"><div class="n">2</div><div><div class="t">closed=false не отсекает прошлое</div><div class="d">Recurring-серии pre-deploy'ят на сутки вперёд, старые не помечают closed. Фильтрую сам: <code>endDate ≥ now</code>, пагинация останавливается на первом прошедшем.</div></div></div>
+    <div class="step"><div class="n">3</div><div><div class="t">Двойная JSON-кодировка</div><div class="d"><code>outcomes</code> и <code>clobTokenIds</code> приходят строками <code>"[\"Up\",\"Down\"]"</code> → распаковываю <code>json.loads()</code>.</div></div></div>
+    <div class="step"><div class="n">4</div><div><div class="t">Цена Up = бид на Yes</div><div class="d">Для свечи <code>[Up, Down]</code>: вероятность Up = <code>bestBid</code>, Down = 1 − Up, <code>mid = (bid+ask)/2</code>. Всё из Gamma, CLOB /midpoint — запасной.</div></div></div>
+    <div class="step"><div class="n">5</div><div><div class="t">Сквозные ключи</div><div class="d"><code>conditionId</code> (рынок) и <code>token_yes</code> (токен) связывают рынок → стакан → сделки → кошельки.</div></div></div>
+    <div class="step"><div class="n">6</div><div><div class="t">TTL-кэш 5 секунд</div><div class="d">Стакан и сделки кэшируются 5с, чтобы не долбить API при каждом клике.</div></div></div>
+
+    <h3>Собираемые типы и поля</h3>
+    <ul>
+      <li><b style="color:var(--text)">Типы рынков</b> (4): up-or-down (свечи), hit-price, multi-strikes, neg-risk</li>
+      <li><b style="color:var(--text)">Активы</b> (8): btc, eth, sol, xrp, doge, bnb, link, ena</li>
+      <li><b style="color:var(--text)">Таймфреймы</b> (7): 5m, 15m, 4h, hourly, daily, weekly, monthly</li>
+      <li><b style="color:var(--text)">Рынок</b>: question, asset, recurrence, endDate, outcomes, bid/ask/mid, spread, conditionId, token_yes/no, volume, liquidity</li>
+      <li><b style="color:var(--text)">Стакан</b>: bids[], asks[] (цена+размер), last_trade_price, tick_size</li>
+      <li><b style="color:var(--text)">Сделки</b>: side, outcome, price, size, timestamp, wallet (proxyWallet), pseudonym, txHash</li>
+      <li><b style="color:var(--text)">Кошельки</b>: wallet, pseudonym, buys/sells, buy_usd/sell_usd, net_shares</li>
+    </ul>
+  </div>
+</div>
+
+<script>
+let MARKETS = [];
+let SELECTED = null;
+
+function switchTab(name, el) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('tab_markets').classList.toggle('hidden', name !== 'markets');
+  document.getElementById('tab_how').classList.toggle('hidden', name !== 'how');
+}
+
+async function j(url) {
+  const r = await fetch(url);
+  if (!r.ok) throw new Error('HTTP ' + r.status);
+  return r.json();
+}
+
+async function loadMarkets() {
+  const q = new URLSearchParams();
+  if (f_asset.value) q.set('asset', f_asset.value);
+  if (f_tf.value) q.set('tf', f_tf.value);
+  if (f_type.value) q.set('type', f_type.value);
+  q.set('min_volume', f_minvol.value || '0');
+  q.set('sort', f_sort.value);
+  q.set('limit', '1000');
+  try {
+    const d = await j('/api/markets?' + q);
+    MARKETS = d.markets;
+    document.getElementById('count').textContent = d.total;
+    document.getElementById('status').textContent = `снимок: ${(d.generated_at||'').replace('T',' ').slice(0,19)} · серий ${d.series_count} · показано ${d.markets.length} из ${d.total}`;
+    renderTable();
+  } catch (e) {
+    document.getElementById('status').textContent = 'ошибка: ' + e.message;
+  }
+}
+
+function fmtVol(v) {
+  const n = parseFloat(v || 0);
+  if (!n) return '—';
+  if (n >= 1e6) return (n/1e6).toFixed(2) + 'M';
+  if (n >= 1e3) return (n/1e3).toFixed(1) + 'K';
+  return n.toFixed(0);
+}
+
+function fmtPx(p) { return p == null ? '—' : Number(p).toFixed(3); }
+
+function renderTable() {
+  const tb = document.getElementById('mk_body');
+  tb.innerHTML = '';
+  for (const m of MARKETS) {
+    const tr = document.createElement('tr');
+    const mid = m.mid != null ? Number(m.mid).toFixed(3) : '—';
+    tr.innerHTML = `
+      <td class="asset">${m.asset||'?'}</td>
+      <td><span class="tag">${m.recurrence||'—'}</span></td>
+      <td>${esc(m.question||'')}</td>
+      <td class="num">${mid}</td>
+      <td class="num muted">${fmtPx(m.bid)} / ${fmtPx(m.ask)}</td>
+      <td class="num">${fmtVol(m.volumeNum != null ? m.volumeNum : m.volume)}</td>`;
+    tr.onclick = () => { select(tr, m); };
+    tb.appendChild(tr);
+  }
+}
+
+function esc(s) { return (s||'').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+async function select(tr, m) {
+  document.querySelectorAll('#mk_body tr').forEach(r => r.classList.remove('selected'));
+  tr.classList.add('selected');
+  SELECTED = m;
+  const el = document.getElementById('detail');
+  el.innerHTML = `<div class="mk-title">${esc(m.question)}</div>
+    <div class="mk-meta">${esc(m.series_slug||'')} · конец: ${esc((m.endDate||'').replace('T',' ').slice(0,16))} · спред: ${m.spread} · outcomes: ${esc(JSON.stringify(m.outcomes))}</div>
+    <div class="empty">гружу стакан и сделки…</div>`;
+  const token = m.token_yes;
+  if (token) {
+    try {
+      const book = await j('/api/book?token_id=' + token);
+      renderBook(el, book, m);
+    } catch (e) { el.querySelector('.empty').textContent = 'стакан: ' + e.message; }
+  }
+  if (m.conditionId) {
+    try {
+      const [trs, trd] = await Promise.all([
+        j('/api/trades?condition_id=' + m.conditionId + '&limit=60'),
+        j('/api/traders?condition_id=' + m.conditionId + '&limit=15')
+      ]);
+      renderTrades(el, trs.trades);
+      renderTraders(el, trd.traders);
+    } catch (e) { /* ignore */ }
+  }
+}
+
+function renderBook(container, book, m) {
+  const empty = container.querySelector('.empty');
+  if (empty) empty.remove();
+  const bids = (book.bids||[]).slice(-12).reverse();
+  const asks = (book.asks||[]).slice(0, 12);
+  const maxSize = Math.max(1, ...bids.map(b=>b.size), ...asks.map(a=>a.size));
+  const mk = document.createElement('div');
+  mk.className = 'book';
+  let bHtml = `<div class="side"><h3>Bids (покупка) · послед. цена ${book.last_trade_price??'—'}</h3>`;
+  for (const b of bids) {
+    bHtml += `<div class="row"><span class="num pos">${b.price.toFixed(3)}</span><span class="num muted">${b.size.toFixed(0)}</span>
+      <div class="bar-wrap"><div class="bar bid" style="width:${(b.size/maxSize*100).toFixed(1)}%"></div></div></div>`;
+  }
+  bHtml += `</div>`;
+  let aHtml = `<div class="side"><h3>Asks (продажа)</h3>`;
+  for (const a of asks) {
+    aHtml += `<div class="row"><span class="num neg">${a.price.toFixed(3)}</span><span class="num muted">${a.size.toFixed(0)}</span>
+      <div class="bar-wrap"><div class="bar ask" style="width:${(a.size/maxSize*100).toFixed(1)}%"></div></div></div>`;
+  }
+  aHtml += `</div>`;
+  mk.innerHTML = bHtml + aHtml;
+  container.appendChild(mk);
+}
+
+function renderTrades(container, trades) {
+  const div = document.createElement('div');
+  div.innerHTML = `<h3 style="font-size:12px;color:var(--muted);margin-bottom:6px">Последние сделки</h3>`;
+  if (!trades || !trades.length) { div.innerHTML += `<div class="empty">сделок нет</div>`; container.appendChild(div); return; }
+  let h = `<table><thead><tr><th>время</th><th>сторона</th><th>цена</th><th>размер</th><th>кошелёк</th></tr></thead><tbody>`;
+  for (const t of trades.slice(0, 20)) {
+    const d = new Date(t.timestamp * 1000);
+    const tm = d.toTimeString().slice(0,8);
+    h += `<tr>
+      <td class="num muted">${tm}</td>
+      <td class="trade-side ${t.side==='BUY'?'buy':'sell'}">${t.side}</td>
+      <td class="num">${Number(t.price).toFixed(3)}</td>
+      <td class="num">${Number(t.size).toFixed(0)}</td>
+      <td><a class="wallet" href="https://polymarket.com/profile/${t.wallet}" target="_blank">${short(t.wallet)}</a></td>
+    </tr>`;
+  }
+  h += `</tbody></table>`;
+  div.innerHTML += h;
+  container.appendChild(div);
+}
+
+function renderTraders(container, traders) {
+  const div = document.createElement('div');
+  div.innerHTML = `<h3 style="font-size:12px;color:var(--muted);margin:14px 0 6px">Топ кошельков (по объёму)</h3>`;
+  if (!traders || !traders.length) { div.innerHTML += `<div class="empty">данных нет</div>`; container.appendChild(div); return; }
+  let h = `<table><thead><tr><th>кошелёк</th><th>buy $</th><th>sell $</th><th>net акции</th><th>сделок</th></tr></thead><tbody>`;
+  for (const t of traders) {
+    h += `<tr>
+      <td><a class="wallet" href="https://polymarket.com/profile/${t.wallet}" target="_blank">${short(t.wallet)}</a>${t.pseudonym ? `<span class="pseudonym"> ${esc(t.pseudonym)}</span>` : ''}</td>
+      <td class="num pos">${t.buy_usd.toFixed(0)}</td>
+      <td class="num neg">${t.sell_usd.toFixed(0)}</td>
+      <td class="num ${t.net_shares>=0?'pos':'neg'}">${t.net_shares>=0?'+':''}${t.net_shares}</td>
+      <td class="num muted">${t.buys+t.sells}</td>
+    </tr>`;
+  }
+  h += `</tbody></table>`;
+  div.innerHTML += h;
+  container.appendChild(div);
+}
+
+function short(w) { return w ? w.slice(0,6) + '…' + w.slice(-4) : ''; }
+
+// инициализация
+(async () => {
+  const d = await j('/api/markets?limit=500');
+  const assets = [...new Set(d.markets.map(m => m.asset).filter(Boolean))].sort();
+  const sel = document.getElementById('f_asset');
+  for (const a of assets) { const o = document.createElement('option'); o.value = a; o.textContent = a; sel.appendChild(o); }
+  loadMarkets();
+})();
+
+['f_asset','f_tf','f_type','f_sort'].forEach(id => document.getElementById(id).onchange = loadMarkets);
+document.getElementById('f_minvol').onchange = loadMarkets;
+</script>
+</body>
+</html>

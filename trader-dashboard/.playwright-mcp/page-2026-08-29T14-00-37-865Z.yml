@@ -1,0 +1,1054 @@
+- generic [ref=f1e2]:
+  - banner [ref=f1e3]:
+    - generic [ref=f1e10]:
+      - generic [ref=f1e11]: trader-analyzer · on-chain intelligence
+      - heading [level=1] [ref=f1e13]:
+        - text: Читаем чужие кошельки
+        - emphasis [ref=f1e14]: Polymarket
+      - paragraph [ref=f1e15]:
+        - text: Парсер обходит кошельки топ-трейдеров, восстанавливает торговую стратегию и географию рынков, считает PnL и активность, и раздаёт готовые сигналы собственным ботам. Все цифры ниже — реальная выгрузка из
+        - code [ref=f1e16]: profiles.db
+        - text: .
+      - generic [ref=f1e17]:
+        - generic [ref=f1e18]: 2 245 кошельков в индексе
+        - generic [ref=f1e20]: 2 221 weather-профиль ≥ 0.3
+        - generic [ref=f1e22]: 8 классов стратегий
+        - generic [ref=f1e24]: 792 кошелька в ранге стратегий
+        - generic [ref=f1e26]: 53 города
+  - navigation [ref=f1e28]:
+    - tablist [ref=f1e29]:
+      - tab "01 Overview" [ref=f1e30] [cursor=pointer]:
+        - generic [ref=f1e31]: "01"
+        - text: Overview
+      - tab "02 Wallets" [ref=f1e32] [cursor=pointer]:
+        - generic [ref=f1e33]: "02"
+        - text: Wallets
+      - tab "03 Strategies" [ref=f1e34] [cursor=pointer]:
+        - generic [ref=f1e35]: "03"
+        - text: Strategies
+      - tab "04 Portrait" [active] [selected] [ref=f1e36] [cursor=pointer]:
+        - generic [ref=f1e37]: "04"
+        - text: Portrait
+      - tab "05 On-chain" [ref=f1e38] [cursor=pointer]:
+        - generic [ref=f1e39]: "05"
+        - text: On-chain
+      - tab "06 Signals" [ref=f1e40] [cursor=pointer]:
+        - generic [ref=f1e41]: "06"
+        - text: Signals
+  - main [ref=f1e42]:
+    - generic [ref=f1e350]:
+      - generic [ref=f1e351]:
+        - generic [ref=f1e352]:
+          - generic [ref=f1e353]:
+            - generic [ref=f1e354]: WE
+            - generic [ref=f1e355]:
+              - generic [ref=f1e356]: WeatherHk (macau.weather)
+              - generic [ref=f1e357]: "0x4989bfed5900ba096b08ba1f9b718464527c983e"
+            - generic [ref=f1e358]:
+              - generic [ref=f1e359]: +$10 079,59
+              - generic [ref=f1e360]: реализованный PnL
+          - generic [ref=f1e361]:
+            - generic [ref=f1e362]: ladder
+            - generic [ref=f1e363]: Hong Kong · концентрация 89,4%
+            - generic [ref=f1e364]: 250 сделок
+            - generic [ref=f1e365]: 188 buy · 75,2%
+            - generic [ref=f1e366]: playbook
+            - generic [ref=f1e367]: weather 98,9%
+        - generic [ref=f1e368]:
+          - generic [ref=f1e369]:
+            - generic [ref=f1e370]: Профиль торговли
+            - img [ref=f1e372]:
+              - generic [ref=f1e375]: 75%
+            - generic [ref=f1e376]: buy-доля (buy_trades / total_trades)
+            - generic [ref=f1e377]:
+              - generic [ref=f1e378]: Сделок всего
+              - generic [ref=f1e379]: "250"
+            - generic [ref=f1e380]:
+              - generic [ref=f1e381]: Buy / Sell
+              - generic [ref=f1e382]: 188 / 62
+            - generic [ref=f1e383]:
+              - generic [ref=f1e384]: Медианный вход
+              - generic [ref=f1e385]: 0,2356
+            - generic [ref=f1e386]:
+              - generic [ref=f1e387]: PnL на сделку
+              - generic [ref=f1e388]: +$40,32
+            - generic [ref=f1e389]:
+              - generic [ref=f1e390]: Стратегия
+              - generic [ref=f1e391]: ladder
+          - generic [ref=f1e392]:
+            - generic [ref=f1e393]: Паттерны и активность
+            - generic [ref=f1e394]:
+              - generic [ref=f1e395]: ladder
+              - generic [ref=f1e398]: 79,8%
+            - generic [ref=f1e399]:
+              - generic [ref=f1e400]: longshot
+              - generic [ref=f1e403]: 28,2%
+            - generic [ref=f1e404]:
+              - generic [ref=f1e405]: certain
+              - generic [ref=f1e408]: 6,9%
+            - generic [ref=f1e409]:
+              - generic [ref=f1e410]: weather
+              - generic [ref=f1e413]: 98,9%
+            - generic [ref=f1e414]:
+              - generic [ref=f1e415]: Сделок за 30 дней
+              - generic [ref=f1e416]: 250 (188 buy)
+            - generic [ref=f1e417]:
+              - generic [ref=f1e418]: Объём за 30 дней
+              - generic [ref=f1e419]: $4 480,86
+            - generic [ref=f1e420]:
+              - generic [ref=f1e421]: Активных дней / 30
+              - generic [ref=f1e422]: "8"
+            - generic [ref=f1e423]:
+              - generic [ref=f1e424]: Сделок в месяц
+              - generic [ref=f1e425]: 447,1
+            - generic [ref=f1e426]:
+              - generic [ref=f1e427]: Период наблюдения
+              - generic [ref=f1e428]: 16,8 дн.
+            - generic [ref=f1e429]:
+              - generic [ref=f1e430]: Первая / последняя
+              - generic [ref=f1e431]: 07.08.2026 → 24.08.2026
+        - generic [ref=f1e432]:
+          - generic [ref=f1e433]:
+            - generic [ref=f1e434]: Города · top-5 из 2
+            - generic [ref=f1e439]:
+              - generic [ref=f1e440]:
+                - generic [ref=f1e441]: Hong Kong
+                - generic [ref=f1e443]: 168 · 91,3%
+              - generic [ref=f1e444]:
+                - generic [ref=f1e445]: Shenzhen
+                - generic [ref=f1e447]: 16 · 8,7%
+            - paragraph [ref=f1e448]: "Всего городских сделок: 184. Топ-город Hong Kong, концентрация 89,4%."
+          - generic [ref=f1e449]:
+            - generic [ref=f1e450]: Тематическое распределение
+            - generic [ref=f1e451]:
+              - generic [ref=f1e452]: нет данных
+              - paragraph [ref=f1e453]:
+                - text: Темы (weather / politics / sports / crypto / science / pop culture) в
+                - code [ref=f1e454]: profiles.db
+                - text: не классифицированы — в выгрузке есть только
+                - code [ref=f1e455]: weather_ratio
+                - text: (98,9% у этого кошелька) и география рынков. Пока тематический классификатор не отработал, разбивку по 6 темам показать нечем.
+            - generic [ref=f1e456]: On-chain потоки
+            - generic [ref=f1e457]:
+              - generic [ref=f1e458]: нет данных
+              - paragraph [ref=f1e459]:
+                - text: Депозиты и выводы USDC/ETH требуют
+                - code [ref=f1e460]: POLYGONSCAN_API_KEY
+                - text: в
+                - code [ref=f1e461]: .env
+                - text: . Ключ не задан — потоков в выгрузке нет. Подробнее — вкладка On-chain.
+        - paragraph [ref=f1e462]:
+          - text: Все поля выше — из
+          - code [ref=f1e463]: profiles.db
+          - text: как есть. Прочерк означает, что значения нет в выгрузке.
+      - generic [ref=f1e464]:
+        - generic [ref=f1e465]: Выберите кошелёк · 2 245
+        - generic [ref=f1e466]:
+          - generic [ref=f1e467]:
+            - generic [ref=f1e468]: Поиск
+            - searchbox "имя или адрес…" [ref=f1e469]
+          - generic [ref=f1e470]:
+            - generic [ref=f1e471] [cursor=pointer]:
+              - generic [ref=f1e472]: BA
+              - generic [ref=f1e473]:
+                - generic [ref=f1e474]: balthazar
+                - generic [ref=f1e475]: certain · Munich
+              - generic [ref=f1e476]: +$1 512 472
+            - generic [ref=f1e477] [cursor=pointer]:
+              - generic [ref=f1e478]: BU
+              - generic [ref=f1e479]:
+                - generic [ref=f1e480]: Buenos Aires
+                - generic [ref=f1e481]: certain · New York City
+              - generic [ref=f1e482]: +$1 274 867
+            - generic [ref=f1e483] [cursor=pointer]:
+              - generic [ref=f1e484]: HO
+              - generic [ref=f1e485]:
+                - generic [ref=f1e486]: Hong Kong
+                - generic [ref=f1e487]: certain · Shanghai
+              - generic [ref=f1e488]: +$704 415
+            - generic [ref=f1e489] [cursor=pointer]:
+              - generic [ref=f1e490]: PA
+              - generic [ref=f1e491]:
+                - generic [ref=f1e492]: Paris
+                - generic [ref=f1e493]: certain · Houston
+              - generic [ref=f1e494]: +$486 517
+            - generic [ref=f1e495] [cursor=pointer]:
+              - generic [ref=f1e496]: CH
+              - generic [ref=f1e497]:
+                - generic [ref=f1e498]: Chicago
+                - generic [ref=f1e499]: certain · Hong Kong
+              - generic [ref=f1e500]: +$483 756
+            - generic [ref=f1e501] [cursor=pointer]:
+              - generic [ref=f1e502]: PA
+              - generic [ref=f1e503]:
+                - generic [ref=f1e504]: Paris
+                - generic [ref=f1e505]: certain · Madrid
+              - generic [ref=f1e506]: +$447 696
+            - generic [ref=f1e507] [cursor=pointer]:
+              - generic [ref=f1e508]: KU
+              - generic [ref=f1e509]:
+                - generic [ref=f1e510]: Kuala Lumpur
+                - generic [ref=f1e511]: certain · Ankara
+              - generic [ref=f1e512]: +$306 532
+            - generic [ref=f1e513] [cursor=pointer]:
+              - generic [ref=f1e514]: MI
+              - generic [ref=f1e515]:
+                - generic [ref=f1e516]: Milan
+                - generic [ref=f1e517]: certain · Miami
+              - generic [ref=f1e518]: +$226 931
+            - generic [ref=f1e519] [cursor=pointer]:
+              - generic [ref=f1e520]: SH
+              - generic [ref=f1e521]:
+                - generic [ref=f1e522]: Shanghai
+                - generic [ref=f1e523]: certain · Tokyo
+              - generic [ref=f1e524]: +$225 720
+            - generic [ref=f1e525] [cursor=pointer]:
+              - generic [ref=f1e526]: NE
+              - generic [ref=f1e527]:
+                - generic [ref=f1e528]: New York City
+                - generic [ref=f1e529]: certain · Toronto
+              - generic [ref=f1e530]: +$194 388
+            - generic [ref=f1e531] [cursor=pointer]:
+              - generic [ref=f1e532]: PO
+              - generic [ref=f1e533]:
+                - generic [ref=f1e534]: Poligarch
+                - generic [ref=f1e535]: momentum · Madrid
+              - generic [ref=f1e536]: +$191 444
+            - generic [ref=f1e537] [cursor=pointer]:
+              - generic [ref=f1e538]: 0X
+              - generic [ref=f1e539]:
+                - generic [ref=f1e540]: 0x122Cb94C437EA5e6f088c6c0C143c592ab8EFBed-1782168978900
+                - generic [ref=f1e541]: momentum · Taipei
+              - generic [ref=f1e542]: +$187 212
+            - generic [ref=f1e543] [cursor=pointer]:
+              - generic [ref=f1e544]: CO
+              - generic [ref=f1e545]:
+                - generic [ref=f1e546]: ColdMath
+                - generic [ref=f1e547]: longshot · New York City
+              - generic [ref=f1e548]: +$135 444
+            - generic [ref=f1e549] [cursor=pointer]:
+              - generic [ref=f1e550]: HO
+              - generic [ref=f1e551]:
+                - generic [ref=f1e552]: Hong Kong
+                - generic [ref=f1e553]: certain · Hong Kong
+              - generic [ref=f1e554]: +$129 687
+            - generic [ref=f1e555] [cursor=pointer]:
+              - generic [ref=f1e556]: PA
+              - generic [ref=f1e557]:
+                - generic [ref=f1e558]: Paris
+                - generic [ref=f1e559]: certain · Miami
+              - generic [ref=f1e560]: +$128 038
+            - generic [ref=f1e561] [cursor=pointer]:
+              - generic [ref=f1e562]: MI
+              - generic [ref=f1e563]:
+                - generic [ref=f1e564]: Milan
+                - generic [ref=f1e565]: certain · Munich
+              - generic [ref=f1e566]: +$119 342
+            - generic [ref=f1e567] [cursor=pointer]:
+              - generic [ref=f1e568]: BU
+              - generic [ref=f1e569]:
+                - generic [ref=f1e570]: Busan
+                - generic [ref=f1e571]: mixed · Seoul (Incheon)
+              - generic [ref=f1e572]: +$118 657
+            - generic [ref=f1e573] [cursor=pointer]:
+              - generic [ref=f1e574]: PA
+              - generic [ref=f1e575]:
+                - generic [ref=f1e576]: Paris
+                - generic [ref=f1e577]: certain · Cape Town
+              - generic [ref=f1e578]: +$108 134
+            - generic [ref=f1e579] [cursor=pointer]:
+              - generic [ref=f1e580]: IS
+              - generic [ref=f1e581]:
+                - generic [ref=f1e582]: Istanbul
+                - generic [ref=f1e583]: certain · Munich
+              - generic [ref=f1e584]: +$98 195
+            - generic [ref=f1e585] [cursor=pointer]:
+              - generic [ref=f1e586]: PA
+              - generic [ref=f1e587]:
+                - generic [ref=f1e588]: Paris
+                - generic [ref=f1e589]: certain · New York City
+              - generic [ref=f1e590]: +$96 857
+            - generic [ref=f1e591] [cursor=pointer]:
+              - generic [ref=f1e592]: LO
+              - generic [ref=f1e593]:
+                - generic [ref=f1e594]: London
+                - generic [ref=f1e595]: mixed · New York City
+              - generic [ref=f1e596]: +$94 607
+            - generic [ref=f1e597] [cursor=pointer]:
+              - generic [ref=f1e598]: BE
+              - generic [ref=f1e599]:
+                - generic [ref=f1e600]: BeefSlayer
+                - generic [ref=f1e601]: longshot · Chicago
+              - generic [ref=f1e602]: +$75 306
+            - generic [ref=f1e603] [cursor=pointer]:
+              - generic [ref=f1e604]: DE
+              - generic [ref=f1e605]:
+                - generic [ref=f1e606]: Denver
+                - generic [ref=f1e607]: longshot · Madrid
+              - generic [ref=f1e608]: +$74 784
+            - generic [ref=f1e609] [cursor=pointer]:
+              - generic [ref=f1e610]: HI
+              - generic [ref=f1e611]:
+                - generic [ref=f1e612]: HighTempTation
+                - generic [ref=f1e613]: certain · Ankara
+              - generic [ref=f1e614]: +$73 422
+            - generic [ref=f1e615] [cursor=pointer]:
+              - generic [ref=f1e616]: JJ
+              - generic [ref=f1e617]:
+                - generic [ref=f1e618]: jjavi
+                - generic [ref=f1e619]: ladder · Munich
+              - generic [ref=f1e620]: +$69 055
+            - generic [ref=f1e621] [cursor=pointer]:
+              - generic [ref=f1e622]: HO
+              - generic [ref=f1e623]:
+                - generic [ref=f1e624]: HondaCivic
+                - generic [ref=f1e625]: ladder · London
+              - generic [ref=f1e626]: +$68 548
+            - generic [ref=f1e627] [cursor=pointer]:
+              - generic [ref=f1e628]: OP
+              - generic [ref=f1e629]:
+                - generic [ref=f1e630]: opopv.
+                - generic [ref=f1e631]: mixed · Seattle
+              - generic [ref=f1e632]: +$60 825
+            - generic [ref=f1e633] [cursor=pointer]:
+              - generic [ref=f1e634]: HO
+              - generic [ref=f1e635]:
+                - generic [ref=f1e636]: Hong Kong
+                - generic [ref=f1e637]: ladder · Seoul (Incheon)
+              - generic [ref=f1e638]: +$53 335
+            - generic [ref=f1e639] [cursor=pointer]:
+              - generic [ref=f1e640]: GU
+              - generic [ref=f1e641]:
+                - generic [ref=f1e642]: Guangzhou
+                - generic [ref=f1e643]: certain · Paris
+              - generic [ref=f1e644]: +$50 374
+            - generic [ref=f1e645] [cursor=pointer]:
+              - generic [ref=f1e646]: SH
+              - generic [ref=f1e647]:
+                - generic [ref=f1e648]: ShyGuy1
+                - generic [ref=f1e649]: longshot · Shenzhen
+              - generic [ref=f1e650]: +$49 380
+            - generic [ref=f1e651] [cursor=pointer]:
+              - generic [ref=f1e652]: NE
+              - generic [ref=f1e653]:
+                - generic [ref=f1e654]: neo7777
+                - generic [ref=f1e655]: momentum · Dallas
+              - generic [ref=f1e656]: +$49 012
+            - generic [ref=f1e657] [cursor=pointer]:
+              - generic [ref=f1e658]: WE
+              - generic [ref=f1e659]:
+                - generic [ref=f1e660]: weatherstappen
+                - generic [ref=f1e661]: certain · Munich
+              - generic [ref=f1e662]: +$46 440
+            - generic [ref=f1e663] [cursor=pointer]:
+              - generic [ref=f1e664]: GG
+              - generic [ref=f1e665]:
+                - generic [ref=f1e666]: gghff
+                - generic [ref=f1e667]: unknown · Taipei
+              - generic [ref=f1e668]: +$45 938
+            - generic [ref=f1e669] [cursor=pointer]:
+              - generic [ref=f1e670]: PA
+              - generic [ref=f1e671]:
+                - generic [ref=f1e672]: Paris
+                - generic [ref=f1e673]: longshot · Paris
+              - generic [ref=f1e674]: +$45 419
+            - generic [ref=f1e675] [cursor=pointer]:
+              - generic [ref=f1e676]: AB
+              - generic [ref=f1e677]:
+                - generic [ref=f1e678]: aboss
+                - generic [ref=f1e679]: momentum · London
+              - generic [ref=f1e680]: +$42 937
+            - generic [ref=f1e681] [cursor=pointer]:
+              - generic [ref=f1e682]: 0X
+              - generic [ref=f1e683]:
+                - generic [ref=f1e684]: "0x77266604E63f5cAF08D19CaEBae0C563ce064aE"
+                - generic [ref=f1e685]: value · New York City
+              - generic [ref=f1e686]: +$39 456
+            - generic [ref=f1e687] [cursor=pointer]:
+              - generic [ref=f1e688]: NE
+              - generic [ref=f1e689]:
+                - generic [ref=f1e690]: New York City
+                - generic [ref=f1e691]: longshot · New York City
+              - generic [ref=f1e692]: +$37 294
+            - generic [ref=f1e693] [cursor=pointer]:
+              - generic [ref=f1e694]: SE
+              - generic [ref=f1e695]:
+                - generic [ref=f1e696]: Seoul (Incheon)
+                - generic [ref=f1e697]: momentum · Seoul (Incheon)
+              - generic [ref=f1e698]: +$36 360
+            - generic [ref=f1e699] [cursor=pointer]:
+              - generic [ref=f1e700]: MU
+              - generic [ref=f1e701]:
+                - generic [ref=f1e702]: Munich
+                - generic [ref=f1e703]: momentum · Munich
+              - generic [ref=f1e704]: +$35 594
+            - generic [ref=f1e705] [cursor=pointer]:
+              - generic [ref=f1e706]: SA
+              - generic [ref=f1e707]:
+                - generic [ref=f1e708]: sailor82
+                - generic [ref=f1e709]: certain · London
+              - generic [ref=f1e710]: +$34 522
+            - generic [ref=f1e711] [cursor=pointer]:
+              - generic [ref=f1e712]: HO
+              - generic [ref=f1e713]:
+                - generic [ref=f1e714]: Hong Kong
+                - generic [ref=f1e715]: value · Shenzhen
+              - generic [ref=f1e716]: +$33 242
+            - generic [ref=f1e717] [cursor=pointer]:
+              - generic [ref=f1e718]: GU
+              - generic [ref=f1e719]:
+                - generic [ref=f1e720]: Guangzhou
+                - generic [ref=f1e721]: longshot · Hong Kong
+              - generic [ref=f1e722]: +$28 165
+            - generic [ref=f1e723] [cursor=pointer]:
+              - generic [ref=f1e724]: DP
+              - generic [ref=f1e725]:
+                - generic [ref=f1e726]: dpnd
+                - generic [ref=f1e727]: mixed · Shenzhen
+              - generic [ref=f1e728]: +$28 140
+            - generic [ref=f1e729] [cursor=pointer]:
+              - generic [ref=f1e730]: SA
+              - generic [ref=f1e731]:
+                - generic [ref=f1e732]: San Francisco
+                - generic [ref=f1e733]: value · Los Angeles
+              - generic [ref=f1e734]: +$27 508
+            - generic [ref=f1e735] [cursor=pointer]:
+              - generic [ref=f1e736]: LO
+              - generic [ref=f1e737]:
+                - generic [ref=f1e738]: London
+                - generic [ref=f1e739]: longshot · Munich
+              - generic [ref=f1e740]: +$27 405
+            - generic [ref=f1e741] [cursor=pointer]:
+              - generic [ref=f1e742]: LO
+              - generic [ref=f1e743]:
+                - generic [ref=f1e744]: London
+                - generic [ref=f1e745]: certain · Chicago
+              - generic [ref=f1e746]: +$26 967
+            - generic [ref=f1e747] [cursor=pointer]:
+              - generic [ref=f1e748]: PA
+              - generic [ref=f1e749]:
+                - generic [ref=f1e750]: Paris
+                - generic [ref=f1e751]: certain · Madrid
+              - generic [ref=f1e752]: +$26 792
+            - generic [ref=f1e753] [cursor=pointer]:
+              - generic [ref=f1e754]: 0X
+              - generic [ref=f1e755]:
+                - generic [ref=f1e756]: 0x56b381017b589FB0AFB049137c8D4Af2E7233fA2-1769535581188
+                - generic [ref=f1e757]: value · Dallas
+              - generic [ref=f1e758]: +$24 549
+            - generic [ref=f1e759] [cursor=pointer]:
+              - generic [ref=f1e760]: WU
+              - generic [ref=f1e761]:
+                - generic [ref=f1e762]: Wuhan
+                - generic [ref=f1e763]: ladder · Shenzhen
+              - generic [ref=f1e764]: +$23 910
+            - generic [ref=f1e765] [cursor=pointer]:
+              - generic [ref=f1e766]: CA
+              - generic [ref=f1e767]:
+                - generic [ref=f1e768]: Cape Town
+                - generic [ref=f1e769]: certain · Busan
+              - generic [ref=f1e770]: +$23 857
+            - generic [ref=f1e771] [cursor=pointer]:
+              - generic [ref=f1e772]: 0X
+              - generic [ref=f1e773]:
+                - generic [ref=f1e774]: 0x496f76BD5Cf4c2819C710aE90Ed1C84B2dc6FA5D-1773782287927
+                - generic [ref=f1e775]: momentum · Munich
+              - generic [ref=f1e776]: +$23 792
+            - generic [ref=f1e777] [cursor=pointer]:
+              - generic [ref=f1e778]: WU
+              - generic [ref=f1e779]:
+                - generic [ref=f1e780]: Wuhan
+                - generic [ref=f1e781]: value · Shanghai
+              - generic [ref=f1e782]: +$23 595
+            - generic [ref=f1e783] [cursor=pointer]:
+              - generic [ref=f1e784]: RA
+              - generic [ref=f1e785]:
+                - generic [ref=f1e786]: Railbird
+                - generic [ref=f1e787]: ladder · London
+              - generic [ref=f1e788]: +$23 505
+            - generic [ref=f1e789] [cursor=pointer]:
+              - generic [ref=f1e790]: SE
+              - generic [ref=f1e791]:
+                - generic [ref=f1e792]: securebet
+                - generic [ref=f1e793]: unknown · Seoul (Incheon)
+              - generic [ref=f1e794]: +$23 228
+            - generic [ref=f1e795] [cursor=pointer]:
+              - generic [ref=f1e796]: WE
+              - generic [ref=f1e797]:
+                - generic [ref=f1e798]: Wellington
+                - generic [ref=f1e799]: certain · Wellington
+              - generic [ref=f1e800]: +$21 990
+            - generic [ref=f1e801] [cursor=pointer]:
+              - generic [ref=f1e802]: LM
+              - generic [ref=f1e803]:
+                - generic [ref=f1e804]: LMVM
+                - generic [ref=f1e805]: value · Buenos Aires
+              - generic [ref=f1e806]: +$21 392
+            - generic [ref=f1e807] [cursor=pointer]:
+              - generic [ref=f1e808]: CH
+              - generic [ref=f1e809]:
+                - generic [ref=f1e810]: Chicago
+                - generic [ref=f1e811]: certain · Tokyo
+              - generic [ref=f1e812]: +$20 628
+            - generic [ref=f1e813] [cursor=pointer]:
+              - generic [ref=f1e814]: CA
+              - generic [ref=f1e815]:
+                - generic [ref=f1e816]: Cape Town
+                - generic [ref=f1e817]: ladder · Taipei
+              - generic [ref=f1e818]: +$20 410
+            - generic [ref=f1e819] [cursor=pointer]:
+              - generic [ref=f1e820]: NE
+              - generic [ref=f1e821]:
+                - generic [ref=f1e822]: New York City
+                - generic [ref=f1e823]: specialist · New York City
+              - generic [ref=f1e824]: +$19 733
+            - generic [ref=f1e825] [cursor=pointer]:
+              - generic [ref=f1e826]: MU
+              - generic [ref=f1e827]:
+                - generic [ref=f1e828]: Munich
+                - generic [ref=f1e829]: certain · Guangzhou
+              - generic [ref=f1e830]: +$19 205
+            - generic [ref=f1e831] [cursor=pointer]:
+              - generic [ref=f1e832]: KO
+              - generic [ref=f1e833]:
+                - generic [ref=f1e834]: korda-
+                - generic [ref=f1e835]: ladder · Hong Kong
+              - generic [ref=f1e836]: +$19 168
+            - generic [ref=f1e837] [cursor=pointer]:
+              - generic [ref=f1e838]: HO
+              - generic [ref=f1e839]:
+                - generic [ref=f1e840]: Hong Kong
+                - generic [ref=f1e841]: ladder · Hong Kong
+              - generic [ref=f1e842]: +$19 055
+            - generic [ref=f1e843] [cursor=pointer]:
+              - generic [ref=f1e844]: FA
+              - generic [ref=f1e845]:
+                - generic [ref=f1e846]: fastestclick
+                - generic [ref=f1e847]: certain · Wellington
+              - generic [ref=f1e848]: +$18 324
+            - generic [ref=f1e849] [cursor=pointer]:
+              - generic [ref=f1e850]: LO
+              - generic [ref=f1e851]:
+                - generic [ref=f1e852]: London
+                - generic [ref=f1e853]: unknown · Miami
+              - generic [ref=f1e854]: +$17 998
+            - generic [ref=f1e855] [cursor=pointer]:
+              - generic [ref=f1e856]: SH
+              - generic [ref=f1e857]:
+                - generic [ref=f1e858]: Shenzhen
+                - generic [ref=f1e859]: ladder · Shenzhen
+              - generic [ref=f1e860]: +$17 776
+            - generic [ref=f1e861] [cursor=pointer]:
+              - generic [ref=f1e862]: CH
+              - generic [ref=f1e863]:
+                - generic [ref=f1e864]: Chongqing
+                - generic [ref=f1e865]: mixed · Sao Paulo
+              - generic [ref=f1e866]: +$17 427
+            - generic [ref=f1e867] [cursor=pointer]:
+              - generic [ref=f1e868]: JE
+              - generic [ref=f1e869]:
+                - generic [ref=f1e870]: Jeddah
+                - generic [ref=f1e871]: certain · Jeddah
+              - generic [ref=f1e872]: +$17 241
+            - generic [ref=f1e873] [cursor=pointer]:
+              - generic [ref=f1e874]: DI
+              - generic [ref=f1e875]:
+                - generic [ref=f1e876]: dingdingdangdang
+                - generic [ref=f1e877]: mixed · Seattle
+              - generic [ref=f1e878]: +$16 926
+            - generic [ref=f1e879] [cursor=pointer]:
+              - generic [ref=f1e880]: MU
+              - generic [ref=f1e881]:
+                - generic [ref=f1e882]: Munich
+                - generic [ref=f1e883]: mixed · Dallas
+              - generic [ref=f1e884]: +$16 449
+            - generic [ref=f1e885] [cursor=pointer]:
+              - generic [ref=f1e886]: AM
+              - generic [ref=f1e887]:
+                - generic [ref=f1e888]: Amano-Hina
+                - generic [ref=f1e889]: momentum · Los Angeles
+              - generic [ref=f1e890]: +$16 235
+            - generic [ref=f1e891] [cursor=pointer]:
+              - generic [ref=f1e892]: LO
+              - generic [ref=f1e893]:
+                - generic [ref=f1e894]: London
+                - generic [ref=f1e895]: mixed · London
+              - generic [ref=f1e896]: +$15 487
+            - generic [ref=f1e897] [cursor=pointer]:
+              - generic [ref=f1e898]: CH
+              - generic [ref=f1e899]:
+                - generic [ref=f1e900]: Chengdu
+                - generic [ref=f1e901]: certain · Chengdu
+              - generic [ref=f1e902]: +$15 408
+            - generic [ref=f1e903] [cursor=pointer]:
+              - generic [ref=f1e904]: OL
+              - generic [ref=f1e905]:
+                - generic [ref=f1e906]: olkf
+                - generic [ref=f1e907]: momentum · Wuhan
+              - generic [ref=f1e908]: +$15 402
+            - generic [ref=f1e909] [cursor=pointer]:
+              - generic [ref=f1e910]: SA
+              - generic [ref=f1e911]:
+                - generic [ref=f1e912]: Sao Paulo
+                - generic [ref=f1e913]: ladder · Sao Paulo
+              - generic [ref=f1e914]: +$15 208
+            - generic [ref=f1e915] [cursor=pointer]:
+              - generic [ref=f1e916]: MA
+              - generic [ref=f1e917]:
+                - generic [ref=f1e918]: Madrid
+                - generic [ref=f1e919]: longshot · Madrid
+              - generic [ref=f1e920]: +$14 199
+            - generic [ref=f1e921] [cursor=pointer]:
+              - generic [ref=f1e922]: DR
+              - generic [ref=f1e923]:
+                - generic [ref=f1e924]: drunk-unc
+                - generic [ref=f1e925]: ladder · London
+              - generic [ref=f1e926]: +$14 151
+            - generic [ref=f1e927] [cursor=pointer]:
+              - generic [ref=f1e928]: MU
+              - generic [ref=f1e929]:
+                - generic [ref=f1e930]: Munich
+                - generic [ref=f1e931]: momentum · Munich
+              - generic [ref=f1e932]: +$14 094
+            - generic [ref=f1e933] [cursor=pointer]:
+              - generic [ref=f1e934]: HO
+              - generic [ref=f1e935]:
+                - generic [ref=f1e936]: Hong Kong
+                - generic [ref=f1e937]: mixed · New York City
+              - generic [ref=f1e938]: +$13 528
+            - generic [ref=f1e939] [cursor=pointer]:
+              - generic [ref=f1e940]: AN
+              - generic [ref=f1e941]:
+                - generic [ref=f1e942]: Ankara
+                - generic [ref=f1e943]: mixed · Hong Kong
+              - generic [ref=f1e944]: +$13 209
+            - generic [ref=f1e945] [cursor=pointer]:
+              - generic [ref=f1e946]: NE
+              - generic [ref=f1e947]:
+                - generic [ref=f1e948]: New York City
+                - generic [ref=f1e949]: certain · Seattle
+              - generic [ref=f1e950]: +$12 876
+            - generic [ref=f1e951] [cursor=pointer]:
+              - generic [ref=f1e952]: NE
+              - generic [ref=f1e953]:
+                - generic [ref=f1e954]: New York City
+                - generic [ref=f1e955]: certain · New York City
+              - generic [ref=f1e956]: +$12 804
+            - generic [ref=f1e957] [cursor=pointer]:
+              - generic [ref=f1e958]: NE
+              - generic [ref=f1e959]:
+                - generic [ref=f1e960]: New York City
+                - generic [ref=f1e961]: momentum · London
+              - generic [ref=f1e962]: +$12 648
+            - generic [ref=f1e963] [cursor=pointer]:
+              - generic [ref=f1e964]: BB
+              - generic [ref=f1e965]:
+                - generic [ref=f1e966]: bby123
+                - generic [ref=f1e967]: specialist · Busan
+              - generic [ref=f1e968]: +$12 603
+            - generic [ref=f1e969] [cursor=pointer]:
+              - generic [ref=f1e970]: SS
+              - generic [ref=f1e971]:
+                - generic [ref=f1e972]: SS123
+                - generic [ref=f1e973]: unknown · New York City
+              - generic [ref=f1e974]: +$12 313
+            - generic [ref=f1e975] [cursor=pointer]:
+              - generic [ref=f1e976]: MA
+              - generic [ref=f1e977]:
+                - generic [ref=f1e978]: Manila
+                - generic [ref=f1e979]: certain · Manila
+              - generic [ref=f1e980]: +$12 182
+            - generic [ref=f1e981] [cursor=pointer]:
+              - generic [ref=f1e982]: LO
+              - generic [ref=f1e983]:
+                - generic [ref=f1e984]: London
+                - generic [ref=f1e985]: specialist · London
+              - generic [ref=f1e986]: +$12 144
+            - generic [ref=f1e987] [cursor=pointer]:
+              - generic [ref=f1e988]: TO
+              - generic [ref=f1e989]:
+                - generic [ref=f1e990]: Toronto
+                - generic [ref=f1e991]: unknown · Toronto
+              - generic [ref=f1e992]: +$11 780
+            - generic [ref=f1e993] [cursor=pointer]:
+              - generic [ref=f1e994]: JI
+              - generic [ref=f1e995]:
+                - generic [ref=f1e996]: Jinan
+                - generic [ref=f1e997]: certain · Jinan
+              - generic [ref=f1e998]: +$11 605
+            - generic [ref=f1e999] [cursor=pointer]:
+              - generic [ref=f1e1000]: BA
+              - generic [ref=f1e1001]:
+                - generic [ref=f1e1002]: BaileyDontLook
+                - generic [ref=f1e1003]: unknown · New York City
+              - generic [ref=f1e1004]: +$11 569
+            - generic [ref=f1e1005] [cursor=pointer]:
+              - generic [ref=f1e1006]: SH
+              - generic [ref=f1e1007]:
+                - generic [ref=f1e1008]: Shenzhen
+                - generic [ref=f1e1009]: ladder · Seoul (Incheon)
+              - generic [ref=f1e1010]: +$11 424
+            - generic [ref=f1e1011] [cursor=pointer]:
+              - generic [ref=f1e1012]: JE
+              - generic [ref=f1e1013]:
+                - generic [ref=f1e1014]: Jeddah
+                - generic [ref=f1e1015]: certain · Ankara
+              - generic [ref=f1e1016]: +$11 321
+            - generic [ref=f1e1017] [cursor=pointer]:
+              - generic [ref=f1e1018]: 0X
+              - generic [ref=f1e1019]:
+                - generic [ref=f1e1020]: 0xa054a910cfF3f6D3503335577f12D68a169Aa95d-1776013841606
+                - generic [ref=f1e1021]: momentum · Munich
+              - generic [ref=f1e1022]: +$11 200
+            - generic [ref=f1e1023] [cursor=pointer]:
+              - generic [ref=f1e1024]: MU
+              - generic [ref=f1e1025]:
+                - generic [ref=f1e1026]: Munich
+                - generic [ref=f1e1027]: longshot · Munich
+              - generic [ref=f1e1028]: +$10 910
+            - generic [ref=f1e1029] [cursor=pointer]:
+              - generic [ref=f1e1030]: MU
+              - generic [ref=f1e1031]:
+                - generic [ref=f1e1032]: Munich
+                - generic [ref=f1e1033]: ladder · Madrid
+              - generic [ref=f1e1034]: +$10 586
+            - generic [ref=f1e1035] [cursor=pointer]:
+              - generic [ref=f1e1036]: WE
+              - generic [ref=f1e1037]:
+                - generic [ref=f1e1038]: WeatherHk (macau.weather)
+                - generic [ref=f1e1039]: ladder · Hong Kong
+              - generic [ref=f1e1040]: +$10 080
+            - generic [ref=f1e1041] [cursor=pointer]:
+              - generic [ref=f1e1042]: FI
+              - generic [ref=f1e1043]:
+                - generic [ref=f1e1044]: fildoro
+                - generic [ref=f1e1045]: momentum · Munich
+              - generic [ref=f1e1046]: +$9 970
+            - generic [ref=f1e1047] [cursor=pointer]:
+              - generic [ref=f1e1048]: LO
+              - generic [ref=f1e1049]:
+                - generic [ref=f1e1050]: London
+                - generic [ref=f1e1051]: ladder · London
+              - generic [ref=f1e1052]: +$9 934
+            - generic [ref=f1e1053] [cursor=pointer]:
+              - generic [ref=f1e1054]: BL
+              - generic [ref=f1e1055]:
+                - generic [ref=f1e1056]: blackbean7
+                - generic [ref=f1e1057]: value · London
+              - generic [ref=f1e1058]: +$9 023
+            - generic [ref=f1e1059] [cursor=pointer]:
+              - generic [ref=f1e1060]: PO
+              - generic [ref=f1e1061]:
+                - generic [ref=f1e1062]: PolMatt
+                - generic [ref=f1e1063]: certain · Hong Kong
+              - generic [ref=f1e1064]: +$8 992
+            - generic [ref=f1e1065] [cursor=pointer]:
+              - generic [ref=f1e1066]: HO
+              - generic [ref=f1e1067]:
+                - generic [ref=f1e1068]: Hong Kong
+                - generic [ref=f1e1069]: ladder · Hong Kong
+              - generic [ref=f1e1070]: +$8 698
+            - generic [ref=f1e1071] [cursor=pointer]:
+              - generic [ref=f1e1072]: TA
+              - generic [ref=f1e1073]:
+                - generic [ref=f1e1074]: Taipei
+                - generic [ref=f1e1075]: ladder · Taipei
+              - generic [ref=f1e1076]: +$8 689
+            - generic [ref=f1e1077] [cursor=pointer]:
+              - generic [ref=f1e1078]: SE
+              - generic [ref=f1e1079]:
+                - generic [ref=f1e1080]: Seoul (Incheon)
+                - generic [ref=f1e1081]: ladder · Singapore
+              - generic [ref=f1e1082]: +$8 655
+            - generic [ref=f1e1083] [cursor=pointer]:
+              - generic [ref=f1e1084]: AM
+              - generic [ref=f1e1085]:
+                - generic [ref=f1e1086]: Amsterdam
+                - generic [ref=f1e1087]: value · Singapore
+              - generic [ref=f1e1088]: +$8 178
+            - generic [ref=f1e1089] [cursor=pointer]:
+              - generic [ref=f1e1090]: CH
+              - generic [ref=f1e1091]:
+                - generic [ref=f1e1092]: Chengdu
+                - generic [ref=f1e1093]: mixed · Chengdu
+              - generic [ref=f1e1094]: +$8 080
+            - generic [ref=f1e1095] [cursor=pointer]:
+              - generic [ref=f1e1096]: JE
+              - generic [ref=f1e1097]:
+                - generic [ref=f1e1098]: Jeddah
+                - generic [ref=f1e1099]: longshot · Jeddah
+              - generic [ref=f1e1100]: +$8 046
+            - generic [ref=f1e1101] [cursor=pointer]:
+              - generic [ref=f1e1102]: PA
+              - generic [ref=f1e1103]:
+                - generic [ref=f1e1104]: Paris
+                - generic [ref=f1e1105]: unknown · Madrid
+              - generic [ref=f1e1106]: +$7 909
+            - generic [ref=f1e1107] [cursor=pointer]:
+              - generic [ref=f1e1108]: MA
+              - generic [ref=f1e1109]:
+                - generic [ref=f1e1110]: Manila
+                - generic [ref=f1e1111]: certain · Manila
+              - generic [ref=f1e1112]: +$7 869
+            - generic [ref=f1e1113] [cursor=pointer]:
+              - generic [ref=f1e1114]: SH
+              - generic [ref=f1e1115]:
+                - generic [ref=f1e1116]: shamu14
+                - generic [ref=f1e1117]: mixed · Chengdu
+              - generic [ref=f1e1118]: +$7 805
+            - generic [ref=f1e1119] [cursor=pointer]:
+              - generic [ref=f1e1120]: HE
+              - generic [ref=f1e1121]:
+                - generic [ref=f1e1122]: henh3n
+                - generic [ref=f1e1123]: specialist · Kuala Lumpur
+              - generic [ref=f1e1124]: +$7 580
+            - generic [ref=f1e1125] [cursor=pointer]:
+              - generic [ref=f1e1126]: TO
+              - generic [ref=f1e1127]:
+                - generic [ref=f1e1128]: Tokyo
+                - generic [ref=f1e1129]: value · Wellington
+              - generic [ref=f1e1130]: +$7 437
+            - generic [ref=f1e1131] [cursor=pointer]:
+              - generic [ref=f1e1132]: PA
+              - generic [ref=f1e1133]:
+                - generic [ref=f1e1134]: Paris
+                - generic [ref=f1e1135]: mixed · New York City
+              - generic [ref=f1e1136]: +$7 432
+            - generic [ref=f1e1137] [cursor=pointer]:
+              - generic [ref=f1e1138]: MU
+              - generic [ref=f1e1139]:
+                - generic [ref=f1e1140]: Munich
+                - generic [ref=f1e1141]: certain · Guangzhou
+              - generic [ref=f1e1142]: +$7 149
+            - generic [ref=f1e1143] [cursor=pointer]:
+              - generic [ref=f1e1144]: SL
+              - generic [ref=f1e1145]:
+                - generic [ref=f1e1146]: slr07
+                - generic [ref=f1e1147]: value · New York City
+              - generic [ref=f1e1148]: +$7 135
+            - generic [ref=f1e1149] [cursor=pointer]:
+              - generic [ref=f1e1150]: NE
+              - generic [ref=f1e1151]:
+                - generic [ref=f1e1152]: New York City
+                - generic [ref=f1e1153]: momentum · Shanghai
+              - generic [ref=f1e1154]: +$7 124
+            - generic [ref=f1e1155] [cursor=pointer]:
+              - generic [ref=f1e1156]: SA
+              - generic [ref=f1e1157]:
+                - generic [ref=f1e1158]: Sao Paulo
+                - generic [ref=f1e1159]: mixed · Sao Paulo
+              - generic [ref=f1e1160]: +$7 039
+            - generic [ref=f1e1161] [cursor=pointer]:
+              - generic [ref=f1e1162]: LO
+              - generic [ref=f1e1163]:
+                - generic [ref=f1e1164]: London
+                - generic [ref=f1e1165]: value · Dallas
+              - generic [ref=f1e1166]: +$7 038
+            - generic [ref=f1e1167] [cursor=pointer]:
+              - generic [ref=f1e1168]: WE
+              - generic [ref=f1e1169]:
+                - generic [ref=f1e1170]: Wellington
+                - generic [ref=f1e1171]: ladder · Wellington
+              - generic [ref=f1e1172]: +$6 913
+            - generic [ref=f1e1173] [cursor=pointer]:
+              - generic [ref=f1e1174]: NE
+              - generic [ref=f1e1175]:
+                - generic [ref=f1e1176]: New York City
+                - generic [ref=f1e1177]: certain · Denver
+              - generic [ref=f1e1178]: +$6 891
+            - generic [ref=f1e1179] [cursor=pointer]:
+              - generic [ref=f1e1180]: MI
+              - generic [ref=f1e1181]:
+                - generic [ref=f1e1182]: Miami
+                - generic [ref=f1e1183]: momentum · Miami
+              - generic [ref=f1e1184]: +$6 859
+            - generic [ref=f1e1185] [cursor=pointer]:
+              - generic [ref=f1e1186]: 0X
+              - generic [ref=f1e1187]:
+                - generic [ref=f1e1188]: 0xbddc2a7690BF600E347d5eb4A9C28f9F24E55d4f-1774968947489
+                - generic [ref=f1e1189]: value · Dallas
+              - generic [ref=f1e1190]: +$6 825
+            - generic [ref=f1e1191] [cursor=pointer]:
+              - generic [ref=f1e1192]: SH
+              - generic [ref=f1e1193]:
+                - generic [ref=f1e1194]: shamu12
+                - generic [ref=f1e1195]: ladder · Chongqing
+              - generic [ref=f1e1196]: +$6 751
+            - generic [ref=f1e1197] [cursor=pointer]:
+              - generic [ref=f1e1198]: TO
+              - generic [ref=f1e1199]:
+                - generic [ref=f1e1200]: Toronto
+                - generic [ref=f1e1201]: value · Toronto
+              - generic [ref=f1e1202]: +$6 709
+            - generic [ref=f1e1203] [cursor=pointer]:
+              - generic [ref=f1e1204]: HO
+              - generic [ref=f1e1205]:
+                - generic [ref=f1e1206]: Hong Kong
+                - generic [ref=f1e1207]: value · Hong Kong
+              - generic [ref=f1e1208]: +$6 643
+            - generic [ref=f1e1209] [cursor=pointer]:
+              - generic [ref=f1e1210]: NE
+              - generic [ref=f1e1211]:
+                - generic [ref=f1e1212]: New York City
+                - generic [ref=f1e1213]: mixed · New York City
+              - generic [ref=f1e1214]: +$6 523
+            - generic [ref=f1e1215] [cursor=pointer]:
+              - generic [ref=f1e1216]: SA
+              - generic [ref=f1e1217]:
+                - generic [ref=f1e1218]: Sao Paulo
+                - generic [ref=f1e1219]: value · Sao Paulo
+              - generic [ref=f1e1220]: +$6 482
+            - generic [ref=f1e1221] [cursor=pointer]:
+              - generic [ref=f1e1222]: CA
+              - generic [ref=f1e1223]:
+                - generic [ref=f1e1224]: Cape Town
+                - generic [ref=f1e1225]: momentum · Cape Town
+              - generic [ref=f1e1226]: +$6 464
+            - generic [ref=f1e1227] [cursor=pointer]:
+              - generic [ref=f1e1228]: MI
+              - generic [ref=f1e1229]:
+                - generic [ref=f1e1230]: Miami
+                - generic [ref=f1e1231]: value · Houston
+              - generic [ref=f1e1232]: +$6 455
+            - generic [ref=f1e1233] [cursor=pointer]:
+              - generic [ref=f1e1234]: KU
+              - generic [ref=f1e1235]:
+                - generic [ref=f1e1236]: Kuala Lumpur
+                - generic [ref=f1e1237]: mixed · Busan
+              - generic [ref=f1e1238]: +$6 424
+            - generic [ref=f1e1239] [cursor=pointer]:
+              - generic [ref=f1e1240]: 0X
+              - generic [ref=f1e1241]:
+                - generic [ref=f1e1242]: 0x3dd1cF0515aF12542488aF04388404Fb056e557E-1777227435219
+                - generic [ref=f1e1243]: mixed · Seattle
+              - generic [ref=f1e1244]: +$6 397
+            - generic [ref=f1e1245] [cursor=pointer]:
+              - generic [ref=f1e1246]: SA
+              - generic [ref=f1e1247]:
+                - generic [ref=f1e1248]: Sao Paulo
+                - generic [ref=f1e1249]: ladder · Karachi
+              - generic [ref=f1e1250]: +$6 177
+            - generic [ref=f1e1251] [cursor=pointer]:
+              - generic [ref=f1e1252]: SE
+              - generic [ref=f1e1253]:
+                - generic [ref=f1e1254]: Seoul (Incheon)
+                - generic [ref=f1e1255]: momentum · Seoul (Incheon)
+              - generic [ref=f1e1256]: +$6 130
+            - generic [ref=f1e1257] [cursor=pointer]:
+              - generic [ref=f1e1258]: TO
+              - generic [ref=f1e1259]:
+                - generic [ref=f1e1260]: Tokyo
+                - generic [ref=f1e1261]: certain · Milan
+              - generic [ref=f1e1262]: +$6 042
+            - generic [ref=f1e1263] [cursor=pointer]:
+              - generic [ref=f1e1264]: SI
+              - generic [ref=f1e1265]:
+                - generic [ref=f1e1266]: Singapore
+                - generic [ref=f1e1267]: certain · Istanbul
+              - generic [ref=f1e1268]: +$6 040
+            - generic [ref=f1e1269] [cursor=pointer]:
+              - generic [ref=f1e1270]: CA
+              - generic [ref=f1e1271]:
+                - generic [ref=f1e1272]: Cape Town
+                - generic [ref=f1e1273]: specialist · Cape Town
+              - generic [ref=f1e1274]: +$5 902
+            - generic [ref=f1e1275] [cursor=pointer]:
+              - generic [ref=f1e1276]: PA
+              - generic [ref=f1e1277]:
+                - generic [ref=f1e1278]: Paris
+                - generic [ref=f1e1279]: certain · Paris
+              - generic [ref=f1e1280]: +$5 900
+            - generic [ref=f1e1281] [cursor=pointer]:
+              - generic [ref=f1e1282]: PA
+              - generic [ref=f1e1283]:
+                - generic [ref=f1e1284]: Paris
+                - generic [ref=f1e1285]: mixed · Paris
+              - generic [ref=f1e1286]: +$5 743
+            - generic [ref=f1e1287] [cursor=pointer]:
+              - generic [ref=f1e1288]: NE
+              - generic [ref=f1e1289]:
+                - generic [ref=f1e1290]: New York City
+                - generic [ref=f1e1291]: unknown · New York City
+              - generic [ref=f1e1292]: +$5 743
+            - generic [ref=f1e1293] [cursor=pointer]:
+              - generic [ref=f1e1294]: MI
+              - generic [ref=f1e1295]:
+                - generic [ref=f1e1296]: Miami
+                - generic [ref=f1e1297]: mixed · New York City
+              - generic [ref=f1e1298]: +$5 698
+            - generic [ref=f1e1299] [cursor=pointer]:
+              - generic [ref=f1e1300]: TA
+              - generic [ref=f1e1301]:
+                - generic [ref=f1e1302]: Taipei
+                - generic [ref=f1e1303]: certain · Panama City
+              - generic [ref=f1e1304]: +$5 682
+            - generic [ref=f1e1305] [cursor=pointer]:
+              - generic [ref=f1e1306]: 0X
+              - generic [ref=f1e1307]:
+                - generic [ref=f1e1308]: 0x9506...1c4f
+                - generic [ref=f1e1309]: momentum · Wellington
+              - generic [ref=f1e1310]: +$5 624
+            - generic [ref=f1e1311] [cursor=pointer]:
+              - generic [ref=f1e1312]: HO
+              - generic [ref=f1e1313]:
+                - generic [ref=f1e1314]: Hong Kong
+                - generic [ref=f1e1315]: ladder · Hong Kong
+              - generic [ref=f1e1316]: +$5 597
+            - generic [ref=f1e1317] [cursor=pointer]:
+              - generic [ref=f1e1318]: HE
+              - generic [ref=f1e1319]:
+                - generic [ref=f1e1320]: Helsinki
+                - generic [ref=f1e1321]: momentum · Helsinki
+              - generic [ref=f1e1322]: +$5 568
+            - generic [ref=f1e1323] [cursor=pointer]:
+              - generic [ref=f1e1324]: CH
+              - generic [ref=f1e1325]:
+                - generic [ref=f1e1326]: Chongqing
+                - generic [ref=f1e1327]: unknown · Seoul (Incheon)
+              - generic [ref=f1e1328]: +$5 540
+            - generic [ref=f1e1329] [cursor=pointer]:
+              - generic [ref=f1e1330]: HO
+              - generic [ref=f1e1331]:
+                - generic [ref=f1e1332]: Hong Kong
+                - generic [ref=f1e1333]: value · Shenzhen
+              - generic [ref=f1e1334]: +$5 400
+            - generic [ref=f1e1335] [cursor=pointer]:
+              - generic [ref=f1e1336]: CA
+              - generic [ref=f1e1337]:
+                - generic [ref=f1e1338]: Cape Town
+                - generic [ref=f1e1339]: ladder · Cape Town
+              - generic [ref=f1e1340]: +$5 360
+            - generic [ref=f1e1341] [cursor=pointer]:
+              - generic [ref=f1e1342]: LU
+              - generic [ref=f1e1343]:
+                - generic [ref=f1e1344]: Lucknow
+                - generic [ref=f1e1345]: value · Tokyo
+              - generic [ref=f1e1346]: +$5 275
+            - generic [ref=f1e1347] [cursor=pointer]:
+              - generic [ref=f1e1348]: PA
+              - generic [ref=f1e1349]:
+                - generic [ref=f1e1350]: Paris
+                - generic [ref=f1e1351]: certain · Paris
+              - generic [ref=f1e1352]: +$5 270
+            - generic [ref=f1e1353] [cursor=pointer]:
+              - generic [ref=f1e1354]: PA
+              - generic [ref=f1e1355]:
+                - generic [ref=f1e1356]: Paris
+                - generic [ref=f1e1357]: certain · Wellington
+              - generic [ref=f1e1358]: +$5 138
+            - generic [ref=f1e1359] [cursor=pointer]:
+              - generic [ref=f1e1360]: SE
+              - generic [ref=f1e1361]:
+                - generic [ref=f1e1362]: Seoul (Incheon)
+                - generic [ref=f1e1363]: certain · Seoul (Incheon)
+              - generic [ref=f1e1364]: +$5 122
+            - generic [ref=f1e1365] [cursor=pointer]:
+              - generic [ref=f1e1366]: HL
+              - generic [ref=f1e1367]:
+                - generic [ref=f1e1368]: hlwp229
+                - generic [ref=f1e1369]: value · Paris
+              - generic [ref=f1e1370]: +$5 058
+          - paragraph [ref=f1e1371]: 2 245 совпадений, показаны первые 150.
+  - contentinfo [ref=f1e345]:
+    - generic [ref=f1e346]: trader-analyzer · локальный статический отчёт, без внешних запросов
+    - code [ref=f1e348]: parse → classify → portrait → signals

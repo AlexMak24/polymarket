@@ -1,0 +1,207 @@
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - generic [ref=e10]:
+      - generic [ref=e11]: trader-analyzer · on-chain intelligence
+      - heading [level=1] [ref=e13]:
+        - text: Читаем чужие кошельки
+        - emphasis [ref=e14]: Polymarket
+      - paragraph [ref=e15]: Парсер обходит кошельки топ-трейдеров, восстанавливает торговую стратегию и тематику, считает PnL и потоки USDC/ETH, и раздаёт готовые сигналы собственным ботам.
+      - generic [ref=e16]:
+        - generic [ref=e17]: 2 245 кошельков в индексе
+        - generic [ref=e19]: 2 221 weather-профиль ≥ 0.3
+        - generic [ref=e21]: 8 классов стратегий
+        - generic [ref=e23]: 6 тематик
+        - generic [ref=e25]: 15 CLI-команд
+  - navigation [ref=e27]:
+    - tablist [ref=e28]:
+      - tab "01 Overview" [selected] [ref=e29] [cursor=pointer]:
+        - generic [ref=e30]: "01"
+        - text: Overview
+      - tab "02 Wallets" [ref=e31] [cursor=pointer]:
+        - generic [ref=e32]: "02"
+        - text: Wallets
+      - tab "03 Strategies" [ref=e33] [cursor=pointer]:
+        - generic [ref=e34]: "03"
+        - text: Strategies
+      - tab "04 Portrait" [ref=e35] [cursor=pointer]:
+        - generic [ref=e36]: "04"
+        - text: Portrait
+      - tab "05 On-chain" [ref=e37] [cursor=pointer]:
+        - generic [ref=e38]: "05"
+        - text: On-chain
+      - tab "06 Signals" [ref=e39] [cursor=pointer]:
+        - generic [ref=e40]: "06"
+        - text: Signals
+  - main [ref=e41]:
+    - generic [ref=e42]:
+      - generic [ref=e43]:
+        - generic [ref=e44]:
+          - generic [ref=e45]: Кошельков в индексе
+          - generic [ref=e46]: 2 245
+          - generic [ref=e47]: полный обход watchlist
+        - generic [ref=e52]:
+          - generic [ref=e53]: Weather-профили
+          - generic [ref=e54]: 2 221
+          - generic [ref=e55]: score ≥ 0.3 · 99% индекса
+        - generic [ref=e60]:
+          - generic [ref=e61]: Классов стратегий
+          - generic [ref=e62]: "8"
+          - generic [ref=e63]: классификатор без ручных правил
+        - generic [ref=e68]:
+          - generic [ref=e69]: Тематик
+          - generic [ref=e70]: "6"
+          - generic [ref=e71]: weather · politics · sports · crypto · science · pop
+      - heading "Распределение по стратегиям" [level=2] [ref=e76]
+      - generic [ref=e77]:
+        - generic [ref=e78]:
+          - generic [ref=e79]: 2 221 weather-кошелёк · 8 классов
+          - generic [ref=e80]:
+            - generic [ref=e81]: certain
+            - generic [ref=e84]: "661"
+          - generic [ref=e85]:
+            - generic [ref=e86]: value
+            - generic [ref=e89]: "426"
+          - generic [ref=e90]:
+            - generic [ref=e91]: momentum
+            - generic [ref=e94]: "320"
+          - generic [ref=e95]:
+            - generic [ref=e96]: mixed
+            - generic [ref=e99]: "220"
+          - generic [ref=e100]:
+            - generic [ref=e101]: ladder
+            - generic [ref=e104]: "206"
+          - generic [ref=e105]:
+            - generic [ref=e106]: unknown
+            - generic [ref=e109]: "170"
+          - generic [ref=e110]:
+            - generic [ref=e111]: specialist
+            - generic [ref=e114]: "135"
+          - generic [ref=e115]:
+            - generic [ref=e116]: longshot
+            - generic [ref=e119]: "83"
+          - paragraph [ref=e120]: Сумма по классам = 2 221 — ровно те кошельки, у которых weather-score ≥ 0.3. Остальные 24 из 2 245 остались вне weather-выборки.
+        - generic [ref=e121]:
+          - generic [ref=e122]: Тематическое покрытие
+          - generic [ref=e131]:
+            - generic [ref=e132]: weather · 58.9%
+            - generic [ref=e134]: politics · 8.3%
+            - generic [ref=e136]: sports · 7.4%
+            - generic [ref=e138]: crypto · 8.5%
+            - generic [ref=e140]: science · 9.0%
+            - generic [ref=e142]: pop culture · 7.9%
+          - paragraph [ref=e144]: Доли усреднены по портретам топ-выборки.
+      - heading "Топ-5 по PnL" [level=2] [ref=e145]
+      - table [ref=e148]:
+        - rowgroup [ref=e149]:
+          - row [ref=e150]:
+            - columnheader "#" [ref=e151] [cursor=pointer]
+            - columnheader "Кошелёк" [ref=e152] [cursor=pointer]
+            - columnheader "Стратегия" [ref=e153] [cursor=pointer]
+            - columnheader "Город" [ref=e154] [cursor=pointer]
+            - columnheader "PnL" [ref=e155] [cursor=pointer]
+            - columnheader "Trades" [ref=e156] [cursor=pointer]
+            - columnheader "Эквити" [ref=e157] [cursor=pointer]
+        - rowgroup [ref=e158]:
+          - row [ref=e159] [cursor=pointer]:
+            - cell "1" [ref=e160]
+            - cell "IS Istanbul 0x5243…b3ce" [ref=e161]:
+              - generic [ref=e162]:
+                - generic [ref=e163]: IS
+                - generic [ref=e164]:
+                  - generic [ref=e165]: Istanbul
+                  - generic [ref=e166]: 0x5243…b3ce
+            - cell "certain" [ref=e167]
+            - cell "Munich" [ref=e169]
+            - cell "+$98 195" [ref=e170]
+            - cell "356" [ref=e171]
+            - cell [ref=e172]
+          - row [ref=e177] [cursor=pointer]:
+            - cell "2" [ref=e178]
+            - cell "PA Paris 0xcc75…a08f" [ref=e179]:
+              - generic [ref=e180]:
+                - generic [ref=e181]: PA
+                - generic [ref=e182]:
+                  - generic [ref=e183]: Paris
+                  - generic [ref=e184]: 0xcc75…a08f
+            - cell "certain" [ref=e185]
+            - cell "New York City" [ref=e187]
+            - cell "+$96 857" [ref=e188]
+            - cell "369" [ref=e189]
+            - cell [ref=e190]
+          - row [ref=e195] [cursor=pointer]:
+            - cell "3" [ref=e196]
+            - cell "LO London 0x59ce…bf56" [ref=e197]:
+              - generic [ref=e198]:
+                - generic [ref=e199]: LO
+                - generic [ref=e200]:
+                  - generic [ref=e201]: London
+                  - generic [ref=e202]: 0x59ce…bf56
+            - cell "mixed" [ref=e203]
+            - cell "—" [ref=e205]
+            - cell "+$94 607" [ref=e206]
+            - cell "190" [ref=e207]
+            - cell [ref=e208]
+          - row [ref=e213] [cursor=pointer]:
+            - cell "4" [ref=e214]
+            - cell "JJ jjavi 0x1769…cf20" [ref=e215]:
+              - generic [ref=e216]:
+                - generic [ref=e217]: JJ
+                - generic [ref=e218]:
+                  - generic [ref=e219]: jjavi
+                  - generic [ref=e220]: 0x1769…cf20
+            - cell "ladder" [ref=e221]
+            - cell "—" [ref=e223]
+            - cell "+$69 055" [ref=e224]
+            - cell "421" [ref=e225]
+            - cell [ref=e226]
+          - row [ref=e231] [cursor=pointer]:
+            - cell "5" [ref=e232]
+            - cell "WE weatherstappen 0xc90c…9bb4" [ref=e233]:
+              - generic [ref=e234]:
+                - generic [ref=e235]: WE
+                - generic [ref=e236]:
+                  - generic [ref=e237]: weatherstappen
+                  - generic [ref=e238]: 0xc90c…9bb4
+            - cell "certain" [ref=e239]
+            - cell "—" [ref=e241]
+            - cell "+$46 440" [ref=e242]
+            - cell "343" [ref=e243]
+            - cell [ref=e244]
+      - heading "Сводная статистика выборки" [level=2] [ref=e249]
+      - generic [ref=e250]:
+        - generic [ref=e251]:
+          - generic [ref=e252]: PnL по топ-выборке
+          - generic [ref=e253]: +$150 487
+          - generic [ref=e254]: 14 разобранных кошелька
+          - generic [ref=e255]:
+            - generic [ref=e256]: Лучший
+            - generic [ref=e257]: +$98 195
+          - generic [ref=e258]:
+            - generic [ref=e259]: Худший
+            - generic [ref=e260]: −$227 105
+          - generic [ref=e261]:
+            - generic [ref=e262]: Прибыльных
+            - generic [ref=e263]: 9 / 14
+        - generic [ref=e264]:
+          - generic [ref=e265]: Доля прибыльных
+          - img [ref=e267]:
+            - generic [ref=e270]: 64%
+          - generic [ref=e271]: 9 из 14 кошельков в плюсе. Один certain-кошелёк с −$227 105 перевешивает почти весь плюс выборки.
+        - generic [ref=e272]:
+          - generic [ref=e273]: Возможности CLI
+          - generic [ref=e274]:
+            - generic [ref=e275]: Сделок разобрано
+            - generic [ref=e276]: 3 819
+          - generic [ref=e277]:
+            - generic [ref=e278]: Команд в парсере
+            - generic [ref=e279]: "15"
+          - generic [ref=e280]:
+            - generic [ref=e281]: Города в выборке
+            - generic [ref=e282]: "3"
+          - generic [ref=e283]:
+            - generic [ref=e284]: Порог weather-score
+            - generic [ref=e285]: "0.3"
+          - generic [ref=e286]: Полный список команд — внизу вкладки Signals.
+  - contentinfo [ref=e287]:
+    - generic [ref=e288]: trader-analyzer · локальный статический отчёт, без внешних запросов
+    - code [ref=e290]: parse → classify → portrait → signals

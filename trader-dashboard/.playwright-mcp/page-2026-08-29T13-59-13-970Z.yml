@@ -1,0 +1,295 @@
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - generic [ref=e10]:
+      - generic [ref=e11]: trader-analyzer · on-chain intelligence
+      - heading [level=1] [ref=e13]:
+        - text: Читаем чужие кошельки
+        - emphasis [ref=e14]: Polymarket
+      - paragraph [ref=e15]:
+        - text: Парсер обходит кошельки топ-трейдеров, восстанавливает торговую стратегию и географию рынков, считает PnL и активность, и раздаёт готовые сигналы собственным ботам. Все цифры ниже — реальная выгрузка из
+        - code [ref=e16]: profiles.db
+        - text: .
+      - generic [ref=e17]:
+        - generic [ref=e18]: 2 245 кошельков в индексе
+        - generic [ref=e20]: 2 221 weather-профиль ≥ 0.3
+        - generic [ref=e22]: 8 классов стратегий
+        - generic [ref=e24]: 792 кошелька с разобранным PnL
+        - generic [ref=e26]: 53 города
+  - navigation [ref=e28]:
+    - tablist [ref=e29]:
+      - tab "01 Overview" [selected] [ref=e30] [cursor=pointer]:
+        - generic [ref=e31]: "01"
+        - text: Overview
+      - tab "02 Wallets" [ref=e32] [cursor=pointer]:
+        - generic [ref=e33]: "02"
+        - text: Wallets
+      - tab "03 Strategies" [ref=e34] [cursor=pointer]:
+        - generic [ref=e35]: "03"
+        - text: Strategies
+      - tab "04 Portrait" [ref=e36] [cursor=pointer]:
+        - generic [ref=e37]: "04"
+        - text: Portrait
+      - tab "05 On-chain" [ref=e38] [cursor=pointer]:
+        - generic [ref=e39]: "05"
+        - text: On-chain
+      - tab "06 Signals" [ref=e40] [cursor=pointer]:
+        - generic [ref=e41]: "06"
+        - text: Signals
+  - main [ref=e42]:
+    - generic [ref=e43]:
+      - generic [ref=e44]:
+        - generic [ref=e45]:
+          - generic [ref=e46]: Кошельков в индексе
+          - generic [ref=e47]: 2 245
+          - generic [ref=e48]: полная выгрузка profiles.db
+        - generic [ref=e49]:
+          - generic [ref=e50]: Weather-профили
+          - generic [ref=e51]: 2 221
+          - generic [ref=e52]: score ≥ 0.3 · 98,9% индекса
+        - generic [ref=e53]:
+          - generic [ref=e54]: Классов стратегий
+          - generic [ref=e55]: "8"
+          - generic [ref=e56]: классификатор без ручных правил
+        - generic [ref=e57]:
+          - generic [ref=e58]: Кошельков с PnL
+          - generic [ref=e59]: 2 123
+          - generic [ref=e60]: у 122 PnL не посчитан
+      - heading "Распределение по стратегиям" [level=2] [ref=e61]
+      - generic [ref=e62]:
+        - generic [ref=e63]:
+          - generic [ref=e64]: 2 221 weather-кошельков · 8 классов
+          - generic [ref=e65]:
+            - generic [ref=e66]: certain
+            - generic [ref=e68]: "671"
+          - generic [ref=e69]:
+            - generic [ref=e70]: value
+            - generic [ref=e72]: "427"
+          - generic [ref=e73]:
+            - generic [ref=e74]: momentum
+            - generic [ref=e76]: "329"
+          - generic [ref=e77]:
+            - generic [ref=e78]: mixed
+            - generic [ref=e80]: "223"
+          - generic [ref=e81]:
+            - generic [ref=e82]: ladder
+            - generic [ref=e84]: "206"
+          - generic [ref=e85]:
+            - generic [ref=e86]: unknown
+            - generic [ref=e88]: "171"
+          - generic [ref=e89]:
+            - generic [ref=e90]: specialist
+            - generic [ref=e92]: "135"
+          - generic [ref=e93]:
+            - generic [ref=e94]: longshot
+            - generic [ref=e96]: "83"
+          - paragraph [ref=e97]: Сумма по классам = 2 245 — это кошельки с weather-score ≥ 0.3. Остальные 24 из 2 245 остались вне weather-выборки.
+        - generic [ref=e98]:
+          - generic [ref=e99]: География рынков · top-7
+          - generic [ref=e110]:
+            - generic [ref=e111]: Hong Kong · 6,8%
+            - generic [ref=e113]: London · 5,4%
+            - generic [ref=e115]: Shanghai · 4,4%
+            - generic [ref=e117]: Paris · 4,3%
+            - generic [ref=e119]: Seoul (Incheon) · 4,2%
+            - generic [ref=e121]: Munich · 3,9%
+            - generic [ref=e123]: New York City · 3,7%
+            - generic [ref=e125]: прочие · 67,3%
+          - paragraph [ref=e127]:
+            - text: Города считаны по полю
+            - code [ref=e128]: cities
+            - text: "всех 2 245 кошельков: всего 251 705 городских сделок, 53 уникальных городов."
+      - heading "Топ-10 по PnL" [level=2] [ref=e129]
+      - generic [ref=e130]:
+        - table [ref=e132]:
+          - rowgroup [ref=e133]:
+            - row [ref=e134]:
+              - columnheader "#" [ref=e135] [cursor=pointer]
+              - columnheader "Кошелёк" [ref=e136] [cursor=pointer]
+              - columnheader "Стратегия" [ref=e137] [cursor=pointer]
+              - columnheader "Топ-город" [ref=e138] [cursor=pointer]
+              - columnheader "PnL" [ref=e139] [cursor=pointer]
+              - columnheader "Сделок" [ref=e140] [cursor=pointer]
+              - columnheader "30д" [ref=e141] [cursor=pointer]
+              - columnheader "Объём 30д" [ref=e142] [cursor=pointer]
+          - rowgroup [ref=e143]:
+            - row [ref=e144] [cursor=pointer]:
+              - cell "1" [ref=e145]
+              - cell "BA balthazar 0x5a21…9318" [ref=e146]:
+                - generic [ref=e147]:
+                  - generic [ref=e148]: BA
+                  - generic [ref=e149]:
+                    - generic [ref=e150]: balthazar
+                    - generic [ref=e151]: 0x5a21…9318
+              - cell "certain" [ref=e152]
+              - cell "Munich" [ref=e154]
+              - cell "+$1 512 472" [ref=e155]
+              - cell "250" [ref=e156]
+              - cell "250" [ref=e157]
+              - cell "$5 603" [ref=e158]
+            - row [ref=e159] [cursor=pointer]:
+              - cell "2" [ref=e160]
+              - cell "BU Buenos Aires 0x0380…073d" [ref=e161]:
+                - generic [ref=e162]:
+                  - generic [ref=e163]: BU
+                  - generic [ref=e164]:
+                    - generic [ref=e165]: Buenos Aires
+                    - generic [ref=e166]: 0x0380…073d
+              - cell "certain" [ref=e167]
+              - cell "New York City" [ref=e169]
+              - cell "+$1 274 867" [ref=e170]
+              - cell "250" [ref=e171]
+              - cell "250" [ref=e172]
+              - cell "$8 079" [ref=e173]
+            - row [ref=e174] [cursor=pointer]:
+              - cell "3" [ref=e175]
+              - cell "HO Hong Kong 0xb0c8…fe7f" [ref=e176]:
+                - generic [ref=e177]:
+                  - generic [ref=e178]: HO
+                  - generic [ref=e179]:
+                    - generic [ref=e180]: Hong Kong
+                    - generic [ref=e181]: 0xb0c8…fe7f
+              - cell "certain" [ref=e182]
+              - cell "Shanghai" [ref=e184]
+              - cell "+$704 415" [ref=e185]
+              - cell "250" [ref=e186]
+              - cell "250" [ref=e187]
+              - cell "$12 327" [ref=e188]
+            - row [ref=e189] [cursor=pointer]:
+              - cell "4" [ref=e190]
+              - cell "PA Paris 0xe40a…e4a2" [ref=e191]:
+                - generic [ref=e192]:
+                  - generic [ref=e193]: PA
+                  - generic [ref=e194]:
+                    - generic [ref=e195]: Paris
+                    - generic [ref=e196]: 0xe40a…e4a2
+              - cell "certain" [ref=e197]
+              - cell "Houston" [ref=e199]
+              - cell "+$486 517" [ref=e200]
+              - cell "250" [ref=e201]
+              - cell "250" [ref=e202]
+              - cell "$6 624" [ref=e203]
+            - row [ref=e204] [cursor=pointer]:
+              - cell "5" [ref=e205]
+              - cell "CH Chicago 0xfbd8…4027" [ref=e206]:
+                - generic [ref=e207]:
+                  - generic [ref=e208]: CH
+                  - generic [ref=e209]:
+                    - generic [ref=e210]: Chicago
+                    - generic [ref=e211]: 0xfbd8…4027
+              - cell "certain" [ref=e212]
+              - cell "Hong Kong" [ref=e214]
+              - cell "+$483 756" [ref=e215]
+              - cell "250" [ref=e216]
+              - cell "250" [ref=e217]
+              - cell "$4 037" [ref=e218]
+            - row [ref=e219] [cursor=pointer]:
+              - cell "6" [ref=e220]
+              - cell "PA Paris 0x4f1d…8de2" [ref=e221]:
+                - generic [ref=e222]:
+                  - generic [ref=e223]: PA
+                  - generic [ref=e224]:
+                    - generic [ref=e225]: Paris
+                    - generic [ref=e226]: 0x4f1d…8de2
+              - cell "certain" [ref=e227]
+              - cell "Madrid" [ref=e229]
+              - cell "+$447 696" [ref=e230]
+              - cell "250" [ref=e231]
+              - cell "250" [ref=e232]
+              - cell "$5 499" [ref=e233]
+            - row [ref=e234] [cursor=pointer]:
+              - cell "7" [ref=e235]
+              - cell "KU Kuala Lumpur 0xa328…4977" [ref=e236]:
+                - generic [ref=e237]:
+                  - generic [ref=e238]: KU
+                  - generic [ref=e239]:
+                    - generic [ref=e240]: Kuala Lumpur
+                    - generic [ref=e241]: 0xa328…4977
+              - cell "certain" [ref=e242]
+              - cell "Ankara" [ref=e244]
+              - cell "+$306 532" [ref=e245]
+              - cell "250" [ref=e246]
+              - cell "250" [ref=e247]
+              - cell "$12 916" [ref=e248]
+            - row [ref=e249] [cursor=pointer]:
+              - cell "8" [ref=e250]
+              - cell "MI Milan 0x2b59…9db6" [ref=e251]:
+                - generic [ref=e252]:
+                  - generic [ref=e253]: MI
+                  - generic [ref=e254]:
+                    - generic [ref=e255]: Milan
+                    - generic [ref=e256]: 0x2b59…9db6
+              - cell "certain" [ref=e257]
+              - cell "Miami" [ref=e259]
+              - cell "+$226 931" [ref=e260]
+              - cell "250" [ref=e261]
+              - cell "250" [ref=e262]
+              - cell "$2 490" [ref=e263]
+            - row [ref=e264] [cursor=pointer]:
+              - cell "9" [ref=e265]
+              - cell "SH Shanghai 0x8373…f0bc" [ref=e266]:
+                - generic [ref=e267]:
+                  - generic [ref=e268]: SH
+                  - generic [ref=e269]:
+                    - generic [ref=e270]: Shanghai
+                    - generic [ref=e271]: 0x8373…f0bc
+              - cell "certain" [ref=e272]
+              - cell "Tokyo" [ref=e274]
+              - cell "+$225 720" [ref=e275]
+              - cell "250" [ref=e276]
+              - cell "250" [ref=e277]
+              - cell "$10 462" [ref=e278]
+            - row [ref=e279] [cursor=pointer]:
+              - cell "10" [ref=e280]
+              - cell "NE New York City 0x28bf…4a4e" [ref=e281]:
+                - generic [ref=e282]:
+                  - generic [ref=e283]: NE
+                  - generic [ref=e284]:
+                    - generic [ref=e285]: New York City
+                    - generic [ref=e286]: 0x28bf…4a4e
+              - cell "certain" [ref=e287]
+              - cell "Toronto" [ref=e289]
+              - cell "+$194 388" [ref=e290]
+              - cell "250" [ref=e291]
+              - cell "250" [ref=e292]
+              - cell "$5 470" [ref=e293]
+        - paragraph [ref=e294]: Клик по строке открывает Portrait.
+      - heading "Сводная статистика" [level=2] [ref=e295]
+      - generic [ref=e296]:
+        - generic [ref=e297]:
+          - generic [ref=e298]: PnL по индексу
+          - generic [ref=e299]: +$7 769 457
+          - generic [ref=e300]: сумма по 2 123 кошелькам с посчитанным PnL
+          - generic [ref=e301]:
+            - generic [ref=e302]: Лучший · balthazar
+            - generic [ref=e303]: +$1 512 472
+          - generic [ref=e304]:
+            - generic [ref=e305]: Худший · Toronto
+            - generic [ref=e306]: −$416 732
+          - generic [ref=e307]:
+            - generic [ref=e308]: Прибыльных
+            - generic [ref=e309]: 978 / 2 123
+        - generic [ref=e310]:
+          - generic [ref=e311]: Доля прибыльных
+          - img [ref=e313]:
+            - generic [ref=e316]: 46%
+          - generic [ref=e317]: 978 из 2 123 кошельков в плюсе (46,1%). Медиана по классам — на вкладке Strategies.
+        - generic [ref=e318]:
+          - generic [ref=e319]: Активность выборки
+          - generic [ref=e320]:
+            - generic [ref=e321]: Сделок разобрано
+            - generic [ref=e322]: 490 750
+          - generic [ref=e323]:
+            - generic [ref=e324]: Объём за 30 дней
+            - generic [ref=e325]: $12 018 488
+          - generic [ref=e326]:
+            - generic [ref=e327]: Городов в индексе
+            - generic [ref=e328]: "53"
+          - generic [ref=e329]:
+            - generic [ref=e330]: С playbook
+            - generic [ref=e331]: 1 183 / 2 245
+          - generic [ref=e332]:
+            - generic [ref=e333]: Порог weather-score
+            - generic [ref=e334]: "0.3"
+  - contentinfo [ref=e335]:
+    - generic [ref=e336]: trader-analyzer · локальный статический отчёт, без внешних запросов
+    - code [ref=e338]: parse → classify → portrait → signals

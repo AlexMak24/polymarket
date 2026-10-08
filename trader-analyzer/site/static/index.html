@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trader Analyzer — Polymarket Weather</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="bg-orbs" aria-hidden="true">
+    <div class="orb orb-a"></div>
+    <div class="orb orb-b"></div>
+    <div class="orb orb-c"></div>
+  </div>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-mark">TA</div>
+        <div class="brand-text">
+          <span class="brand-title">Trader Analyzer</span>
+          <span class="brand-sub">Polymarket weather wallets</span>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="#overview" class="nav-link active">Обзор</a>
+        <a href="#strategies" class="nav-link">Стратегии</a>
+        <a href="#wallets" class="nav-link">Кошельки</a>
+      </nav>
+      <div class="live">
+        <span class="live-dot"></span>
+        <span id="live-label">загрузка…</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+    <!-- HERO -->
+    <section id="overview" class="hero">
+      <h1 class="hero-title">Радар <span class="grad">weather-трейдеров</span></h1>
+      <p class="hero-sub">Анализ кошельков Polymarket: стратегии, PnL и города —
+        всё в одном дашборде.</p>
+
+      <div class="metrics">
+        <div class="metric glass">
+          <span class="metric-label">Кошельков</span>
+          <span class="metric-value" id="m-total">0</span>
+          <span class="metric-hint">в базе</span>
+          <span class="metric-glow glow-blue"></span>
+        </div>
+        <div class="metric glass">
+          <span class="metric-label">Суммарный PnL</span>
+          <span class="metric-value pos" id="m-pnl">—</span>
+          <span class="metric-hint">официальный PnL</span>
+          <span class="metric-glow glow-green"></span>
+        </div>
+        <div class="metric glass">
+          <span class="metric-label">Playbook</span>
+          <span class="metric-value" id="m-playbook">0</span>
+          <span class="metric-hint">отобранные профили</span>
+          <span class="metric-glow glow-purple"></span>
+        </div>
+        <div class="metric glass">
+          <span class="metric-label">Прибыльных</span>
+          <span class="metric-value" id="m-winrate">—</span>
+          <span class="metric-hint">доля с PnL &gt; 0</span>
+          <span class="metric-glow glow-orange"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- СТРАТЕГИИ (donut + легенда) -->
+    <section id="strategies" class="section">
+      <div class="section-head">
+        <h2>Стратегии</h2>
+        <p class="section-sub">распределение кошельков и суммарного PnL</p>
+      </div>
+      <div class="panel glass">
+        <div class="donut-wrap">
+          <svg class="donut" id="donut" viewBox="0 0 200 200"></svg>
+          <div class="donut-center">
+            <span class="donut-center-n" id="donut-n">—</span>
+            <span class="donut-center-label">кошельков</span>
+          </div>
+        </div>
+        <div class="legend" id="legend"></div>
+      </div>
+    </section>
+
+    <!-- РАСПРЕДЕЛЕНИЕ PNL (гистограмма) -->
+    <section class="section">
+      <div class="section-head">
+        <h2>Распределение PnL</h2>
+        <p class="section-sub">сколько трейдеров в каждом диапазоне прибыли</p>
+      </div>
+      <div class="panel glass">
+        <div class="histogram" id="histogram"></div>
+      </div>
+    </section>
+
+    <!-- КОШЕЛЬКИ -->
+    <section id="wallets" class="section">
+      <div class="section-head">
+        <h2>Кошельки</h2>
+        <p class="section-sub" id="wallets-count">—</p>
+      </div>
+
+      <div class="filters glass">
+        <div class="field">
+          <label>Стратегия</label>
+          <select id="f-strategy"></select>
+        </div>
+        <div class="field">
+          <label>Город</label>
+          <select id="f-city"></select>
+        </div>
+        <div class="field field-search">
+          <label>Поиск</label>
+          <input id="f-q" type="text" placeholder="имя или адрес…">
+        </div>
+        <div class="field">
+          <label>Мин. PnL, $</label>
+          <input id="f-minpnl" type="number" placeholder="0">
+        </div>
+        <div class="field">
+          <label>Сортировка</label>
+          <select id="f-sort">
+            <option value="pnl">PnL</option>
+            <option value="trades_per_month">сделок/мес</option>
+            <option value="trades_30d">сделок 30д</option>
+            <option value="volume_30d">объём 30д</option>
+            <option value="weather_ratio">доля weather</option>
+            <option value="median_entry">медиана входа</option>
+            <option value="total_trades">всего сделок</option>
+            <option value="active_days_30d">активных дней</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="table-wrap glass">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Трейдер</th>
+              <th>Стратегия</th>
+              <th class="num">PnL, $</th>
+              <th class="num">Сделок/мес</th>
+              <th class="num">Объём 30д, $</th>
+              <th>Город</th>
+              <th class="num">Weather</th>
+              <th class="num">Медиана входа</th>
+            </tr>
+          </thead>
+          <tbody id="wallets-body"></tbody>
+        </table>
+      </div>
+      <div class="table-footer">
+        <span id="pager">—</span>
+        <div class="pager-btns">
+          <button id="pg-prev" class="btn ghost">‹ Назад</button>
+          <button id="pg-next" class="btn ghost">Вперёд ›</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ТОП -->
+    <section class="section">
+      <div class="cols">
+        <div class="col glass">
+          <h3>Топ-трейдеры</h3>
+          <div class="list" id="top-traders-list"></div>
+        </div>
+        <div class="col glass">
+          <h3>Топ-города</h3>
+          <div class="list" id="top-cities-list"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

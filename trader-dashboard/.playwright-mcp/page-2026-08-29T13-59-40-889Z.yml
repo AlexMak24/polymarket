@@ -1,0 +1,971 @@
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - generic [ref=e10]:
+      - generic [ref=e11]: trader-analyzer · on-chain intelligence
+      - heading [level=1] [ref=e13]:
+        - text: Читаем чужие кошельки
+        - emphasis [ref=e14]: Polymarket
+      - paragraph [ref=e15]:
+        - text: Парсер обходит кошельки топ-трейдеров, восстанавливает торговую стратегию и географию рынков, считает PnL и активность, и раздаёт готовые сигналы собственным ботам. Все цифры ниже — реальная выгрузка из
+        - code [ref=e16]: profiles.db
+        - text: .
+      - generic [ref=e17]:
+        - generic [ref=e18]: 2 245 кошельков в индексе
+        - generic [ref=e20]: 2 221 weather-профиль ≥ 0.3
+        - generic [ref=e22]: 8 классов стратегий
+        - generic [ref=e24]: 792 кошелька с разобранным PnL
+        - generic [ref=e26]: 53 города
+  - navigation [ref=e28]:
+    - tablist [ref=e29]:
+      - tab "01 Overview" [ref=e30] [cursor=pointer]:
+        - generic [ref=e31]: "01"
+        - text: Overview
+      - tab "02 Wallets" [active] [selected] [ref=e32] [cursor=pointer]:
+        - generic [ref=e33]: "02"
+        - text: Wallets
+      - tab "03 Strategies" [ref=e34] [cursor=pointer]:
+        - generic [ref=e35]: "03"
+        - text: Strategies
+      - tab "04 Portrait" [ref=e36] [cursor=pointer]:
+        - generic [ref=e37]: "04"
+        - text: Portrait
+      - tab "05 On-chain" [ref=e38] [cursor=pointer]:
+        - generic [ref=e39]: "05"
+        - text: On-chain
+      - tab "06 Signals" [ref=e40] [cursor=pointer]:
+        - generic [ref=e41]: "06"
+        - text: Signals
+  - main [ref=e42]:
+    - generic [ref=e348]:
+      - generic [ref=e349]:
+        - generic [ref=e350]:
+          - generic [ref=e351]: Стратегия
+          - combobox [ref=e352] [cursor=pointer]:
+            - option "все (2 245)" [selected]
+            - option "certain · 671"
+            - option "value · 427"
+            - option "momentum · 329"
+            - option "mixed · 223"
+            - option "ladder · 206"
+            - option "unknown · 171"
+            - option "specialist · 135"
+            - option "longshot · 83"
+        - generic [ref=e353]:
+          - generic [ref=e354]: Топ-город
+          - combobox [ref=e355] [cursor=pointer]:
+            - option "все" [selected]
+            - option "Amsterdam"
+            - option "Ankara"
+            - option "Atlanta"
+            - option "Austin"
+            - option "Beijing"
+            - option "Buenos Aires"
+            - option "Busan"
+            - option "Cape Town"
+            - option "Chengdu"
+            - option "Chicago"
+            - option "Chongqing"
+            - option "Dallas"
+            - option "Denver"
+            - option "Guangzhou"
+            - option "Helsinki"
+            - option "Hong Kong"
+            - option "Houston"
+            - option "Istanbul"
+            - option "Jeddah"
+            - option "Jinan"
+            - option "Karachi"
+            - option "Kuala Lumpur"
+            - option "London"
+            - option "Los Angeles"
+            - option "Lucknow"
+            - option "Madrid"
+            - option "Manila"
+            - option "Mexico City"
+            - option "Miami"
+            - option "Milan"
+            - option "Moscow"
+            - option "Munich"
+            - option "New York"
+            - option "New York City"
+            - option "Panama City"
+            - option "Paris"
+            - option "Qingdao"
+            - option "San Francisco"
+            - option "Sao Paulo"
+            - option "Seattle"
+            - option "Seoul"
+            - option "Seoul (Incheon)"
+            - option "Shanghai"
+            - option "Shenzhen"
+            - option "Singapore"
+            - option "Taipei"
+            - option "Tel Aviv"
+            - option "Tokyo"
+            - option "Toronto"
+            - option "Warsaw"
+            - option "Wellington"
+            - option "Wuhan"
+            - option "Zhengzhou"
+        - generic [ref=e356]:
+          - generic [ref=e357]: Поиск по имени
+          - searchbox "имя или адрес…" [ref=e358]
+        - generic [ref=e359]:
+          - generic [ref=e360]: На странице
+          - combobox [ref=e361] [cursor=pointer]:
+            - option "50" [selected]
+            - option "100"
+            - option "200"
+        - generic [ref=e362]: 2 245 / 2 245 кошельков
+      - table [ref=e364]:
+        - rowgroup [ref=e365]:
+          - row [ref=e366]:
+            - columnheader "Кошелёк ↓" [ref=e367] [cursor=pointer]:
+              - text: Кошелёк
+              - generic [ref=e368]: ↓
+            - columnheader "Стратегия ↓" [ref=e369] [cursor=pointer]:
+              - text: Стратегия
+              - generic [ref=e370]: ↓
+            - columnheader "Топ-город ↓" [ref=e371] [cursor=pointer]:
+              - text: Топ-город
+              - generic [ref=e372]: ↓
+            - columnheader "PnL ↓" [ref=e373] [cursor=pointer]:
+              - text: PnL
+              - generic [ref=e374]: ↓
+            - columnheader "Сделок ↓" [ref=e375] [cursor=pointer]:
+              - text: Сделок
+              - generic [ref=e376]: ↓
+            - columnheader "30д ↓" [ref=e377] [cursor=pointer]:
+              - text: 30д
+              - generic [ref=e378]: ↓
+            - columnheader "Объём 30д ↓" [ref=e379] [cursor=pointer]:
+              - text: Объём 30д
+              - generic [ref=e380]: ↓
+            - columnheader "Сделок/мес ↓" [ref=e381] [cursor=pointer]:
+              - text: Сделок/мес
+              - generic [ref=e382]: ↓
+            - columnheader "Playbook ↓" [ref=e383] [cursor=pointer]:
+              - text: Playbook
+              - generic [ref=e384]: ↓
+            - columnheader "Buy-доля ↓" [ref=e385] [cursor=pointer]:
+              - text: Buy-доля
+              - generic [ref=e386]: ↓
+        - rowgroup [ref=e387]:
+          - row [ref=e388] [cursor=pointer]:
+            - cell "BA balthazar 0x5a21…9318" [ref=e389]:
+              - generic [ref=e390]:
+                - generic [ref=e391]: BA
+                - generic [ref=e392]:
+                  - generic [ref=e393]: balthazar
+                  - generic [ref=e394]: 0x5a21…9318
+            - cell "certain" [ref=e395]
+            - cell "Munich" [ref=e397]
+            - cell "+$1 512 472" [ref=e398]
+            - cell "250" [ref=e399]
+            - cell "250" [ref=e400]
+            - cell "$5 603" [ref=e401]
+            - cell "250,0" [ref=e402]
+            - cell "нет" [ref=e403]
+            - cell "57%" [ref=e405]
+          - row [ref=e410] [cursor=pointer]:
+            - cell "BU Buenos Aires 0x0380…073d" [ref=e411]:
+              - generic [ref=e412]:
+                - generic [ref=e413]: BU
+                - generic [ref=e414]:
+                  - generic [ref=e415]: Buenos Aires
+                  - generic [ref=e416]: 0x0380…073d
+            - cell "certain" [ref=e417]
+            - cell "New York City" [ref=e419]
+            - cell "+$1 274 867" [ref=e420]
+            - cell "250" [ref=e421]
+            - cell "250" [ref=e422]
+            - cell "$8 079" [ref=e423]
+            - cell "250,0" [ref=e424]
+            - cell "нет" [ref=e425]
+            - cell "100%" [ref=e427]
+          - row [ref=e432] [cursor=pointer]:
+            - cell "HO Hong Kong 0xb0c8…fe7f" [ref=e433]:
+              - generic [ref=e434]:
+                - generic [ref=e435]: HO
+                - generic [ref=e436]:
+                  - generic [ref=e437]: Hong Kong
+                  - generic [ref=e438]: 0xb0c8…fe7f
+            - cell "certain" [ref=e439]
+            - cell "Shanghai" [ref=e441]
+            - cell "+$704 415" [ref=e442]
+            - cell "250" [ref=e443]
+            - cell "250" [ref=e444]
+            - cell "$12 327" [ref=e445]
+            - cell "250,0" [ref=e446]
+            - cell "нет" [ref=e447]
+            - cell "89%" [ref=e449]
+          - row [ref=e454] [cursor=pointer]:
+            - cell "PA Paris 0xe40a…e4a2" [ref=e455]:
+              - generic [ref=e456]:
+                - generic [ref=e457]: PA
+                - generic [ref=e458]:
+                  - generic [ref=e459]: Paris
+                  - generic [ref=e460]: 0xe40a…e4a2
+            - cell "certain" [ref=e461]
+            - cell "Houston" [ref=e463]
+            - cell "+$486 517" [ref=e464]
+            - cell "250" [ref=e465]
+            - cell "250" [ref=e466]
+            - cell "$6 624" [ref=e467]
+            - cell "250,0" [ref=e468]
+            - cell "нет" [ref=e469]
+            - cell "100%" [ref=e471]
+          - row [ref=e476] [cursor=pointer]:
+            - cell "CH Chicago 0xfbd8…4027" [ref=e477]:
+              - generic [ref=e478]:
+                - generic [ref=e479]: CH
+                - generic [ref=e480]:
+                  - generic [ref=e481]: Chicago
+                  - generic [ref=e482]: 0xfbd8…4027
+            - cell "certain" [ref=e483]
+            - cell "Hong Kong" [ref=e485]
+            - cell "+$483 756" [ref=e486]
+            - cell "250" [ref=e487]
+            - cell "250" [ref=e488]
+            - cell "$4 037" [ref=e489]
+            - cell "250,0" [ref=e490]
+            - cell "нет" [ref=e491]
+            - cell "99%" [ref=e493]
+          - row [ref=e498] [cursor=pointer]:
+            - cell "PA Paris 0x4f1d…8de2" [ref=e499]:
+              - generic [ref=e500]:
+                - generic [ref=e501]: PA
+                - generic [ref=e502]:
+                  - generic [ref=e503]: Paris
+                  - generic [ref=e504]: 0x4f1d…8de2
+            - cell "certain" [ref=e505]
+            - cell "Madrid" [ref=e507]
+            - cell "+$447 696" [ref=e508]
+            - cell "250" [ref=e509]
+            - cell "250" [ref=e510]
+            - cell "$5 499" [ref=e511]
+            - cell "250,0" [ref=e512]
+            - cell "нет" [ref=e513]
+            - cell "100%" [ref=e515]
+          - row [ref=e520] [cursor=pointer]:
+            - cell "KU Kuala Lumpur 0xa328…4977" [ref=e521]:
+              - generic [ref=e522]:
+                - generic [ref=e523]: KU
+                - generic [ref=e524]:
+                  - generic [ref=e525]: Kuala Lumpur
+                  - generic [ref=e526]: 0xa328…4977
+            - cell "certain" [ref=e527]
+            - cell "Ankara" [ref=e529]
+            - cell "+$306 532" [ref=e530]
+            - cell "250" [ref=e531]
+            - cell "250" [ref=e532]
+            - cell "$12 916" [ref=e533]
+            - cell "250,0" [ref=e534]
+            - cell "нет" [ref=e535]
+            - cell "76%" [ref=e537]
+          - row [ref=e542] [cursor=pointer]:
+            - cell "MI Milan 0x2b59…9db6" [ref=e543]:
+              - generic [ref=e544]:
+                - generic [ref=e545]: MI
+                - generic [ref=e546]:
+                  - generic [ref=e547]: Milan
+                  - generic [ref=e548]: 0x2b59…9db6
+            - cell "certain" [ref=e549]
+            - cell "Miami" [ref=e551]
+            - cell "+$226 931" [ref=e552]
+            - cell "250" [ref=e553]
+            - cell "250" [ref=e554]
+            - cell "$2 490" [ref=e555]
+            - cell "250,0" [ref=e556]
+            - cell "нет" [ref=e557]
+            - cell "62%" [ref=e559]
+          - row [ref=e564] [cursor=pointer]:
+            - cell "SH Shanghai 0x8373…f0bc" [ref=e565]:
+              - generic [ref=e566]:
+                - generic [ref=e567]: SH
+                - generic [ref=e568]:
+                  - generic [ref=e569]: Shanghai
+                  - generic [ref=e570]: 0x8373…f0bc
+            - cell "certain" [ref=e571]
+            - cell "Tokyo" [ref=e573]
+            - cell "+$225 720" [ref=e574]
+            - cell "250" [ref=e575]
+            - cell "250" [ref=e576]
+            - cell "$10 462" [ref=e577]
+            - cell "250,0" [ref=e578]
+            - cell "нет" [ref=e579]
+            - cell "78%" [ref=e581]
+          - row [ref=e586] [cursor=pointer]:
+            - cell "NE New York City 0x28bf…4a4e" [ref=e587]:
+              - generic [ref=e588]:
+                - generic [ref=e589]: NE
+                - generic [ref=e590]:
+                  - generic [ref=e591]: New York City
+                  - generic [ref=e592]: 0x28bf…4a4e
+            - cell "certain" [ref=e593]
+            - cell "Toronto" [ref=e595]
+            - cell "+$194 388" [ref=e596]
+            - cell "250" [ref=e597]
+            - cell "250" [ref=e598]
+            - cell "$5 470" [ref=e599]
+            - cell "250,0" [ref=e600]
+            - cell "нет" [ref=e601]
+            - cell "100%" [ref=e603]
+          - row [ref=e608] [cursor=pointer]:
+            - cell "PO Poligarch 0xb40e…7cc9" [ref=e609]:
+              - generic [ref=e610]:
+                - generic [ref=e611]: PO
+                - generic [ref=e612]:
+                  - generic [ref=e613]: Poligarch
+                  - generic [ref=e614]: 0xb40e…7cc9
+            - cell "momentum" [ref=e615]
+            - cell "Madrid" [ref=e617]
+            - cell "+$191 444" [ref=e618]
+            - cell "250" [ref=e619]
+            - cell "250" [ref=e620]
+            - cell "$2 978" [ref=e621]
+            - cell "250,0" [ref=e622]
+            - cell "да" [ref=e623]
+            - cell "100%" [ref=e625]
+          - row [ref=e630] [cursor=pointer]:
+            - cell "0X 0x122Cb94C437EA5e6f088c6c0C143c592ab8EFBed-1782168978900 0x122c…fbed" [ref=e631]:
+              - generic [ref=e632]:
+                - generic [ref=e633]: 0X
+                - generic [ref=e634]:
+                  - generic [ref=e635]: 0x122Cb94C437EA5e6f088c6c0C143c592ab8EFBed-1782168978900
+                  - generic [ref=e636]: 0x122c…fbed
+            - cell "momentum" [ref=e637]
+            - cell "Taipei" [ref=e639]
+            - cell "+$187 212" [ref=e640]
+            - cell "250" [ref=e641]
+            - cell "250" [ref=e642]
+            - cell "$15 404" [ref=e643]
+            - cell "250,0" [ref=e644]
+            - cell "да" [ref=e645]
+            - cell "61%" [ref=e647]
+          - row [ref=e652] [cursor=pointer]:
+            - cell "CO ColdMath 0x594e…1c11" [ref=e653]:
+              - generic [ref=e654]:
+                - generic [ref=e655]: CO
+                - generic [ref=e656]:
+                  - generic [ref=e657]: ColdMath
+                  - generic [ref=e658]: 0x594e…1c11
+            - cell "longshot" [ref=e659]
+            - cell "New York City" [ref=e661]
+            - cell "+$135 444" [ref=e662]
+            - cell "250" [ref=e663]
+            - cell "106" [ref=e664]
+            - cell "$3 815" [ref=e665]
+            - cell "115,2" [ref=e666]
+            - cell "да" [ref=e667]
+            - cell "100%" [ref=e669]
+          - row [ref=e674] [cursor=pointer]:
+            - cell "HO Hong Kong 0x558f…1a56" [ref=e675]:
+              - generic [ref=e676]:
+                - generic [ref=e677]: HO
+                - generic [ref=e678]:
+                  - generic [ref=e679]: Hong Kong
+                  - generic [ref=e680]: 0x558f…1a56
+            - cell "certain" [ref=e681]
+            - cell "Hong Kong" [ref=e683]
+            - cell "+$129 687" [ref=e684]
+            - cell "250" [ref=e685]
+            - cell "250" [ref=e686]
+            - cell "$11 219" [ref=e687]
+            - cell "2 720,4" [ref=e688]
+            - cell "нет" [ref=e689]
+            - cell "97%" [ref=e691]
+          - row [ref=e696] [cursor=pointer]:
+            - cell "PA Paris 0x9f20…12c3" [ref=e697]:
+              - generic [ref=e698]:
+                - generic [ref=e699]: PA
+                - generic [ref=e700]:
+                  - generic [ref=e701]: Paris
+                  - generic [ref=e702]: 0x9f20…12c3
+            - cell "certain" [ref=e703]
+            - cell "Miami" [ref=e705]
+            - cell "+$128 038" [ref=e706]
+            - cell "250" [ref=e707]
+            - cell "250" [ref=e708]
+            - cell "$5 435" [ref=e709]
+            - cell "6 213,8" [ref=e710]
+            - cell "нет" [ref=e711]
+            - cell "100%" [ref=e713]
+          - row [ref=e718] [cursor=pointer]:
+            - cell "MI Milan 0xfd55…f905" [ref=e719]:
+              - generic [ref=e720]:
+                - generic [ref=e721]: MI
+                - generic [ref=e722]:
+                  - generic [ref=e723]: Milan
+                  - generic [ref=e724]: 0xfd55…f905
+            - cell "certain" [ref=e725]
+            - cell "Munich" [ref=e727]
+            - cell "+$119 342" [ref=e728]
+            - cell "250" [ref=e729]
+            - cell "250" [ref=e730]
+            - cell "$5 316" [ref=e731]
+            - cell "250,0" [ref=e732]
+            - cell "нет" [ref=e733]
+            - cell "100%" [ref=e735]
+          - row [ref=e740] [cursor=pointer]:
+            - cell "BU Busan 0xcbbc…b5d0" [ref=e741]:
+              - generic [ref=e742]:
+                - generic [ref=e743]: BU
+                - generic [ref=e744]:
+                  - generic [ref=e745]: Busan
+                  - generic [ref=e746]: 0xcbbc…b5d0
+            - cell "mixed" [ref=e747]
+            - cell "Seoul (Incheon)" [ref=e749]
+            - cell "+$118 657" [ref=e750]
+            - cell "250" [ref=e751]
+            - cell "250" [ref=e752]
+            - cell "$6 279" [ref=e753]
+            - cell "391,8" [ref=e754]
+            - cell "нет" [ref=e755]
+            - cell "84%" [ref=e757]
+          - row [ref=e762] [cursor=pointer]:
+            - cell "PA Paris 0x942e…be27" [ref=e763]:
+              - generic [ref=e764]:
+                - generic [ref=e765]: PA
+                - generic [ref=e766]:
+                  - generic [ref=e767]: Paris
+                  - generic [ref=e768]: 0x942e…be27
+            - cell "certain" [ref=e769]
+            - cell "Cape Town" [ref=e771]
+            - cell "+$108 134" [ref=e772]
+            - cell "250" [ref=e773]
+            - cell "250" [ref=e774]
+            - cell "$3 694" [ref=e775]
+            - cell "6 628,0" [ref=e776]
+            - cell "нет" [ref=e777]
+            - cell "100%" [ref=e779]
+          - row [ref=e784] [cursor=pointer]:
+            - cell "IS Istanbul 0xcfff…673d" [ref=e785]:
+              - generic [ref=e786]:
+                - generic [ref=e787]: IS
+                - generic [ref=e788]:
+                  - generic [ref=e789]: Istanbul
+                  - generic [ref=e790]: 0xcfff…673d
+            - cell "certain" [ref=e791]
+            - cell "Munich" [ref=e793]
+            - cell "+$98 195" [ref=e794]
+            - cell "250" [ref=e795]
+            - cell "250" [ref=e796]
+            - cell "$5 477" [ref=e797]
+            - cell "250,0" [ref=e798]
+            - cell "нет" [ref=e799]
+            - cell "99%" [ref=e801]
+          - row [ref=e806] [cursor=pointer]:
+            - cell "PA Paris 0x764b…6bad" [ref=e807]:
+              - generic [ref=e808]:
+                - generic [ref=e809]: PA
+                - generic [ref=e810]:
+                  - generic [ref=e811]: Paris
+                  - generic [ref=e812]: 0x764b…6bad
+            - cell "certain" [ref=e813]
+            - cell "New York City" [ref=e815]
+            - cell "+$96 857" [ref=e816]
+            - cell "250" [ref=e817]
+            - cell "250" [ref=e818]
+            - cell "$4 878" [ref=e819]
+            - cell "250,0" [ref=e820]
+            - cell "нет" [ref=e821]
+            - cell "100%" [ref=e823]
+          - row [ref=e828] [cursor=pointer]:
+            - cell "LO London 0x8b8b…2512" [ref=e829]:
+              - generic [ref=e830]:
+                - generic [ref=e831]: LO
+                - generic [ref=e832]:
+                  - generic [ref=e833]: London
+                  - generic [ref=e834]: 0x8b8b…2512
+            - cell "mixed" [ref=e835]
+            - cell "New York City" [ref=e837]
+            - cell "+$94 607" [ref=e838]
+            - cell "250" [ref=e839]
+            - cell "250" [ref=e840]
+            - cell "$2 966" [ref=e841]
+            - cell "250,0" [ref=e842]
+            - cell "нет" [ref=e843]
+            - cell "99%" [ref=e845]
+          - row [ref=e850] [cursor=pointer]:
+            - cell "BE BeefSlayer 0x331b…193f" [ref=e851]:
+              - generic [ref=e852]:
+                - generic [ref=e853]: BE
+                - generic [ref=e854]:
+                  - generic [ref=e855]: BeefSlayer
+                  - generic [ref=e856]: 0x331b…193f
+            - cell "longshot" [ref=e857]
+            - cell "Chicago" [ref=e859]
+            - cell "+$75 306" [ref=e860]
+            - cell "250" [ref=e861]
+            - cell "250" [ref=e862]
+            - cell "$6 796" [ref=e863]
+            - cell "465,5" [ref=e864]
+            - cell "да" [ref=e865]
+            - cell "79%" [ref=e867]
+          - row [ref=e872] [cursor=pointer]:
+            - cell "DE Denver 0x43cb…84df" [ref=e873]:
+              - generic [ref=e874]:
+                - generic [ref=e875]: DE
+                - generic [ref=e876]:
+                  - generic [ref=e877]: Denver
+                  - generic [ref=e878]: 0x43cb…84df
+            - cell "longshot" [ref=e879]
+            - cell "Madrid" [ref=e881]
+            - cell "+$74 784" [ref=e882]
+            - cell "250" [ref=e883]
+            - cell "250" [ref=e884]
+            - cell "$717" [ref=e885]
+            - cell "250,0" [ref=e886]
+            - cell "да" [ref=e887]
+            - cell "100%" [ref=e889]
+          - row [ref=e894] [cursor=pointer]:
+            - cell "HI HighTempTation 0x6011…b31e" [ref=e895]:
+              - generic [ref=e896]:
+                - generic [ref=e897]: HI
+                - generic [ref=e898]:
+                  - generic [ref=e899]: HighTempTation
+                  - generic [ref=e900]: 0x6011…b31e
+            - cell "certain" [ref=e901]
+            - cell "Ankara" [ref=e903]
+            - cell "+$73 422" [ref=e904]
+            - cell "250" [ref=e905]
+            - cell "250" [ref=e906]
+            - cell "$51 891" [ref=e907]
+            - cell "3 359,6" [ref=e908]
+            - cell "нет" [ref=e909]
+            - cell "53%" [ref=e911]
+          - row [ref=e916] [cursor=pointer]:
+            - cell "JJ jjavi 0x6ff2…f140" [ref=e917]:
+              - generic [ref=e918]:
+                - generic [ref=e919]: JJ
+                - generic [ref=e920]:
+                  - generic [ref=e921]: jjavi
+                  - generic [ref=e922]: 0x6ff2…f140
+            - cell "ladder" [ref=e923]
+            - cell "Munich" [ref=e925]
+            - cell "+$69 055" [ref=e926]
+            - cell "250" [ref=e927]
+            - cell "250" [ref=e928]
+            - cell "$30 504" [ref=e929]
+            - cell "1 856,9" [ref=e930]
+            - cell "да" [ref=e931]
+            - cell "84%" [ref=e933]
+          - row [ref=e938] [cursor=pointer]:
+            - cell "HO HondaCivic 0x15ce…d5fa" [ref=e939]:
+              - generic [ref=e940]:
+                - generic [ref=e941]: HO
+                - generic [ref=e942]:
+                  - generic [ref=e943]: HondaCivic
+                  - generic [ref=e944]: 0x15ce…d5fa
+            - cell "ladder" [ref=e945]
+            - cell "London" [ref=e947]
+            - cell "+$68 548" [ref=e948]
+            - cell "250" [ref=e949]
+            - cell "250" [ref=e950]
+            - cell "$8 328" [ref=e951]
+            - cell "1 981,3" [ref=e952]
+            - cell "да" [ref=e953]
+            - cell "82%" [ref=e955]
+          - row [ref=e960] [cursor=pointer]:
+            - cell "OP opopv. 0x7c63…93d4" [ref=e961]:
+              - generic [ref=e962]:
+                - generic [ref=e963]: OP
+                - generic [ref=e964]:
+                  - generic [ref=e965]: opopv.
+                  - generic [ref=e966]: 0x7c63…93d4
+            - cell "mixed" [ref=e967]
+            - cell "Seattle" [ref=e969]
+            - cell "+$60 825" [ref=e970]
+            - cell "250" [ref=e971]
+            - cell "250" [ref=e972]
+            - cell "$22 183" [ref=e973]
+            - cell "524,7" [ref=e974]
+            - cell "нет" [ref=e975]
+            - cell "35%" [ref=e977]
+          - row [ref=e982] [cursor=pointer]:
+            - cell "HO Hong Kong 0xafde…3e1d" [ref=e983]:
+              - generic [ref=e984]:
+                - generic [ref=e985]: HO
+                - generic [ref=e986]:
+                  - generic [ref=e987]: Hong Kong
+                  - generic [ref=e988]: 0xafde…3e1d
+            - cell "ladder" [ref=e989]
+            - cell "Seoul (Incheon)" [ref=e991]
+            - cell "+$53 335" [ref=e992]
+            - cell "250" [ref=e993]
+            - cell "250" [ref=e994]
+            - cell "$10 391" [ref=e995]
+            - cell "2 560,6" [ref=e996]
+            - cell "да" [ref=e997]
+            - cell "77%" [ref=e999]
+          - row [ref=e1004] [cursor=pointer]:
+            - cell "GU Guangzhou 0x5edc…bbad" [ref=e1005]:
+              - generic [ref=e1006]:
+                - generic [ref=e1007]: GU
+                - generic [ref=e1008]:
+                  - generic [ref=e1009]: Guangzhou
+                  - generic [ref=e1010]: 0x5edc…bbad
+            - cell "certain" [ref=e1011]
+            - cell "Paris" [ref=e1013]
+            - cell "+$50 374" [ref=e1014]
+            - cell "250" [ref=e1015]
+            - cell "250" [ref=e1016]
+            - cell "$9 382" [ref=e1017]
+            - cell "1 488,2" [ref=e1018]
+            - cell "нет" [ref=e1019]
+            - cell "98%" [ref=e1021]
+          - row [ref=e1026] [cursor=pointer]:
+            - cell "SH ShyGuy1 0x1f66…4c8d" [ref=e1027]:
+              - generic [ref=e1028]:
+                - generic [ref=e1029]: SH
+                - generic [ref=e1030]:
+                  - generic [ref=e1031]: ShyGuy1
+                  - generic [ref=e1032]: 0x1f66…4c8d
+            - cell "longshot" [ref=e1033]
+            - cell "Shenzhen" [ref=e1035]
+            - cell "+$49 380" [ref=e1036]
+            - cell "250" [ref=e1037]
+            - cell "250" [ref=e1038]
+            - cell "$13 351" [ref=e1039]
+            - cell "1 092,9" [ref=e1040]
+            - cell "да" [ref=e1041]
+            - cell "75%" [ref=e1043]
+          - row [ref=e1048] [cursor=pointer]:
+            - cell "NE neo7777 0xd251…4d37" [ref=e1049]:
+              - generic [ref=e1050]:
+                - generic [ref=e1051]: NE
+                - generic [ref=e1052]:
+                  - generic [ref=e1053]: neo7777
+                  - generic [ref=e1054]: 0xd251…4d37
+            - cell "momentum" [ref=e1055]
+            - cell "Dallas" [ref=e1057]
+            - cell "+$49 012" [ref=e1058]
+            - cell "250" [ref=e1059]
+            - cell "250" [ref=e1060]
+            - cell "$55 243" [ref=e1061]
+            - cell "1 432,3" [ref=e1062]
+            - cell "да" [ref=e1063]
+            - cell "74%" [ref=e1065]
+          - row [ref=e1070] [cursor=pointer]:
+            - cell "WE weatherstappen 0xb901…9fc4" [ref=e1071]:
+              - generic [ref=e1072]:
+                - generic [ref=e1073]: WE
+                - generic [ref=e1074]:
+                  - generic [ref=e1075]: weatherstappen
+                  - generic [ref=e1076]: 0xb901…9fc4
+            - cell "certain" [ref=e1077]
+            - cell "Munich" [ref=e1079]
+            - cell "+$46 440" [ref=e1080]
+            - cell "250" [ref=e1081]
+            - cell "250" [ref=e1082]
+            - cell "$97 381" [ref=e1083]
+            - cell "823,1" [ref=e1084]
+            - cell "нет" [ref=e1085]
+            - cell "52%" [ref=e1087]
+          - row [ref=e1092] [cursor=pointer]:
+            - cell "GG gghff 0x044f…d1f1" [ref=e1093]:
+              - generic [ref=e1094]:
+                - generic [ref=e1095]: GG
+                - generic [ref=e1096]:
+                  - generic [ref=e1097]: gghff
+                  - generic [ref=e1098]: 0x044f…d1f1
+            - cell "unknown" [ref=e1099]
+            - cell "Taipei" [ref=e1101]
+            - cell "+$45 938" [ref=e1102]
+            - cell "250" [ref=e1103]
+            - cell "250" [ref=e1104]
+            - cell "$6 784" [ref=e1105]
+            - cell "5 015,6" [ref=e1106]
+            - cell "нет" [ref=e1107]
+            - cell "94%" [ref=e1109]
+          - row [ref=e1114] [cursor=pointer]:
+            - cell "PA Paris 0x8fbd…a959" [ref=e1115]:
+              - generic [ref=e1116]:
+                - generic [ref=e1117]: PA
+                - generic [ref=e1118]:
+                  - generic [ref=e1119]: Paris
+                  - generic [ref=e1120]: 0x8fbd…a959
+            - cell "longshot" [ref=e1121]
+            - cell "Paris" [ref=e1123]
+            - cell "+$45 419" [ref=e1124]
+            - cell "250" [ref=e1125]
+            - cell "250" [ref=e1126]
+            - cell "$1 118" [ref=e1127]
+            - cell "250,0" [ref=e1128]
+            - cell "да" [ref=e1129]
+            - cell "99%" [ref=e1131]
+          - row [ref=e1136] [cursor=pointer]:
+            - cell "AB aboss 0xaaec…8dc8" [ref=e1137]:
+              - generic [ref=e1138]:
+                - generic [ref=e1139]: AB
+                - generic [ref=e1140]:
+                  - generic [ref=e1141]: aboss
+                  - generic [ref=e1142]: 0xaaec…8dc8
+            - cell "momentum" [ref=e1143]
+            - cell "London" [ref=e1145]
+            - cell "+$42 937" [ref=e1146]
+            - cell "250" [ref=e1147]
+            - cell "0" [ref=e1148]
+            - cell "$0" [ref=e1149]
+            - cell "103,2" [ref=e1150]
+            - cell "да" [ref=e1151]
+            - cell "60%" [ref=e1153]
+          - row [ref=e1158] [cursor=pointer]:
+            - cell "0X 0x77266604E63f5cAF08D19CaEBae0C563ce064aE 0x7726…4aee" [ref=e1159]:
+              - generic [ref=e1160]:
+                - generic [ref=e1161]: 0X
+                - generic [ref=e1162]:
+                  - generic [ref=e1163]: "0x77266604E63f5cAF08D19CaEBae0C563ce064aE"
+                  - generic [ref=e1164]: 0x7726…4aee
+            - cell "value" [ref=e1165]
+            - cell "New York City" [ref=e1167]
+            - cell "+$39 456" [ref=e1168]
+            - cell "250" [ref=e1169]
+            - cell "71" [ref=e1170]
+            - cell "$24 418" [ref=e1171]
+            - cell "44,0" [ref=e1172]
+            - cell "да" [ref=e1173]
+            - cell "79%" [ref=e1175]
+          - row [ref=e1180] [cursor=pointer]:
+            - cell "NE New York City 0x6297…517e" [ref=e1181]:
+              - generic [ref=e1182]:
+                - generic [ref=e1183]: NE
+                - generic [ref=e1184]:
+                  - generic [ref=e1185]: New York City
+                  - generic [ref=e1186]: 0x6297…517e
+            - cell "longshot" [ref=e1187]
+            - cell "New York City" [ref=e1189]
+            - cell "+$37 294" [ref=e1190]
+            - cell "250" [ref=e1191]
+            - cell "250" [ref=e1192]
+            - cell "$1 643" [ref=e1193]
+            - cell "353,1" [ref=e1194]
+            - cell "да" [ref=e1195]
+            - cell "74%" [ref=e1197]
+          - row [ref=e1202] [cursor=pointer]:
+            - cell "SE Seoul (Incheon) 0x1a9c…079d" [ref=e1203]:
+              - generic [ref=e1204]:
+                - generic [ref=e1205]: SE
+                - generic [ref=e1206]:
+                  - generic [ref=e1207]: Seoul (Incheon)
+                  - generic [ref=e1208]: 0x1a9c…079d
+            - cell "momentum" [ref=e1209]
+            - cell "Seoul (Incheon)" [ref=e1211]
+            - cell "+$36 360" [ref=e1212]
+            - cell "250" [ref=e1213]
+            - cell "250" [ref=e1214]
+            - cell "$38 955" [ref=e1215]
+            - cell "1 103,0" [ref=e1216]
+            - cell "да" [ref=e1217]
+            - cell "76%" [ref=e1219]
+          - row [ref=e1224] [cursor=pointer]:
+            - cell "MU Munich 0x6a8d…50f9" [ref=e1225]:
+              - generic [ref=e1226]:
+                - generic [ref=e1227]: MU
+                - generic [ref=e1228]:
+                  - generic [ref=e1229]: Munich
+                  - generic [ref=e1230]: 0x6a8d…50f9
+            - cell "momentum" [ref=e1231]
+            - cell "Munich" [ref=e1233]
+            - cell "+$35 594" [ref=e1234]
+            - cell "250" [ref=e1235]
+            - cell "250" [ref=e1236]
+            - cell "$3 787" [ref=e1237]
+            - cell "2 149,1" [ref=e1238]
+            - cell "да" [ref=e1239]
+            - cell "100%" [ref=e1241]
+          - row [ref=e1246] [cursor=pointer]:
+            - cell "SA sailor82 0xbbb7…a11a" [ref=e1247]:
+              - generic [ref=e1248]:
+                - generic [ref=e1249]: SA
+                - generic [ref=e1250]:
+                  - generic [ref=e1251]: sailor82
+                  - generic [ref=e1252]: 0xbbb7…a11a
+            - cell "certain" [ref=e1253]
+            - cell "London" [ref=e1255]
+            - cell "+$34 522" [ref=e1256]
+            - cell "250" [ref=e1257]
+            - cell "250" [ref=e1258]
+            - cell "$4 196" [ref=e1259]
+            - cell "250,0" [ref=e1260]
+            - cell "нет" [ref=e1261]
+            - cell "100%" [ref=e1263]
+          - row [ref=e1268] [cursor=pointer]:
+            - cell "HO Hong Kong 0xdadb…1870" [ref=e1269]:
+              - generic [ref=e1270]:
+                - generic [ref=e1271]: HO
+                - generic [ref=e1272]:
+                  - generic [ref=e1273]: Hong Kong
+                  - generic [ref=e1274]: 0xdadb…1870
+            - cell "value" [ref=e1275]
+            - cell "Shenzhen" [ref=e1277]
+            - cell "+$33 242" [ref=e1278]
+            - cell "250" [ref=e1279]
+            - cell "250" [ref=e1280]
+            - cell "$10 644" [ref=e1281]
+            - cell "759,8" [ref=e1282]
+            - cell "да" [ref=e1283]
+            - cell "64%" [ref=e1285]
+          - row [ref=e1290] [cursor=pointer]:
+            - cell "GU Guangzhou 0x488c…8c1c" [ref=e1291]:
+              - generic [ref=e1292]:
+                - generic [ref=e1293]: GU
+                - generic [ref=e1294]:
+                  - generic [ref=e1295]: Guangzhou
+                  - generic [ref=e1296]: 0x488c…8c1c
+            - cell "longshot" [ref=e1297]
+            - cell "Hong Kong" [ref=e1299]
+            - cell "+$28 165" [ref=e1300]
+            - cell "250" [ref=e1301]
+            - cell "129" [ref=e1302]
+            - cell "$6 783" [ref=e1303]
+            - cell "142,1" [ref=e1304]
+            - cell "да" [ref=e1305]
+            - cell "92%" [ref=e1307]
+          - row [ref=e1312] [cursor=pointer]:
+            - cell "DP dpnd 0x5f21…b376" [ref=e1313]:
+              - generic [ref=e1314]:
+                - generic [ref=e1315]: DP
+                - generic [ref=e1316]:
+                  - generic [ref=e1317]: dpnd
+                  - generic [ref=e1318]: 0x5f21…b376
+            - cell "mixed" [ref=e1319]
+            - cell "Shenzhen" [ref=e1321]
+            - cell "+$28 140" [ref=e1322]
+            - cell "250" [ref=e1323]
+            - cell "0" [ref=e1324]
+            - cell "$0" [ref=e1325]
+            - cell "221,7" [ref=e1326]
+            - cell "нет" [ref=e1327]
+            - cell "88%" [ref=e1329]
+          - row [ref=e1334] [cursor=pointer]:
+            - cell "SA San Francisco 0xea6a…ab5a" [ref=e1335]:
+              - generic [ref=e1336]:
+                - generic [ref=e1337]: SA
+                - generic [ref=e1338]:
+                  - generic [ref=e1339]: San Francisco
+                  - generic [ref=e1340]: 0xea6a…ab5a
+            - cell "value" [ref=e1341]
+            - cell "Los Angeles" [ref=e1343]
+            - cell "+$27 508" [ref=e1344]
+            - cell "24" [ref=e1345]
+            - cell "24" [ref=e1346]
+            - cell "$70 536" [ref=e1347]
+            - cell "78,6" [ref=e1348]
+            - cell "да" [ref=e1349]
+            - cell "79%" [ref=e1351]
+          - row [ref=e1356] [cursor=pointer]:
+            - cell "LO London 0xaf17…5c20" [ref=e1357]:
+              - generic [ref=e1358]:
+                - generic [ref=e1359]: LO
+                - generic [ref=e1360]:
+                  - generic [ref=e1361]: London
+                  - generic [ref=e1362]: 0xaf17…5c20
+            - cell "longshot" [ref=e1363]
+            - cell "Munich" [ref=e1365]
+            - cell "+$27 405" [ref=e1366]
+            - cell "250" [ref=e1367]
+            - cell "250" [ref=e1368]
+            - cell "$6 952" [ref=e1369]
+            - cell "807,5" [ref=e1370]
+            - cell "да" [ref=e1371]
+            - cell "86%" [ref=e1373]
+          - row [ref=e1378] [cursor=pointer]:
+            - cell "LO London 0x2d0f…81aa" [ref=e1379]:
+              - generic [ref=e1380]:
+                - generic [ref=e1381]: LO
+                - generic [ref=e1382]:
+                  - generic [ref=e1383]: London
+                  - generic [ref=e1384]: 0x2d0f…81aa
+            - cell "certain" [ref=e1385]
+            - cell "Chicago" [ref=e1387]
+            - cell "+$26 967" [ref=e1388]
+            - cell "250" [ref=e1389]
+            - cell "250" [ref=e1390]
+            - cell "$23 739" [ref=e1391]
+            - cell "5 281,6" [ref=e1392]
+            - cell "нет" [ref=e1393]
+            - cell "69%" [ref=e1395]
+          - row [ref=e1400] [cursor=pointer]:
+            - cell "PA Paris 0xf83e…4663" [ref=e1401]:
+              - generic [ref=e1402]:
+                - generic [ref=e1403]: PA
+                - generic [ref=e1404]:
+                  - generic [ref=e1405]: Paris
+                  - generic [ref=e1406]: 0xf83e…4663
+            - cell "certain" [ref=e1407]
+            - cell "Madrid" [ref=e1409]
+            - cell "+$26 792" [ref=e1410]
+            - cell "250" [ref=e1411]
+            - cell "250" [ref=e1412]
+            - cell "$4 855" [ref=e1413]
+            - cell "250,0" [ref=e1414]
+            - cell "нет" [ref=e1415]
+            - cell "100%" [ref=e1417]
+          - row [ref=e1422] [cursor=pointer]:
+            - cell "0X 0x56b381017b589FB0AFB049137c8D4Af2E7233fA2-1769535581188 0x56b3…3fa2" [ref=e1423]:
+              - generic [ref=e1424]:
+                - generic [ref=e1425]: 0X
+                - generic [ref=e1426]:
+                  - generic [ref=e1427]: 0x56b381017b589FB0AFB049137c8D4Af2E7233fA2-1769535581188
+                  - generic [ref=e1428]: 0x56b3…3fa2
+            - cell "value" [ref=e1429]
+            - cell "Dallas" [ref=e1431]
+            - cell "+$24 549" [ref=e1432]
+            - cell "250" [ref=e1433]
+            - cell "250" [ref=e1434]
+            - cell "$31 860" [ref=e1435]
+            - cell "598,9" [ref=e1436]
+            - cell "да" [ref=e1437]
+            - cell "94%" [ref=e1439]
+          - row [ref=e1444] [cursor=pointer]:
+            - cell "WU Wuhan 0x9196…d934" [ref=e1445]:
+              - generic [ref=e1446]:
+                - generic [ref=e1447]: WU
+                - generic [ref=e1448]:
+                  - generic [ref=e1449]: Wuhan
+                  - generic [ref=e1450]: 0x9196…d934
+            - cell "ladder" [ref=e1451]
+            - cell "Shenzhen" [ref=e1453]
+            - cell "+$23 910" [ref=e1454]
+            - cell "250" [ref=e1455]
+            - cell "250" [ref=e1456]
+            - cell "$2 419" [ref=e1457]
+            - cell "2 466,9" [ref=e1458]
+            - cell "да" [ref=e1459]
+            - cell "65%" [ref=e1461]
+          - row [ref=e1466] [cursor=pointer]:
+            - cell "CA Cape Town 0x937b…bfab" [ref=e1467]:
+              - generic [ref=e1468]:
+                - generic [ref=e1469]: CA
+                - generic [ref=e1470]:
+                  - generic [ref=e1471]: Cape Town
+                  - generic [ref=e1472]: 0x937b…bfab
+            - cell "certain" [ref=e1473]
+            - cell "Busan" [ref=e1475]
+            - cell "+$23 857" [ref=e1476]
+            - cell "250" [ref=e1477]
+            - cell "250" [ref=e1478]
+            - cell "$49 762" [ref=e1479]
+            - cell "800,5" [ref=e1480]
+            - cell "нет" [ref=e1481]
+            - cell "54%" [ref=e1483]
+      - generic [ref=e1488]:
+        - button "«" [disabled] [ref=e1489]
+        - button "‹" [disabled] [ref=e1490]
+        - button "1" [ref=e1491] [cursor=pointer]
+        - button "2" [ref=e1492] [cursor=pointer]
+        - button "3" [ref=e1493] [cursor=pointer]
+        - generic [ref=e1494]: …
+        - button "45" [ref=e1495] [cursor=pointer]
+        - button "›" [ref=e1496] [cursor=pointer]
+        - button "»" [ref=e1497] [cursor=pointer]
+        - generic [ref=e1498]: 1–50 из 2 245 · стр. 1/45
+      - paragraph [ref=e1499]:
+        - text: Все 2 245 кошельков из
+        - code [ref=e1500]: profiles.db
+        - text: ", страницами по 50. «Buy-доля» = buy_trades / total_trades — это не winrate по деньгам, а перекос в сторону покупок. У 122 кошельков PnL не посчитан — они показаны с прочерком и сортируются в конец."
+  - contentinfo [ref=e335]:
+    - generic [ref=e336]: trader-analyzer · локальный статический отчёт, без внешних запросов
+    - code [ref=e338]: parse → classify → portrait → signals
